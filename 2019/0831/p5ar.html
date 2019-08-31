@@ -31,18 +31,20 @@
       <canvas id="canvas"></canvas>
     </a-scene>
     <script>
+      var randomColor = "random(0, 255)";
+
       setup = _ => {
         createCanvas(windowWidth, windowHeight, WEBGL);
       };
 
       draw = _ => {
         background(255, 255, 255, 0);
-
         push();
         noFill();
-        stroke(random(0, 255), random(0, 255), 255);
         rotateX(frameCount * 0.01);
         rotateY(frameCount * 0.01);
+        if (frameCount % 10 === 0) {
+        }
         sphere(200);
         pop();
       };
