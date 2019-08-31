@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tokyo WebAR</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+      #defaultCanvas0 {
+        position: fixed;
+        top: 0;
+        z-index: -1;
+      }
+
+      body {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      #container {
+        max-width: 900px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      #page01 {
+        text-align: center;
+        position: relative;
+        margin-top: 300px;
+      }
+      h2 {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .h1-sample {
+        margin: 0px;
+        padding: 0px;
+        font-size: 3rem;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header></header>
+    <div id="container">
+      <div id="page01" class="page">
+        <!-- <h2>TOKYO</h2>
+        <h1 class="h1-sample">WebAR</h1> -->
+      </div>
+    </div>
+    <script>
+      setup = _ => {
+        canvas = createCanvas(windowWidth, windowHeight);
+        background(0);
+      };
+
+      draw = _ => {
+        background("rgba(0, 0, 0, .1)");
+        moveLine();
+      };
+
+      moveLine = _ => {
+        push();
+        for (var i = 0; i < 200; i++) {
+          push();
+          translate(
+            -windowWidth - (frameCount % 1500) + i * 20,
+            (frameCount % 100) * random(-4, 4)
+          );
+          randomColor = color(random(255), 0, random(255));
+          fill(randomColor);
+          noStroke();
+          ellipse((x = windowWidth), windowHeight / 2, 35, 35);
+          pop();
+        }
+        pop();
+      };
+    </script>
+  </body>
+</html>
