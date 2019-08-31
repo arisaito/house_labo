@@ -9,9 +9,17 @@
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
     <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
       #defaultCanvas0 {
         position: fixed;
         top: 0;
+        z-index: 1;
+      }
+
+      a-scene {
         z-index: -1;
       }
     </style>
@@ -23,8 +31,11 @@
       <canvas id="canvas"></canvas>
     </a-scene>
     <script>
-      draw = _ => {
+      setup = _ => {
         createCanvas(windowWidth, windowHeight, WEBGL);
+      };
+
+      draw = _ => {
         background(255, 255, 255, 0);
 
         push();
