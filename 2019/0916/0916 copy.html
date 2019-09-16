@@ -10,16 +10,16 @@
   <body>
     <script>
       let photo;
-      let pixel = 10;
-      const speed = 0.5;
+      let pixel = 7;
 
       function preload() {
-        photo = loadImage("img.png");
+        photo = loadImage(
+          "https://66.media.tumblr.com/fc5746bca66ec9b59623e362457f27bc/tumblr_pvxa1oSvUG1wsc1izo2_1280.png"
+        );
       }
 
       function setup() {
-        createCanvas(windowWidth, windowHeight);
-
+        let canvas = createCanvas(windowWidth, windowHeight);
         translate(windowWidth / 2, windowHeight / 2);
         imageMode(CENTER, CENTER);
         image(photo, 0, 0);
@@ -31,7 +31,7 @@
             let c = photo.get(photo.width / 2 + x, photo.height / 2 + y);
             fill(c);
             noStroke();
-            rect(x, y, 10, 10);
+            rect(x, y, 7, 7);
           }
         }
         // filter(GRAY);
