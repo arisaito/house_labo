@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>untitiled</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <style>
+      #defaultCanvas0 {
+        position: fixed;
+        top: 0;
+        z-index: -1;
+      }
+
+      body {
+        margin: 0;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header></header>
+    <script>
+      // var centY;
+      var x = 0;
+      var y = 0;
+      var theta = 0;
+
+      setup = _ => {
+        canvas = createCanvas(windowWidth, windowHeight);
+        // centY = height / 2;
+        y = height;
+        background(255);
+        drawCurve();
+      };
+
+      drawCurve = _ => {
+        push();
+        for (var i = 0; i < width; i++) {
+          var r = windowHeight;
+          strokeWeight(200);
+          randomColor = color(0, random(150, 255), random(200, 255));
+          stroke(randomColor);
+          x++;
+          y = r * sin(radians(theta));
+          theta += 50;
+          point(x, y);
+        }
+        pop();
+      };
+    </script>
+  </body>
+</html>

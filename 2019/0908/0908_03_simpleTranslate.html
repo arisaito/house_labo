@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>untitiled</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <style>
+      #defaultCanvas0 {
+        position: fixed;
+        top: 0;
+        z-index: -1;
+      }
+
+      body {
+        margin: 0;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header></header>
+    <script>
+      let x, y;
+
+      setup = _ => {
+        canvas = createCanvas(windowWidth, windowHeight);
+
+        x = width;
+        y = height / 2;
+      };
+
+      draw = _ => {
+        background(255);
+        stroke(50);
+        fill(100);
+        ellipse(x, y, 24, 24);
+
+        // Moving up at a constant speed
+        x = x - 1;
+
+        // Reset to the bottom
+        if (x < 0) {
+          x = width;
+        }
+      };
+    </script>
+  </body>
+</html>
