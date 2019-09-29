@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>script system</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: "Noto Sans JP", sans-serif;
+      }
+      #defaultCanvas0 {
+        position: fixed;
+        top: 0;
+        z-index: 2;
+      }
+      #ui {
+        /* z-index: -1; */
+        /* position: relative; */
+        display: block;
+        text-align: center;
+      }
+      #script {
+        position: absolute;
+        text-align: center;
+        width: 1000px;
+        height: auto;
+
+        bottom: 0;
+        left: 50%;
+        -webkit-transform: translateY(-50%) translateX(-50%);
+        transform: translateY(-50%) translateX(-50%);
+
+        font-size: 1.5rem;
+        color: #badfdb;
+      }
+      a-scene {
+        z-index: 0;
+      }
+      #target {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="ui">
+      <p id="script"></p>
+    </div>
+    <a-scene embedded arjs="debugUIEnabled:false;" vr-mode-ui="enabled: false">
+      <a-entity camera></a-entity>
+    </a-scene>
+    <!-- <script src="sub.js"></script> -->
+    <script>
+      let count = 0;
+      let word = [
+        "こんにちは",
+        "伊藤有沙と申します。",
+        "大学はイギリスのgoldsmiths collegeでFine artをやっていました",
+        "帰国後はベンチャー企業で",
+        "ブロックチェーンやAR/VRなど新しい領域の事業にコミットしながら",
+        "主にwebやARVRの作品を制作しています",
+        "新しい技術領域の事業は",
+        "毎日のように倫理的、根源的な問いに突き当たります",
+        "今回のプロジェクト「概念メル●リ」も含め",
+        "それらの体験が自分の制作のアイデアに多く繋がっています",
+        "【概念メル●リは概念を売買できるサービス】",
+        "【売られているのはどれも目に見えない概念】",
+        "【例えば、もうここにいないあの人への愛情とか】",
+        "【誰にも打ち明けられない悲しみとか】",
+        "このプロジェクトは2つの意義があると思っています。",
+        "まずひとつ目は",
+        "あたらしい経済活動の実験という側面",
+        "ナラティブを重視する「買いのトレンド」と",
+        "お金を稼ぐ方法が多様化した「売りのトレンド」が",
+        "お互いに歩み寄ってきた「価値の変化の時代」です",
+        "そのなかでなにに価値を見いだすかを参加者全員で考えてみたい",
+        "それからもうひとつは",
+        "本来価値を見出されずに忘れられる",
+        "個人のナラティブや思いに価値を持たせるということです",
+        "わたしを含む、東京に生きる個人個人のストーリーをすくいあげ",
+        "できればお互いのストーリーを愛したい",
+        "それが都市や人と心を通わせ",
+        "ソーシャルダイブできる方法だと思っています",
+        "どうしてもこれがやりたいです",
+        "どうぞよろしくお願いします"
+      ];
+
+      let script = document.getElementById("script");
+
+      document.onkeydown = function(e) {
+        // if (count > word.length) {
+        console.log(count);
+        script.innerText = word[count];
+        count += 1;
+        if (count > word.length) {
+          console.log("done");
+          script.innerText = "";
+          // setInterval("drawLine()", 10);
+        }
+      };
+
+      let centY;
+      let x = 0;
+      let y = 0;
+      let r;
+      let theta = 0;
+
+      function setup() {
+        canvas = createCanvas(windowWidth, windowHeight, WEBGL);
+        centY = height / 2;
+        x = width;
+        r = height / 3;
+      }
+
+      function draw() {
+        camera(1, 0, 1000, 0, 0, 0, 0, 1, 0);
+        push();
+        translate(
+          2 * sin(frameCount * 0.01573) * 400,
+          sin(frameCount * 0.0242) * 400,
+          -cos(frameCount * 0) * 30
+        );
+        // rotateX(frameCount * 0.5);
+        // rotateY(frameCount * 0.5);
+        noStroke();
+        fill("#badfdb");
+        // normalMaterial();
+        sphere(8);
+        pop();
+        smooth();
+      }
+
+      // function drawLine(){
+      //   let randomColor = color(random(255), random(255), 255);
+
+      //   strokeWeight(150);
+      //   stroke(randomColor);
+      //   y = centY + r * sin(radians(theta));
+      //   theta += 1.2;
+
+      //   x = x - 1;
+      //   point(x, y);
+      //   if (x < -width / 5) {
+      //     x = width + width / 5;
+      //   }
+      // }
+    </script>
+  </body>
+</html>

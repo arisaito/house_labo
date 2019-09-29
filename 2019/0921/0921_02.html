@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+  </head>
+  <body>
+    <script>
+      let a = 0.0;
+      let s = 0.0;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight, WEBGL);
+        colorMode(HSB, 360, 100, 100, 100);
+        angleMode(DEGREES);
+        blendMode(BLEND);
+      }
+
+      function draw() {
+        camera(100, 0, 25 + sin(frameCount * 0.65) * 500, 0, 0, 0, 0, 1, 0);
+        // // //20 + sin(frameCount * 1) * -10
+        push();
+        translate(-windowWidth / 2, -windowHeight / 2, -windowWidth / 2);
+        background(177, 0, 80);
+
+        ambientLight(200);
+        let cells = 3;
+        // let offset = width /
+        let w = width / cells;
+        let h = height / cells;
+        a = a + 0.4;
+        s = sin(a) * 4;
+
+        for (let j = 0; j < cells; j++) {
+          for (let i = 0; i < cells; i++) {
+            for (let k = 0; k < cells; k++) {
+              let x = i * w;
+              let y = j * h;
+              let z = k * w;
+              let d = w / 3;
+
+              push();
+              translate(x + w / 2, y + h / 2, z + w / 2);
+              rotateX(frameCount * 0.2);
+              rotateY(frameCount * 0.2);
+              rotateZ(frameCount * 0.2);
+              noStroke();
+              specularMaterial(223, 82, 90, 20);
+              scale(s);
+              box(d - d / 3);
+              pop();
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

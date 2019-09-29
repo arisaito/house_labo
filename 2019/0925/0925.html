@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      window.addEventListener(
+        "load",
+        (init = () => {
+          // サイズを指定
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+
+          // レンダラー作成
+          const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector("canvas"),
+            antialias: true
+          });
+
+          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setSize(width, height);
+
+          // シーンを作成
+          const scene = new THREE.Scene();
+          // ここで背景色決められてるよ！！！！
+          scene.background = new THREE.Color(0xefefef);
+
+          // フォグを設定
+          scene.fog = new THREE.Fog(0xefefef, 100, 2000);
+
+          // カメラを作成
+          const camera = new THREE.PerspectiveCamera(45, width / height);
+          camera.position.set(0, 0, 1000);
+
+          let rot = 0;
+          let mouseX = 0;
+
+          // radian変換
+          const radian = (rot * Math.PI) / 180;
+          // 角度に応じてカメラ位置を設定
+          camera.position.x = 1000 * Math.sin(radian);
+          camera.position.z = 1000 * Math.cos(radian);
+
+          // 原点方向を見つめる
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+          document.addEventListener("mousemove", event => {
+            mouseX = event.pageX;
+          });
+
+          // 箱をつくりゅ
+          // 1. ジオメトリ/形を定義する
+          const geometry = new THREE.BoxGeometry(50, 50, 50);
+          // 2. マテリアルを定義する
+          const material = new THREE.MeshToonMaterial({
+            color: 0x6699ff,
+            wireframe: true
+          });
+
+          const group = new THREE.Group();
+          scene.add(group);
+          let box;
+
+          for (let i = 0; i < 50; i++) {
+            box = new THREE.Mesh(geometry, material);
+            box.position.x = (Math.random() - 0.5) * 800;
+            box.position.y = (Math.random() - 0.5) * 800;
+            box.position.z = (Math.random() - 0.5) * 800;
+            group.add(box);
+          }
+
+          scene.add(box);
+
+          // light
+          const directionalLight = new THREE.DirectionalLight(0xffffff);
+          directionalLight.position.set(1, 1, 1);
+          scene.add(directionalLight);
+
+          let tick = () => {
+            group.rotation.y += 0.0005;
+            group.rotation.x += 0.0005;
+            renderer.render(scene, camera);
+
+            const targetRot = (mouseX / window.innerWidth) * 360;
+            // easing
+            rot += (targetRot - rot) * 0.001;
+
+            const radian = (rot * Math.PI) / 180;
+            camera.position.x = 1000 * Math.sin(radian);
+            camera.position.z = 1000 * Math.cos(radian);
+
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+            renderer.render(scene, camera);
+
+            requestAnimationFrame(tick);
+          };
+
+          tick();
+        })
+      );
+    </script>
+
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        position: relative;
+        margin: 0;
+        /* overflow: hidden; */
+        cursor: none;
+        color: black;
+        font-size: 1rem;
+      }
+
+      a {
+        /* text-decoration: none; */
+        color: black;
+        cursor: none;
+      }
+
+      nav #g-nav {
+        list-style: none;
+        z-index: 10;
+        position: fixed;
+        right: 0;
+        display: block;
+      }
+
+      ul {
+        text-align: right;
+      }
+
+      nav li {
+        list-style: none;
+        padding: 10px 20px 10px 0px;
+        text-align: center;
+        float: left;
+      }
+
+      #canvas {
+        z-index: -1;
+        top: 0;
+        left: 0;
+        position: fixed;
+      }
+
+      .cursor,
+      .follower {
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+
+      .cursor {
+        width: 8px;
+        height: 8px;
+        background-color: black;
+        z-index: 1000;
+      }
+
+      .follower {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background-color: blue;
+        opacity: 0.8;
+        z-index: 999;
+        mix-blend-mode: multiply;
+        transition: transform ease 0.1s;
+        text-align: center;
+      }
+
+      #container {
+        z-index: 1;
+      }
+
+      section {
+        width: 100%;
+      }
+
+      .inner {
+        max-width: 1200px;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 30px;
+      }
+
+      #kv {
+        height: 90vh;
+        margin: 40px 0px 40px 0px;
+      }
+
+      #conpanny-name {
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 18%;
+        font-size: 6rem;
+        letter-spacing: 10px;
+      }
+
+      #about {
+        width: 100%;
+        height: 500px;
+        background: yellow;
+        /* mix-blend-mode: multiply; */
+        position: relative;
+        padding: 50px 0px 50px 0px;
+      }
+
+      .text_area {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="cursor"></div>
+    <div class="follower"></div>
+    <canvas id="canvas"></canvas>
+    <div id="container">
+      <header id="header">
+        <div class="inner">
+          <nav id="g-nav">
+            <ul>
+              <li><a href="#header">TOP</a></li>
+              <li><a href="#about">ABOUT</a></li>
+              <li><a href="#contents">CONTENTS</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <section id="kv">
+        <div class="inner">
+          <h1 id="conpanny-name">SAMPLE</h1>
+        </div>
+      </section>
+      <main>
+        <section id="about">
+          <div class="inner">
+            <div class="text_area">
+              <h1>ABOUT</h1>
+              <p>概要</p>
+            </div>
+          </div>
+        </section>
+        <section id="contents">
+          <div class="inner"></div>
+        </section>
+      </main>
+    </div>
+    <script>
+      let cursor = $(".cursor");
+      let follower = $(".follower");
+      let cWidth = 8;
+      let fWidth = 40;
+      delay = 10;
+      mouseX = 0;
+      mouseY = 0;
+      posX = 0;
+      posY = 0;
+
+      TweenMax.to({}, 0.001, {
+        repeat: -1,
+        onRepeat: function() {
+          posX += (mouseX - posX) / delay;
+          posY += (mouseY - posY) / delay;
+
+          TweenMax.set(follower, {
+            css: {
+              left: posX - fWidth / 2,
+              top: posY - fWidth / 2
+            }
+          });
+
+          TweenMax.set(cursor, {
+            css: {
+              left: mouseX - cWidth / 2,
+              top: mouseY - cWidth / 2
+            }
+          });
+        }
+      });
+
+      // get mouse position
+      $(document).on("mousemove", function(e) {
+        mouseX = e.pageX;
+        mouseY = e.pageY;
+      });
+
+      $("a").on({
+        mouseenter: function() {
+          cursor.addClass("is-active");
+          follower.addClass("is-active");
+          follower.css({ background: "yellow", transform: "scale(2)" });
+        },
+        mouseleave: function() {
+          cursor.removeClass("is-active");
+          follower.removeClass("is-active");
+          follower.css({ background: "blue", transform: "scale(1)" });
+        }
+      });
+    </script>
+  </body>
+</html>

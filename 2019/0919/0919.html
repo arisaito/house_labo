@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+  </head>
+  <body>
+    <script>
+      let photo;
+      let pixel = 5;
+      const speed = 0.5;
+      let shape = [];
+
+      function preload() {
+        photo = loadImage(
+          "http://www.arisaito.com/2D/assets/pf_img/profile.jpg"
+        );
+      }
+
+      function setup() {
+        canvas = createCanvas(windowWidth, windowHeight);
+
+        imageMode(CENTER, CENTER);
+        image(photo, windowWidth / 2, windowHeight / 2);
+
+        xp = windowWidth / 2 - photo.width / 2;
+        yp = windowHeight / 2 - photo.height / 2;
+
+        // photo.loadPixels();
+
+        pixelUp();
+        updatePixels();
+        // let randomPx = ellipse(
+        //   random(xp, photo.width + xp),
+        //   random(yp, photo.height + yp),
+        //   5,
+        //   5
+        // );
+
+        filter(GREY);
+        // let randomPos = photo.get(
+        //   random(-photo.Width, photo.Width),
+        //   random(-photo.Height, photo.Height)
+        // );
+        // console.log(randomPos);
+      }
+
+      function pixelUp() {
+        // for (let i = 0; i < photo.pixels.length; i++) {
+        //   // photo.pixels[i];
+        //   photo.pixels[i] = color(random(255));
+        // }
+        for (let x = xp; x < photo.width + xp; x += pixel) {
+          for (let y = yp; y < photo.height + yp; y += pixel) {
+            // let index = (y * photo.width + x) * 4;
+            let c = photo.get(x.y);
+            fill(c);
+            noStroke();
+            rect(x, y, 5, 5);
+          }
+        }
+      }
+
+      function draw() {
+        // push();
+        // translate(windowWidth / 2, windowHeight / 2);
+        // randomPos.y -= 1;
+        // pop();
+        // shape[random()].x += 1;
+      }
+
+      // for (let x = xp; x < photo.width + xp; x += pixel) {
+      //   for (let y = yp; y < photo.height + yp; y += pixel) {
+      //     // let index = (y * photo.width + x) * 4;
+      //     let c = photo.get(x.y);
+      //     fill(c);
+      //     noStroke();
+      //     rect(x, y, 5, 5);
+
+      // randomPx.y -= speed;
+      // let randomNum = int(random(3));
+      // if (randomNum == 0) {
+      //   y += speed;
+      // }
+    </script>
+  </body>
+</html>

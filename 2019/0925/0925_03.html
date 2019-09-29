@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+
+    <script>
+      window.addEventListener(
+        "load",
+        (init = () => {
+          // サイズを指定
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+
+          // レンダラー作成
+          const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector("canvas"),
+            antialias: true
+          });
+
+          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setSize(width, height);
+
+          // シーンを作成
+          const scene = new THREE.Scene();
+          // ここで背景色決められてるよ！！！！
+          scene.background = new THREE.Color(0xefefef);
+
+          // フォグを設定
+          scene.fog = new THREE.Fog(0xefefef, 50, 2500);
+
+          // カメラを作成
+          const camera = new THREE.PerspectiveCamera(45, width / height);
+          camera.position.set(0, 0, 1000);
+
+          // 原点方向を見つめる
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+          let degree = 0;
+          const radius = 300;
+
+          // 箱をつくり
+          let boxWidth = 50;
+          const geometry = new THREE.BoxGeometry(boxWidth, boxWidth, boxWidth);
+          const geometryC = new THREE.SphereGeometry(250);
+
+          // 2. マテリアルを定義する
+          const material = new THREE.MeshStandardMaterial({
+            color: 0xb0f4e6,
+            wireframe: false
+          });
+          const materialC = new THREE.MeshStandardMaterial({
+            color: 0xbfbfbf,
+            wireframe: true
+          });
+          const box = new THREE.Mesh(geometry, material);
+          const center = new THREE.Mesh(geometryC, materialC);
+          scene.add(box);
+          scene.add(center);
+
+          // for (let j = 0; j < 50; j++) {
+          //   boxP = new THREE.Mesh(geometryP, materialP);
+          //   boxP.position.x = (Math.random() - 0.5) * 1000;
+          //   boxP.position.y = (Math.random() - 0.5) * 1000;
+          //   boxP.position.z = (Math.random() - 0.5) * 1000;
+          //   boxP.rotation.z += (Math.random() - 0.5) * 10;
+          //   boxP.rotation.x += (Math.random() - 0.5) * 10;
+          //   groupP.add(boxP);
+          // }
+
+          const directionalLight = new THREE.AmbientLight(0xffffff, 1.8);
+          directionalLight.position.set(1, 1, 1);
+          scene.add(directionalLight);
+
+          // const pointLight = new THREE.PointLight(0xe85bf3, 0.1);
+          // pointLight.position.set(0, 0, 0);
+          // scene.add(pointLight);
+
+          let tick = () => {
+            degree += 1;
+            const rad = (degree * Math.PI) / 180;
+            const x = radius * Math.sin(rad);
+            const y = radius * Math.sin(rad);
+            const z = radius * Math.sin(rad);
+
+            box.position.set(x, y, 0);
+            box.rotation.y += 0.01;
+            box.rotation.x += 0.01;
+
+            center.rotation.y += 0.01;
+            center.rotation.x += 0.01;
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(tick);
+          };
+
+          tick();
+        })
+      );
+    </script>
+
+    <style>
+      body {
+        position: relative;
+        margin: 0;
+        overflow: hidden;
+      }
+      #canvas {
+        z-index: -1;
+        top: 0;
+        left: 0;
+        position: fixed;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="canvas"></canvas>
+  </body>
+</html>
