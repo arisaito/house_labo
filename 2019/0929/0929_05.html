@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      window.addEventListener(
+        "load",
+        (init = () => {
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+          const randomColor = ["0xa8edea", "0xfed6e3", "0xc3cfe2"];
+
+          const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector("canvas")
+          });
+
+          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setSize(width, height);
+
+          const scene = new THREE.Scene();
+          scene.background = new THREE.Color(0xefefef);
+
+          const camera = new THREE.PerspectiveCamera(45, width / height);
+          camera.position.set(0, 0, 0);
+          let rot = 0;
+
+          // obj 01
+
+          const group = new THREE.Group();
+          scene.add(group);
+
+          const num = 100;
+          for (let i = 0; i < num; i++) {
+            const material = new THREE.MeshNormalMaterial({
+              wireframe: false
+            });
+            const geometry = new THREE.OctahedronBufferGeometry(1);
+
+            const obj = new THREE.Mesh(geometry, material);
+            obj.position.x = Math.random() * (100 + 100) - 100;
+            obj.position.y = Math.random() * (10 + 10) - 10;
+            obj.position.z = Math.random() * (100 + 100) - 100;
+            obj.rotation.x = (Math.random() - 0.1) * 10;
+            obj.rotation.y = (Math.random() - 0.1) * 10;
+            group.add(obj);
+          }
+
+          // obj 02
+
+          // let ObjLoader = new THREE.OBJMTLLoader();
+          // let objmodel;
+          // ObjLoader.load(
+          //   "women_shoes.obj",
+          //   function(object) {
+          //     objmodel = object.clone();
+          //     objmodel.scale.set(10, 10, 10); // 縮尺の初期化
+          //     objmodel.rotation.set(0, 0, 0); // 角度の初期化
+          //     objmodel.position.set(0, 0, 0);
+
+          //     let model = new THREE.Object3D();
+          //     model.add(objmodel);
+          //     scene.add(model);
+          //   },
+          //   onProgress,
+          //   onError
+          // );
+
+          const material02 = new THREE.MeshToonMaterial({
+            wireframe: false,
+            color: 0x6efaf5
+          });
+          const geometry02 = new THREE.IcosahedronBufferGeometry(50);
+          const obj02 = new THREE.Mesh(geometry02, material02);
+          scene.add(obj02);
+
+          // ligh
+          const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
+          directionalLight.position.set(1, 1, 1);
+          scene.add(directionalLight);
+
+          const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+          ambientLight.position.set(-1, -1, -1);
+          scene.add(ambientLight);
+
+          let tick = () => {
+            const targetRot = 300;
+
+            // easing
+            rot += (targetRot - rot) * 0.001;
+
+            const radian = (rot * Math.PI) / 180;
+            camera.position.x = 200 * Math.sin(radian);
+            camera.position.z = 100 * Math.cos(radian);
+
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+            renderer.render(scene, camera);
+
+            requestAnimationFrame(tick);
+          };
+
+          tick();
+        })
+      );
+
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
+    </script>
+
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        position: relative;
+        margin: 0;
+        /* overflow: hidden; */
+
+        color: black;
+        font-size: 1rem;
+
+        /* background: linear-gradient(45deg, #a8edea, #fed6e3, #f5f7fa);
+            background-size: 600% 600%;
+            animation: Grade 8s ease infinite; */
+      }
+
+      /* 
+        @keyframes Grade {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        } */
+
+      a {
+        /* text-decoration: none; */
+        color: black;
+      }
+
+      nav #g-nav {
+        list-style: none;
+        z-index: 10;
+        position: fixed;
+        right: 0;
+        display: block;
+      }
+
+      ul {
+        text-align: right;
+      }
+
+      nav li {
+        list-style: none;
+        padding: 10px 20px 10px 0px;
+        text-align: center;
+        float: left;
+      }
+
+      #canvas {
+        z-index: -1;
+        top: 0;
+        left: 0;
+        position: fixed;
+      }
+
+      #container {
+        z-index: 1;
+      }
+
+      section {
+        width: 100%;
+      }
+
+      .inner {
+        max-width: 1200px;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 30px;
+      }
+
+      #kv {
+        height: 90vh;
+        margin: 40px 0px 40px 0px;
+      }
+
+      #conpanny-name {
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 18%;
+        font-size: 2rem;
+        letter-spacing: 10px;
+      }
+
+      #about {
+        width: 100%;
+        height: 500px;
+        background: yellow;
+        /* mix-blend-mode: multiply; */
+        position: relative;
+        padding: 50px 0px 50px 0px;
+      }
+
+      .text_area {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="canvas"></canvas>
+    <div id="container">
+      <!-- <header id="header">
+            <div class="inner">
+                <nav id="g-nav">
+                    <ul>
+                        <li><a href="#header">TOP</a></li>
+                        <li><a href="#about">ABOUT</a></li>
+                        <li><a href="#contents">CONTENTS</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header> -->
+      <section id="kv">
+        <div class="inner">
+          <h2 id="conpanny-name"></h2>
+        </div>
+      </section>
+      <main>
+        <section id="about">
+          <div class="inner">
+            <div class="text_area">
+              <h1>ABOUT</h1>
+              <p>概要</p>
+            </div>
+          </div>
+        </section>
+        <section id="contents">
+          <div class="inner"></div>
+        </section>
+      </main>
+    </div>
+    <script></script>
+  </body>
+</html>
