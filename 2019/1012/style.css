@@ -1,0 +1,116 @@
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    color: black;
+    font-size: 1rem;
+    margin: 0;
+    background: #eeeeee;
+    cursor: none;
+}
+
+a {
+    /* text-decoration: none; */
+    color: black;
+    cursor: none;
+}
+
+#canvas {
+    z-index: 1;
+    top: 0;
+    left: 0;
+    position: fixed;
+    pointer-events: none;
+}
+
+.cursor {
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.cursor {
+    width: 8px;
+    height: 8px;
+    background-color: black;
+    z-index: 100;
+    transition: transform ease 0.1s;
+    mix-blend-mode: multiply;
+}
+
+/* .follower {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(138, 138, 138);
+    opacity: 0.8;
+    z-index: 999;
+    mix-blend-mode: multiply;
+    transition: transform ease 0.1s;
+    text-align: center;
+} */
+
+#container {
+    position: relative;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+section {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.box01 {
+    /* background: #eeeeee; */
+}
+
+.box02 {
+    /* background: #eeeeee; */
+}
+
+.box03 {
+    /* background: #eeeeee; */
+}
+
+.inner {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    position: relative;
+    margin: auto;
+}
+
+.st0 {
+    stroke: #000;
+    stroke-width: 5px;
+    fill: transparent;
+    stroke-dasharray: 1425px;
+    stroke-dashoffset: 1425px;
+    animation: anim 2s ease-in .5s forwards;
+}
+
+@keyframes anim {
+    0% {
+        stroke-dashoffset: 1425px;
+    }
+
+    30% {
+        fill: transparent;
+    }
+
+    60% {
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        fill: #000000;
+    }
+}

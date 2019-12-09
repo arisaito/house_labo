@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>untitiled</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
+    <style></style>
+  </head>
+
+  <body>
+    <canvas class="canvas"></canvas>
+    <script>
+      window.addEventListener(
+        "load",
+        (init = () => {
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+          const randomColor = ["0xa8edea", "0xfed6e3", "0xc3cfe2"];
+
+          const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector("canvas"),
+            antialias: true,
+            alpha: true
+          });
+
+          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setSize(width, height);
+
+          const scene = new THREE.Scene();
+          scene.background = new THREE.Color(0xefefef);
+
+          scene.fog = new THREE.Fog(0xefefef, 100, 2000);
+
+          const camera = new THREE.PerspectiveCamera(45, width / height);
+          camera.position.set(0, 0, 1000);
+
+          //   let rot = 0;
+          //   let mouseX = 0;
+
+          //   const radian = (rot * Math.PI) / 180;
+          //   camera.position.x = 1000 * Math.sin(radian);
+          //   camera.position.z = 1000 * Math.cos(radian);
+
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+          //   const controls = new THREE.OrbitControls(camera);
+
+          document.addEventListener("mousemove", event => {
+            mouseX = event.pageX;
+          });
+
+          const geometry = new THREE.TetrahedronBufferGeometry(10);
+
+          const group = new THREE.Group();
+          scene.add(group);
+          let box;
+          let boxNum = 10;
+          let interval = 30;
+
+          for (let x = 0; x < boxNum; x++) {
+            for (let y = 0; y < boxNum; y++) {
+              let c = randomColor[getRandomInt(3)];
+              const material = new THREE.MeshPhongMaterial({
+                color: Number(c)
+              });
+
+              box = new THREE.Mesh(geometry, material);
+              //   box.positoin.x = interval * x;
+              //   box.position.y = interval * y;
+              box.position.x = x * interval - interval * 5;
+              box.position.y = y * interval - interval * 5;
+              //   box.position.z = z * interval - interval * 5;
+
+              group.add(box);
+
+              group.rotation.z = 100;
+            }
+          }
+          scene.add(box);
+
+          // light
+          const directionalLight = new THREE.AmbientLight(0xffffff);
+          directionalLight.position.set(1, 1, 1);
+          scene.add(directionalLight);
+
+          let tick = () => {
+            // group.rotation.y += 0.0005;
+            // group.rotation.x += 0.0005;
+            renderer.render(scene, camera);
+
+            const targetRot = (mouseX / window.innerWidth) * 360;
+            // easing
+            rot += (targetRot - rot) * 0.001;
+
+            // const radian = (rot * Math.PI) / 180;
+            // camera.position.x = 600 * Math.sin(radian);
+            // camera.position.z = 600 * Math.cos(radian);
+
+            // camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+            renderer.render(scene, camera);
+
+            requestAnimationFrame(tick);
+          };
+
+          tick();
+        })
+      );
+
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
+    </script>
+  </body>
+</html>
