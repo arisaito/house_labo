@@ -1,15 +1,14 @@
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "MV Boil", Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
   color: black;
   font-size: 0.8rem;
   margin: 0;
-  background: #eeeeee;
+  background: radial-gradient(#fdfdfd, #eeeeee);
   cursor: none;
 }
 
 a {
-  /* text-decoration: none; */
   color: black;
   cursor: none;
 }
@@ -43,20 +42,6 @@ h1 {
   mix-blend-mode: multiply;
 }
 
-/* .follower {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background-color: rgb(138, 138, 138);
-    opacity: 0.8;
-    z-index: 999;
-    mix-blend-mode: multiply;
-    transition: transform ease 0.1s;
-    text-align: center;
-} */
-
 #container {
   position: relative;
   text-align: center;
@@ -68,18 +53,6 @@ section {
   height: 100vh;
   margin: 0;
   padding: 0;
-}
-
-.box01 {
-  /* background: #eeeeee; */
-}
-
-.box02 {
-  /* background: #eeeeee; */
-}
-
-.box03 {
-  /* background: #eeeeee; */
 }
 
 .inner {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>arisa ito web</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -14,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-scrollify@1/jquery.scrollify.min.js"></script>
     <script src="canvas.js"></script>
+    <script src="cursor.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
@@ -22,7 +23,7 @@
   </head>
 
   <body id="body">
-    <div class="cursor"></div>
+    <div class="cursor" id="cursor"></div>
     <canvas id="canvas"></canvas>
     <div id="container">
       <section class="sec-top box box01">
@@ -61,13 +62,12 @@
           <div class="content">
             <h1>Arisa Ito Web</h1>
             <br />
-            <h3>News</h3>
+            <!-- <h3>News</h3> -->
             <ul class="news">
               <li>2019.11.23-12.1 個展INTERWOVEN</li>
             </ul>
             <p><a href="2D/biography.html">Biography</a></p>
             <p><a href="2D/work.html">Works</a></p>
-            <!-- <p><a href="https://suzuri.jp/saharu54">Saharu Products</a></p> -->
             <a href="https://twitter.com/saharu54"
               ><i class="fab fa-twitter"></i
             ></a>
@@ -75,72 +75,5 @@
         </div>
       </section>
     </div>
-    <script>
-      $.scrollify({ section: ".box" });
-
-      let bg = document.getElementById("body");
-      document.addEventListener("mousemove", event => {
-        let x = Math.round(event.pageX / 50);
-        let y = Math.round(event.pageY / 100);
-
-        bg.style.marginLeft = -x + "px";
-        // bg.style.marginTop = -y + "px";
-      });
-
-      let cursor = $(".cursor");
-      let follower = $(".follower");
-      let cWidth = 8;
-      let fWidth = 40;
-      delay = 10;
-      mouseX = 0;
-      mouseY = 0;
-      posX = 0;
-      posY = 0;
-
-      TweenMax.to({}, 0.001, {
-        repeat: -1,
-        onRepeat: function() {
-          posX += (mouseX - posX) / delay;
-          posY += (mouseY - posY) / delay;
-
-          TweenMax.set(follower, {
-            css: {
-              left: posX - fWidth / 2,
-              top: posY - fWidth / 2
-            }
-          });
-
-          TweenMax.set(cursor, {
-            css: {
-              left: mouseX - cWidth / 2,
-              top: mouseY - cWidth / 2
-            }
-          });
-        }
-      });
-
-      // get mouse position
-      $(document).on("mousemove", function(e) {
-        mouseX = e.pageX;
-        mouseY = e.pageY;
-      });
-
-      $("a").on({
-        mouseenter: function() {
-          cursor.addClass("is-active");
-          cursor.css({
-            background: "yellow",
-            transform: "scale(5)"
-          });
-        },
-        mouseleave: function() {
-          cursor.removeClass("is-active");
-          cursor.css({
-            background: "black",
-            transform: "scale(1)"
-          });
-        }
-      });
-    </script>
   </body>
 </html>
