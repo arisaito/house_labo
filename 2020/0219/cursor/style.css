@@ -1,0 +1,25 @@
+body {
+  font-family: "MV Boil", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  color: black;
+  background-color: #eeeeee;
+  font-size: 0.8rem;
+  margin: 0;
+  cursor: none;
+}
+
+a {
+  color: black;
+}
+
+.cursor_bg {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: -webkit-image-set(url(../src/face.png) 1x, url(../src/face.png) 2x),auto;
+}
+/* *{
+  cursor: -webkit-image-set(url(../src/cursor1.png) 1x, url(../src/cursor1.png) 2x),auto;
+ } */

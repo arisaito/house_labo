@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>aauuu</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body id="body">
+    <a-scene vr-mode-ui="enabled: false">
+      <a-light
+        light="type:directional; castShadow:true;"
+        position="1 1 1"
+        intensity="0.1"
+      ></a-light>
+      <a-light type="ambient" position="7 10 0" intensity="0.5"></a-light>
+      <a-sky color="#dbdbdb"></a-sky>
+      <!-- <a-box position="0 0 -3"></a-box> -->
+      <a-entity position="0.5 0.3 0" rotation="0 30 0">
+        <a-text
+          value="undefined"
+          position="0 0.1 -1"
+          scale="1 1.4 1"
+          align="center"
+          rotation="0 0 10"
+          color="#dbdbdb"
+          shadow="receive: true"
+        ></a-text>
+        <!-- <a-box
+          position="0 -0.5 -1"
+          scale="0.5 0.5 0.5"
+          rotation="0 0 0"
+          shadow="receive: true"
+        ></a-box> -->
+        <a-plane
+          position="0 0 -1"
+          rotation="-70 0 0"
+          scale="2 2 2"
+          shadow="receive: true"
+          material="color: grey"
+        ></a-plane>
+      </a-entity>
+      <a-entity
+        camera
+        position="0 0.5 0"
+        look-controls
+        wasd-controls
+        animation="property: position; from: 0 0.5 0; to: 0 0.5 3; loop: true; dur: 4000; dir: alternate; easing: easeInOutQuad"
+      ></a-entity>
+    </a-scene>
+  </body>
+</html>
+
+<!-- animation="property: position; from: 0.02 1.6 -2; to: -0.02 1.6 -2; dur: 1; loop: true; dir: alternate;" -->

@@ -61,11 +61,92 @@ table {
   100% {
     opacity: 1; } }
 body {
+  font-family: 'Walter Turncoat', cursive, sans-serif ;
   height: 100%;
   width: 100%;
   font-size: 14px;
   animation: fadeIn 3s ease 0s 1 normal;
   -webkit-animation: fadeIn 3s ease 0s 1 normal; }
+
+.frame {
+  z-index: 100;
+  background: transparent;
+  width: 100%;
+  height: 60%;
+  position: fixed;
+  top: 10%;
+  right: 0;
+  outline: 50px solid #fff;
+  outline-offset: -50px;
+}
+
+.frame::before {
+  background: #fff;
+  content: "";
+  width: 100%;
+  height: 15%;
+  top: 0;
+  position: fixed;
+}
+
+.frame::after {
+  background: #fff;
+  content: "";
+  width: 100%;
+  height: 35%;
+  bottom: 0;
+  position: fixed; 
+}
+
+.frame-inner {
+  /* border: 1px solid #000; */
+  outline: 2px solid #000;
+  position: fixed;
+  margin: 50px;
+  width: calc(100vw - 100px);
+  height: calc(60vh - 100px);
+}
+
+.frame__item {
+  position: fixed;
+  bottom: 20%;
+  z-index: 120;
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.frame__item--before {
+  /* position: fixed; */
+  /* bottom: 20%;
+  left: 20%; */
+  max-height: 40px;
+  display: inline;
+  
+}
+
+.a-canvas {
+  pointer-events: none;
+}
+
+.main-txt {
+  font-size: 1.7rem;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 3px;
+}
+
+.frame__item--after {
+  /* position: fixed;
+  bottom: 20%;
+  right: 20%; */
+  max-height: 40px;
+  display: inline; 
+}
 
 .container {
   width: 100%;
@@ -104,11 +185,11 @@ body {
   width: 100%;
   height: 0;
   position: absolute;
-  top: 0;
+  top: 2%;
   right: 0;
   margin: 0;
   padding: 0;
-  z-index: 999;
+  z-index: 9;
   text-align: center;
   box-sizing: border-box; }
 
@@ -138,12 +219,12 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 50px;
-      height: 50px;
-      border: 2px solid #669AFF;
+      width: 40px;
+      height: 40px;
+      border: 2px solid #000;
       border-radius: 25px;
       background-color: #fff;
-      box-shadow: 0 4px 0 #004ee6;
+      /* box-shadow: 0 4px 0 #004ee6; */
       transition: .3s; }
       @media screen and (min-width: 769px) {
         .button_list_item a:hover, .button_list_item label:hover {
@@ -154,20 +235,20 @@ body {
         .button_list_item a, .button_list_item label {
           width: 12.5vw;
           height: 12.5vw;
-          border: 0.5208333333vw solid #669AFF;
+          border: 0.5208333333vw solid #000;
           border-radius: 12.5vw;
-          box-shadow: 0 0.78125vw 0 #004ee6; }
+          /* box-shadow: 0 0.78125vw 0 #004ee6; */
+          text-decoration: none; }
           .button_list_item a:hover, .button_list_item label:hover {
             text-decoration: none; } }
       @media screen and (max-width: 768px) and (orientation: landscape) {
         .button_list_item a, .button_list_item label {
           width: 7.8125vw;
           height: 7.8125vw;
-          border: 0.5208333333vw solid #669AFF;
-          border-radius: 7.8125vw;
-          box-shadow: 0 0.78125vw 0 #004ee6; } }
+          border: 0.5208333333vw solid #000;
+          border-radius: 7.8125vw;} }
       .button_list_item a i, .button_list_item label i {
-        color: #669AFF;
+        color: #000;
         position: relative; }
   .button_list_item-camera a i {
     font-size: 22px; }
@@ -223,6 +304,7 @@ body {
   overflow: auto;
   position: fixed;
   top: 0;
+  left: 0;
   z-index: 9999;
   background: rgba(0, 0, 0, 0.7);
   opacity: 0;
@@ -255,7 +337,7 @@ body {
       width: 94.7916666667vw;
       border-radius: 1.5625vw 0 1.5625vw 1.5625vw; } }
 
-.howtouse {
+/* .howtouse {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -289,77 +371,9 @@ body {
       @media screen and (max-width: 768px) and (orientation: landscape) {
         .howtouse_item p {
           margin-top: 2.8645833333vw;
-          font-size: 2.6041666667vw; } }
-    .howtouse_item_button {
-      margin: 8px auto 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 50px;
-      height: 50px;
-      border: 2px solid #669AFF;
-      border-radius: 25px;
-      background-color: #fff;
-      box-shadow: 0 4px 0 #004ee6; }
-      @media screen and (max-width: 768px) {
-        .howtouse_item_button {
-          margin: 3.125vw auto 0;
-          width: 12.5vw;
-          height: 12.5vw;
-          border: 0.5208333333vw solid #669AFF;
-          border-radius: 12.5vw;
-          box-shadow: 0 0.78125vw 0 #004ee6; }
-          .howtouse_item_button:hover {
-            text-decoration: none; } }
-      @media screen and (max-width: 768px) and (orientation: landscape) {
-        .howtouse_item_button {
-          margin: 2.0833333333vw auto 0;
-          width: 7.8125vw;
-          height: 7.8125vw;
-          border: 0.5208333333vw solid #669AFF;
-          border-radius: 7.8125vw;
-          box-shadow: 0 0.78125vw 0 #004ee6; } }
-      .howtouse_item_button i {
-        color: #669AFF; }
-  .howtouse_item-camera div i {
-    font-size: 22px; }
-    @media screen and (max-width: 768px) {
-      .howtouse_item-camera div i {
-        font-size: 5.7291666667vw;
-        top: 0; } }
-    @media screen and (max-width: 768px) and (orientation: landscape) {
-      .howtouse_item-camera div i {
-        font-size: 3.90625vw; } }
-  .howtouse_item-menu div i {
-    font-size: 22px;
-    top: 1px; }
-    @media screen and (max-width: 768px) {
-      .howtouse_item-menu div i {
-        font-size: 5.2083333333vw;
-        top: 0; } }
-    @media screen and (max-width: 768px) and (orientation: landscape) {
-      .howtouse_item-menu div i {
-        font-size: 3.90625vw; } }
-  .howtouse_item-file div i {
-    font-size: 22px;
-    top: 1px; }
-    @media screen and (max-width: 768px) {
-      .howtouse_item-file div i {
-        font-size: 5.2083333333vw;
-        top: 0; } }
-    @media screen and (max-width: 768px) and (orientation: landscape) {
-      .howtouse_item-file div i {
-        font-size: 3.90625vw; } }
-  .howtouse_item-delete div i {
-    font-size: 24px;
-    left: 1px; }
-    @media screen and (max-width: 768px) {
-      .howtouse_item-delete div i {
-        font-size: 5.46875vw; } }
-    @media screen and (max-width: 768px) and (orientation: landscape) {
-      .howtouse_item-delete div i {
-        font-size: 4.1666666667vw; } }
-
+          font-size: 2.6041666667vw; } } */
+    
+  
 .close_button {
   width: 48px;
   height: 48px;
@@ -442,10 +456,9 @@ body {
   .modal_wrap .btn_ok, .modal_wrap .btn_reserve {
     display: block;
     position: initial;
-    color: #669AFF;
+    color: #000000;
     background-color: #fff;
-    border: 2px solid #669AFF;
-    box-shadow: 0 4px 0 #3378ff;
+    border: 2px solid #000000;
     margin: 36px auto 0;
     height: 64px;
     line-height: 60px;
@@ -468,8 +481,7 @@ body {
         line-height: 11.9791666667vw;
         border-radius: 6.25vw;
         font-size: 4.6875vw;
-        border: 0.5208333333vw solid #669AFF;
-        box-shadow: 0 0.5208333333vw 0 #3378ff; }
+        border: 0.5208333333vw solid #000000; }
         .modal_wrap .btn_ok:hover, .modal_wrap .btn_reserve:hover {
           text-decoration: none; } }
     @media screen and (max-width: 768px) and (orientation: landscape) {
@@ -513,7 +525,8 @@ body {
   height: 100%; }
 
 #capture_image {
-  width: 100%; }
+  width: 100%;
+border: solid 1px #000; }
   @media screen and (max-width: 768px) {
     #capture_image {
       max-height: 104.1666666667vw;
@@ -529,8 +542,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px 8px 0 0;
-  background-color: #669AFF;
+  border-radius: 200px;
+  background-color: #000000;
   position: absolute;
   top: -48px;
   right: 0;
@@ -581,28 +594,34 @@ body {
     margin-right: 10px; }
 
 .btn_camera {
-  width: 100%;
-  height: auto; }
+  width: 70px;
+  height: 70px;
+  position: fixed;
+  bottom: 3%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
 
 .cameraContainer {
-  width: 100%;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   position: absolute;
   bottom: 16px;
-  right: 0;
+  right: 50%;
   margin: 0;
   padding: 0;
+  z-index: 110;
   text-align: center;
   box-sizing: border-box; }
-  @media screen and (max-width: 768px) {
+  /* @media screen and (max-width: 768px) {
     .cameraContainer {
       height: 16.6666666667vw;
       bottom: 5.2083333333vw; } }
   @media screen and (max-width: 768px) and (orientation: landscape) {
     .cameraContainer {
       height: 13.0208333333vw;
-      bottom: 2.6041666667vw; } }
-
+      bottom: 2.6041666667vw; } } */
+    }
 .nav-arrow--close {
   border-right: 8px solid transparent;
   border-bottom: 8px solid transparent;
@@ -661,7 +680,7 @@ body {
 /*閉じる用の薄黒カバー*/
 #nav-close {
   position: fixed;
-  z-index: 99;
+  z-index: 110;
   top: 0;
   /*全体に広がるように*/
   left: 0;
@@ -679,7 +698,7 @@ body {
   width: 100%;
   transition: .3s ease-in-out;
   transition: 0.8s;
-  z-index: 99; }
+  z-index: 110; }
 
 /*チェックが入ったらもろもろ表示*/
 .nav-stampList {
@@ -789,7 +808,7 @@ body {
       box-shadow: 0 0.5208333333vw 0 #004ee6;
       left: 2.6041666667vw; } }
   .nav-stampList .nav-stamp__item:first-child i {
-    color: #669AFF;
+    color: #000;
     font-size: 24px;
     position: relative;
     left: 1px; }

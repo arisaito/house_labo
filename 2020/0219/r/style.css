@@ -1,0 +1,17 @@
+body {
+  font-family: "MV Boil", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  color: black;
+  background-color: #eeeeee;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+a {
+  color: black;
+}
+
+
+.a-canvas {
+  pointer-events: none;
+}
