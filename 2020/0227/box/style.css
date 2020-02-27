@@ -1,0 +1,78 @@
+body {
+  font-family: "MV Boil", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  color: black;
+  font-size: 0.8rem;
+  margin: 0;
+  background: radial-gradient(#fdfdfd, #eeeeee);
+}
+
+a {
+  color: black;
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+#canvas {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  position: fixed;
+  pointer-events: none;
+}
+
+#container {
+  position: relative;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+section {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.inner {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  position: relative;
+  margin: auto;
+}
+
+.news {
+  text-decoration: none;
+}
+
+.st0 {
+  stroke: #000;
+  stroke-width: 5px;
+  fill: transparent;
+  stroke-dasharray: 1425px;
+  stroke-dashoffset: 1425px;
+  animation: anim 2s ease-in 0.5s forwards;
+}
+
+@keyframes anim {
+  0% {
+    stroke-dashoffset: 1425px;
+  }
+
+  30% {
+    fill: transparent;
+  }
+
+  60% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    fill: #000000;
+  }
+}
