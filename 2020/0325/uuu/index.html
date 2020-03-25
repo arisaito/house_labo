@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>aauuu</title>
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="index.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="frame" id="frame"></div>
+    <div class="frame2" id="frame2"></div>
+    <div class="ui">
+      <div id="ui01" class="ui01 ui-parts">
+        <img src="./img/kuma.png" alt="" />
+      </div>
+      <div id="ui02" class="ui02 ui-parts">
+        <img src="./img/rain.png" alt="" />
+      </div>
+      <div id="ui03" class="ui03 ui-parts">
+        <img src="./img/yakan.png" alt="" />
+      </div>
+      <div id="ui04" class="ui04 ui-parts">
+        <img src="./img/phon.png" alt="" />
+      </div>
+      <div id="ui05" class="ui05 ui-parts">
+        <img src="./img/man.png" alt="" />
+      </div>
+      <div id="ui06" class="ui06 ui-parts">
+        <img src="./img/ris.png" alt="" />
+      </div>
+      <div id="ui07" class="ui07 ui-parts">
+        <img src="./img/roudai.png" alt="" />
+      </div>
+      <div id="ui08" class="ui08 ui-parts">
+        <img src="./img/house.png" alt="" />
+      </div>
+      <div id="ui09" class="ui09 ui-parts">
+        <img src="./img/car.png" alt="" />
+      </div>
+      <div id="ui10" class="ui10 ui-parts">
+        <img src="./img/present.png" alt="" />
+      </div>
+      <div id="ui11" class="ui11 ui-parts">
+        <img src="./img/santa.png" alt="" />
+      </div>
+    </div>
+    <div class="modal-bg" id="modal-bg"></div>
+    <div class="modal01 modal" id="modal01">
+      <div class="modal__inner">
+        <div class="modal__conts">
+          <p>Hi</p>
+          <img id="icon-hi" class="icon-hi" src="./img/hi.png" alt="" />
+          <br />
+          <div class="btn" id="btn01">Hi</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-man modal is-hidden" id="modal-man">
+      <div class="modal__inner">
+        <div class="modal__conts">
+          <p>random oji-photo</p>
+          <img id="oji-img" class="oji-img" src="" alt="" />
+          <div class="btn" id="btn-man">CLOSE</div>
+        </div>
+      </div>
+    </div>
+    <!-- <audio id="audio" class="audio" src="./audio.mp3" autoplay="false"></audio> -->
+    <a-scene vr-mode-ui="enabled: false">
+      <a-entity id="generator" position="8 8 8" rotation="20 20 0"></a-entity>
+      <!-- <a-entity camera look-controls position="0 0 0" class="camera"></a-entity> -->
+      <a-light type="ambient"></a-light>
+      <a-sky color="#fcfefe" id="sky"></a-sky>
+    </a-scene>
+  </body>
+</html>

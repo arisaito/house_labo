@@ -1,0 +1,226 @@
+body {
+  font-family: "MV Boil", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  color: black;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+a-scene {
+  z-index: 0;
+}
+
+.a-modal {
+  display: none;
+}
+
+.frame {
+  width: 200%;
+  height: 200%;
+  z-index: 8;
+  border: 13px solid #000;
+  position: fixed;
+  padding: 10px;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.frame2 {
+  width: 200%;
+  height: 200%;
+  z-index: 8;
+  border: 13px solid #000;
+  position: fixed;
+  padding: 10px;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-bg {
+  z-index: 9;
+  background: black;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.modal__inner {
+  width: 300px;
+  height: 300px;
+  max-width: 300px;
+  background: white;
+  border-radius: 200px;
+  padding: 10px;
+}
+
+.modal-man .modal__inner {
+  border-radius: 20px;
+  height: 50%;
+  transition: 0.1s;
+}
+
+.modal__conts {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 60%;
+}
+
+.modal_inner p {
+  width: 100px;
+  margin: auto;
+}
+
+.btn {
+  width: 130px;
+  background: rgb(32, 32, 32);
+  padding: 8px 10px;
+  text-align: center;
+  margin: 10px auto;
+  color: white;
+  border-radius: 5px;
+}
+
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+.icon-hi {
+  width: 80px;
+  margin: 10px;
+}
+
+.ui {
+  z-index: 3;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: -1%;
+  left: 0;
+  filter: blur(10px);
+  transition: 1.5s;
+}
+
+.ui-parts {
+  width: 80px;
+  height: 80px;
+}
+
+.ui-parts img {
+  width: 100%;
+}
+
+.ui01 {
+  position: fixed;
+  bottom: 5%;
+}
+
+.ui02 {
+  /* 雨雲 */
+  position: fixed;
+  bottom: 4%;
+  right: 10%;
+}
+
+.ui03 {
+  position: fixed;
+  bottom: 20%;
+  right: 30%;
+}
+
+.ui04 {
+  /* フォン */
+  position: fixed;
+  bottom: 48%;
+  right: 23%;
+}
+
+.ui05 {
+  position: fixed;
+  top: 8%;
+  right: 10%;
+}
+
+.ui06 {
+  /* りす */
+  position: fixed;
+  top: 8%;
+  left: 7%;
+}
+
+.ui07 {
+  /* 東大 */
+  position: fixed;
+  top: 60%;
+  left: 22%;
+}
+
+.ui08 {
+  /* house */
+  position: fixed;
+  bottom: 70%;
+  left: 40%;
+}
+
+.ui09 {
+  /* かー */
+  position: fixed;
+  top: 49%;
+  left: -3%;
+}
+
+.ui10 {
+  /* プレゼント */
+  position: fixed;
+  top: 35%;
+  left: 18%;
+  width: 70px;
+}
+
+.ui11 {
+  /* サンタ */
+  position: fixed;
+  top: 55%;
+  right: 5%;
+}
+
+.pink-kuma {
+  animation: kumaFul 5s linear;
+  display: inline-block;
+  height: 80px;
+  position: fixed;
+  top: -80px;
+  z-index: 1;
+}
+
+@keyframes kumaFul {
+  0% {
+    transform: translateY(0) rotateZ(0);
+  }
+  100% {
+    transform: translateY(calc(100vh + 80px)) rotateZ(360deg);
+  }
+}
+
+.oji-img {
+  width: 100%;
+}
