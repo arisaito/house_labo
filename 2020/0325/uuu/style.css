@@ -234,8 +234,9 @@ a-scene {
   display: inline-block;
   height: 80px;
   position: fixed;
-  top: -80px;
+  top: -20vh;
   z-index: 1;
+  mix-blend-mode: luminosity;
 }
 
 @keyframes kumaFul {
@@ -243,7 +244,7 @@ a-scene {
     transform: translateY(0) rotateZ(0);
   }
   100% {
-    transform: translateY(calc(100vh + 80px)) rotateZ(360deg);
+    transform: translateY(calc(100vh + 20vh)) rotateZ(360deg);
   }
 }
 
@@ -279,8 +280,8 @@ a-scene {
 }
 
 .modal-run__txt-small {
-  font-size: 0.3rem;
-  line-height: 0.85rem;
+  font-size: 0.5rem;
+  /* line-height: 0.85rem; */
 }
 
 .sumaho-bg {
@@ -312,8 +313,9 @@ a-scene {
 .pen-input {
   padding: 10px 15px;
   /* font-size: 16px; */
-  border-radius: 3px;
-  border: 2px solid #ddd;
+  width: 90%;
+  border-radius: 5px;
+  border: 1px solid #ddd;
   box-sizing: border-box;
   margin-bottom: 10px;
 }
