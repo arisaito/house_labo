@@ -14,6 +14,15 @@ a-scene {
   display: none;
 }
 
+.container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .frame {
   width: 200%;
   height: 200%;
@@ -72,6 +81,12 @@ a-scene {
   border-radius: 20px;
   height: 50%;
   transition: 0.1s;
+}
+
+.modal-run .modal__inner {
+  border-radius: 5px;
+  height: 15%;
+  background: #ffffff;
 }
 
 .modal__conts {
@@ -185,7 +200,7 @@ a-scene {
   /* かー */
   position: fixed;
   top: 49%;
-  left: -3%;
+  left: 0%;
 }
 
 .ui10 {
@@ -201,6 +216,16 @@ a-scene {
   position: fixed;
   top: 55%;
   right: 5%;
+}
+
+.loading-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 200;
 }
 
 .pink-kuma {
@@ -223,4 +248,49 @@ a-scene {
 
 .oji-img {
   width: 100%;
+}
+
+.progress-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    red,
+    orange,
+    yellow,
+    green,
+    aqua,
+    blue,
+    purple
+  );
+}
+
+.btn-run-close {
+  z-index: 100;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-run__txt-small {
+  font-size: 0.3rem;
+  line-height: 0.85rem;
+}
+
+.sumaho-bg {
+  /* background: url(./img/sumaho-bg.png); */
+  background: url("./img/sumaho-bg5.png") no-repeat center / cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
 }
