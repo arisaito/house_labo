@@ -237,6 +237,7 @@ a-scene {
   top: -20vh;
   z-index: 1;
   mix-blend-mode: luminosity;
+  opacity: 0.5;
 }
 
 @keyframes kumaFul {
@@ -305,7 +306,7 @@ a-scene {
   z-index: 1;
   margin: 0;
   font-weight: bold;
-  color: aliceblue;
+  color: #fcfefe;
   mix-blend-mode: hard-light;
   word-break: break-all;
 }

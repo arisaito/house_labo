@@ -51,8 +51,6 @@ window.addEventListener("load", () => {
     loadingbg.classList.add("is-hidden");
   }, 300);
 
-  let sphere = "<a-sphere color='pink' scale='0.8 0.8 0.8'>";
-
   for (let i = 0; i < 5; i++) {
     for (let j = 0; j < 5; j++) {
       for (let k = 0; k < 5; k++) {
