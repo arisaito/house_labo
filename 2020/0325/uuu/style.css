@@ -367,7 +367,7 @@ a-scene {
 }
 
 .shin-anim2 {
-  animation: shinPulse 1.5s linear infinite;
+  animation: shinPulse 1s linear infinite;
 }
 
 @keyframes updown {
