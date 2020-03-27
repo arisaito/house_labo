@@ -234,7 +234,7 @@ a-scene {
   display: inline-block;
   height: 80px;
   position: fixed;
-  top: -20vh;
+  top: -25%;
   z-index: 1;
 }
 
@@ -243,7 +243,7 @@ a-scene {
     transform: translateY(0) rotateZ(0);
   }
   100% {
-    transform: translateY(calc(100vh + 20vh)) rotateZ(360deg);
+    transform: translateY(calc(100vh + 25vh)) rotateZ(360deg);
   }
 }
 

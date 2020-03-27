@@ -148,17 +148,6 @@ kumaSet = clone => {
   kumaStyle.left = 100 * Math.random() + "%";
   kumaStyle.animationDelay = 8 * Math.random() + "s";
   container.appendChild(kumaClone);
-  //   kumaClone.addEventListener(
-  //     "animationend",
-  //     function() {
-  //       this.parentNode.removeChild(this);
-  //       let pinkkuma = document.createElement("img");
-  //       pinkkuma.className = "kuma";
-  //       pinkkuma.setAttribute("src", "./img/kuma-pink.png");
-  //       kumaSet(pinkkuma);
-  //     },
-  //     false
-  //   );
 };
 
 lightup = () => {
