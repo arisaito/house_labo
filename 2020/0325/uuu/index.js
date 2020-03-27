@@ -25,6 +25,7 @@ let ojiImg;
 let ojiPhoto;
 let diaFlag = false;
 let sumahoFlag = false;
+let shinFlag = 0;
 
 window.addEventListener("load", () => {
   loadingbg = document.getElementById("loading-bg");
@@ -118,12 +119,14 @@ window.addEventListener("load", () => {
         console.log("東大");
         lightup();
       } else if (i === 7) {
-        console.log("house");
+        console.log("shin");
+        shinControl();
       } else if (i === 8) {
         console.log("car");
         carAnim();
       } else if (i === 9) {
-        console.log("present");
+        console.log("pen");
+        penControl();
       } else if (i === 10) {
         console.log("run");
         run();
@@ -290,5 +293,37 @@ sumaho = () => {
     container.style.width = "100%";
     container.style.height = "100%";
     sumahoFlag = false;
+  }
+};
+
+penControl = () => {
+  let modalPen = document.getElementById("modal-pen");
+  let modalPenBtn = document.getElementById("btn-pen");
+  let penOutput = document.getElementById("pen-output");
+  modalPen.classList.remove("is-hidden");
+  penInputSend = () => {
+    let penInput = document.getElementById("pen-input").value;
+    console.log(penInput);
+    penOutput.innerText = penInput;
+    penInput = "";
+    modalPen.classList.add("is-hidden");
+  };
+};
+
+shinControl = () => {
+  let ui08 = document.getElementById("ui08");
+  if (shinFlag === 0) {
+    console.log("最初");
+    ui08.classList.add("shin-anim1");
+    shinFlag = 1;
+  } else if (shinFlag === 1) {
+    console.log("次");
+    ui08.classList.remove("shin-anim1");
+    ui08.classList.add("shin-anim2");
+    shinFlag = 2;
+  } else {
+    console.log("最後");
+    ui08.classList.remove("shin-anim2");
+    shinFlag = 0;
   }
 };

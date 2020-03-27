@@ -27,6 +27,7 @@
     <div id="container" class="container">
       <div class="frame" id="frame01"></div>
       <div class="frame2" id="frame02"></div>
+      <p id="pen-output" class="pen-output"></p>
       <div class="ui">
         <div id="ui01" class="ui01 ui-parts">
           <img src="./img/kuma.png" alt="" />
@@ -50,13 +51,13 @@
           <img src="./img/roudai.png" alt="" />
         </div>
         <div id="ui08" class="ui08 ui-parts">
-          <img src="./img/house.png" alt="" />
+          <img src="./img/shin.png" alt="" />
         </div>
         <div id="ui09" class="ui09 ui-parts">
           <img src="./img/car.png" alt="" />
         </div>
         <div id="ui10" class="ui10 ui-parts">
-          <img src="./img/present.png" alt="" />
+          <img src="./img/pen.png" alt="" />
         </div>
         <div id="ui11" class="ui11 ui-parts">
           <img src="./img/run.png" alt="" />
@@ -95,6 +96,21 @@
               iOS13以上にバージョンアップしてください
             </p>
             <div class="btn" id="btn-run">CLOSE</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-pen modal is-hidden" id="modal-pen">
+        <div class="modal__inner">
+          <div class="modal__conts">
+            <input type="text" id="pen-input" class="pen-input" />
+            <!-- <div class="btn" id="btn-pen">SEND</div> -->
+            <input
+              type="button"
+              class="btn"
+              id="btn-pen"
+              onclick="penInputSend()"
+              value="SEND"
+            />
           </div>
         </div>
       </div>
