@@ -236,8 +236,6 @@ a-scene {
   position: fixed;
   top: -20vh;
   z-index: 1;
-  mix-blend-mode: luminosity;
-  opacity: 0.5;
 }
 
 @keyframes kumaFul {
@@ -281,7 +279,7 @@ a-scene {
 }
 
 .modal-run__txt-small {
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   /* line-height: 0.85rem; */
 }
 
