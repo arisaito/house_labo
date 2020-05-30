@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>aauuu</title>
+    <title>UIS</title>
     <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
     <script src="index.js"></script>
@@ -24,6 +24,7 @@
     <audio id="audio06" class="audio" src="./audio/audio06.mp3"></audio>
     <div id="loading-bg" class="loading-bg"></div>
     <div id="sumaho-bg" class="sumaho-bg"></div>
+    <div id="toudai-bg" class="toudai-bg grade"></div>
     <div id="container" class="container">
       <div class="frame" id="frame01"></div>
       <div class="frame2" id="frame02"></div>
@@ -67,7 +68,7 @@
       <div class="modal01 modal" id="modal01">
         <div class="modal__inner">
           <div class="modal__conts">
-            <p>Hi</p>
+            <p class="c-txt__first">Hi</p>
             <img id="icon-hi" class="icon-hi" src="./img/hi.png" alt="" />
             <br />
             <div class="btn" id="btn01">Hi</div>
@@ -77,8 +78,10 @@
       <div class="modal-man modal is-hidden" id="modal-man">
         <div class="modal__inner">
           <div class="modal__conts">
-            <p>Random</p>
-            <img id="oji-img" class="oji-img" src="" alt="" />
+            <p class="c-txt">Random</p>
+            <div class="modal__oji-img">
+              <img id="oji-img" class="oji-img" src="" alt="" />
+            </div>
             <div class="btn" id="btn-man">CLOSE</div>
           </div>
         </div>
@@ -88,12 +91,9 @@
         <div id="btn-run-close" class="btn btn-run-close is-hidden">おわり</div>
         <div class="modal__inner">
           <div class="modal__conts">
-            <p id="modal-run__txt" class="modal-run__txt">
-              スマホをシャカシャカ振ろう！
-            </p>
-            <p id="modal-run__txt-small" class="modal-run__txt-small">
-              降っても何も起きないiOS Safariユーザーは<br />
-              iOS13以上にバージョンアップしてください
+            <p id="modal-run__txt" class="c-txt__run">
+              スマホをシャカシャカ振ろう！<br /><br />
+              ※iOS13以上
             </p>
             <div class="btn" id="btn-run">CLOSE</div>
           </div>
@@ -103,18 +103,16 @@
         <div class="modal__inner">
           <div class="modal__conts">
             <input type="text" id="pen-input" class="pen-input" />
-            <!-- <div class="btn" id="btn-pen">SEND</div> -->
             <input
               type="button"
               class="btn"
               id="btn-pen"
               onclick="penInputSend()"
-              value="SEND"
+              value="GO"
             />
           </div>
         </div>
       </div>
-      <!-- <audio id="audio" class="audio" src="./audio.mp3" autoplay="false"></audio> -->
       <a-scene vr-mode-ui="enabled: false">
         <a-entity
           id="generator"
@@ -122,15 +120,26 @@
           rotation="20 20 0"
           visible="false"
         ></a-entity>
-        <!-- <a-entity camera look-controls position="0 0 0" class="camera"></a-entity> -->
         <a-light id="ambient-light" type="ambient" intensity="1.0"></a-light>
-        <a-light
-          type="directional"
-          position="-5 10 10"
-          intensity="0.8"
-        ></a-light>
-        <a-sky color="#fcfefe" id="sky"></a-sky>
-        <a-entity camera look-controls>
+
+        <!-- <a-sky id="sky" color="#fcfefe"></a-sky> -->
+        <a-sky
+          id="sky"
+          visible="false"
+          radius="100"
+          theta-length="360"
+          material="shader:gradientshader;topColor:#ffc4d0; bottomColor:#476fac"
+        ></a-sky>
+        <a-entity
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; easing: linear; loop: true"
+        >
+          <a-light
+            type="directional"
+            position="-5 10 10"
+            intensity="0.8"
+          ></a-light>
+          <a-entity camera look-controls> </a-entity>
+
           <a-icosahedron
             id="dia"
             position="0 0 -3"

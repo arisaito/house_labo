@@ -1,3 +1,4 @@
+let mobileFlag = false;
 let loadingbg;
 let modalbg;
 let modal01;
@@ -28,6 +29,7 @@ let sumahoFlag = false;
 let shinFlag = 0;
 
 window.addEventListener("load", () => {
+  initDevice();
   loadingbg = document.getElementById("loading-bg");
   modalbg = document.getElementById("modal-bg");
   modal01 = document.getElementById("modal01");
@@ -96,44 +98,49 @@ window.addEventListener("load", () => {
   for (let i = 0; i < uiParts.length; i++) {
     uiParts[i].addEventListener("click", () => {
       if (i === 0) {
-        console.log("くま");
         kumaFul(20);
       } else if (i === 1) {
-        console.log("sumaho");
         sumaho();
       } else if (i === 2) {
-        console.log("ヤカン");
         yakanAlert();
       } else if (i === 3) {
-        console.log("拡声器");
         phon();
       } else if (i === 4) {
-        console.log("おじさん");
         oji();
       } else if (i === 5) {
-        console.log("ダイヤ");
         diamond();
       } else if (i === 6) {
-        console.log("東大");
         lightup();
       } else if (i === 7) {
-        console.log("shin");
         shinControl();
       } else if (i === 8) {
-        console.log("car");
         carAnim();
       } else if (i === 9) {
-        console.log("pen");
         penControl();
       } else if (i === 10) {
-        console.log("run");
         run();
       }
     });
   }
 });
 
-kumaFul = n => {
+const initDevice = () => {
+  let regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+  windowWidth = document.documentElement.clientWidth;
+  windowHeight = document.documentElement.clientHeight;
+  if (
+    window.navigator.userAgent.search(regexp) !== -1 ||
+    windowWidth < windowHeight
+  ) {
+    mobileFlag = true;
+    console.log("📱");
+  } else {
+    mobileFlag = false;
+    console.log("💻");
+  }
+};
+
+kumaFul = (n) => {
   let pinkkuma = document.createElement("img");
   pinkkuma.classList.add("pink-kuma");
   pinkkuma.setAttribute("src", "./img/kuma-pink.png");
@@ -142,7 +149,7 @@ kumaFul = n => {
   }
 };
 
-kumaSet = clone => {
+kumaSet = (clone) => {
   let kumaClone = clone.cloneNode(true);
   let kumaStyle = kumaClone.style;
   kumaStyle.left = 100 * Math.random() + "%";
@@ -154,12 +161,12 @@ lightup = () => {
   let sky = document.getElementById("sky");
   if (lightupFlag === false) {
     generator.setAttribute("visible", true);
-    sky.setAttribute("color", "#364f6b");
+    sky.setAttribute("visible", true);
     ui06.style.pointerEvents = "none";
     lightupFlag = true;
   } else {
     generator.setAttribute("visible", false);
-    sky.setAttribute("color", "#fcfefe");
+    sky.setAttribute("visible", false);
     ui06.style.pointerEvents = "auto";
     lightupFlag = false;
   }
@@ -167,7 +174,7 @@ lightup = () => {
 
 yakanAlert = () => {
   const waita = () => {
-    window.alert("お湯わいた");
+    window.alert("お湯が湧きました");
     yakanFlag = false;
   };
   if (yakanFlag === false) {
@@ -234,12 +241,15 @@ run = () => {
   let btnRun = document.getElementById("btn-run");
   let btnRunClose = document.getElementById("btn-run-close");
   let motionCount = 0;
+  if (mobileFlag === false) {
+    txt.innerText = "このボタンはスマホ限定で遊べます";
+  }
   modalRun.style.top = "0%";
   btnRunClose.classList.add("is-hidden");
   btnRun.addEventListener("click", () => {
     modalRun.classList.add("is-hidden");
   });
-  window.addEventListener("devicemotion", function(e) {
+  window.addEventListener("devicemotion", function (e) {
     let accX = e.acceleration.x;
     if (accX > 3) {
       motionCount++;
@@ -290,7 +300,6 @@ penControl = () => {
   modalPen.classList.remove("is-hidden");
   penInputSend = () => {
     let penInput = document.getElementById("pen-input").value;
-    console.log(penInput);
     penOutput.innerText = penInput;
     penInput = "";
     modalPen.classList.add("is-hidden");
@@ -300,16 +309,13 @@ penControl = () => {
 shinControl = () => {
   let ui08 = document.getElementById("ui08");
   if (shinFlag === 0) {
-    console.log("最初");
     ui08.classList.add("shin-anim1");
     shinFlag = 1;
   } else if (shinFlag === 1) {
-    console.log("次");
     ui08.classList.remove("shin-anim1");
     ui08.classList.add("shin-anim2");
     shinFlag = 2;
   } else {
-    console.log("最後");
     ui08.classList.remove("shin-anim2");
     shinFlag = 0;
   }
