@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="./index.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <a-scene vr-mode-ui="enabled: false">
+      <a-assets>
+        <img id="01" src="./01.png" />
+        <img id="02" src="./02.png" />
+        <img id="en" src="./en.png" />
+      </a-assets>
+      <a-entity
+        light="type:directional;  intensity: 5"
+        position="-1 2 1"
+      ></a-entity>
+      <a-image
+        id="en01"
+        src="#en"
+        position="1 0 -2"
+        opacity="0.5"
+        rotation="90 0 0"
+        animation="property: opacity; from: 1.0; to: 0.3; dur: 1000; loop: true; dir: alternate"
+      ></a-image>
+      <a-box
+        id="collider01"
+        scale="1.5 1.5 1.5"
+        position="1 0 -3"
+        opacity="0"
+        cursor-listener
+      ></a-box>
+      <a-sky
+        id="360bg"
+        radius="10"
+        src="#01"
+        animation="property: opacity; from: 1.0; to: 0; loop: false; dur: 400; startEvents: foo"
+      ></a-sky>
+      <a-sky id="360bg" rotation="0 -130 0" radius="11" src="#02"></a-sky>
+      <a-entity camera position="0 1 0" look-controls>
+        <a-entity
+          cursor="fuse: false;"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          material="color: black; shader: flat; opacity: 0.0"
+        >
+        </a-entity>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
