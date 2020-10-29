@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        margin: 0em;
+        padding: 2em;
+      }
+      #target {
+        background: white;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body onload="init();" style="touch-action: none;">
+    <div id="target">
+      2点に触れたままにして、ピンチインまたはピンチアウトしてください。<br />
+      ピンチが開いている場合（ズームイン）は背景色がピンクに変わり、
+      ピンチが閉じている場合（ズームアウト）は背景色が水色に変わります。
+      <!-- UI for logging/debugging -->
+      <button id="log" onclick="enableLog(event);">
+        Start/Stop event logging
+      </button>
+      <button id="clearlog" onclick="clearLog(event);">Clear the log</button>
+      <p></p>
+      <output></output>
+    </div>
+
+    <script>
+      // イベント状態をキャッシュするグローバル変数
+      let evCache = new Array();
+      let prevDiff = -1;
+
+      function init() {
+        let el = document.getElementById("target");
+        el.onpointerdown = pointerdown_handler;
+        el.onpointermove = pointermove_handler;
+        el.onpointerup = pointerup_handler;
+        el.onpointercancel = pointerup_handler;
+        el.onpointerout = pointerup_handler;
+        el.onpointerleave = pointerup_handler;
+      }
+
+      function pointerdown_handler(ev) {
+        // pointerdownイベントはタッチ操作の開始を知らせます
+        // このイベントは2本指ジェスチャーをサポートするためにキャッシュされました
+        evCache.push(ev);
+        log("pointerDown", ev);
+      }
+      function pointermove_handler(ev) {
+        // この関数は2ポインターの水平ピンチ/ズームジェスチャーを実装している
+        // 2つのポインター間の距離が広がるとズームイン、縮まるとズームあうと
+        log("pointerMove", ev);
+        ev.target.style.border = "dashed";
+        for (let i = 0; i < evCache.length; i++) {
+          if (ev.pointerId == evCache[i].pointerId) {
+            evCache[i] = ev;
+            break;
+          }
+        }
+
+        if (evCache.length == 2) {
+          let curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
+
+          if (prevDiff > 0) {
+            if (curDiff > 0) {
+              log("Pinch moving OUT -> Zoom in", ev);
+              ev.target.style.background = "pink";
+            }
+            if (curDiff < prevDiff) {
+              log("Pinch moving In -> Zoom out", ev);
+              ev.target.style.background = "lightblue";
+            }
+          }
+          prevDiff = curDiff;
+        }
+      }
+      function pointerup_handler(ev) {
+        log(ev.type, ev);
+        // pointerup時にこのポインターをキャッシュから削除し
+        // ターゲットの背景色と境界線をリセットする
+        remove_event(ev);
+        ev.target.style.background = "white";
+        ev.target.style.borer = "1px solid black";
+        if (evCache.length < 2) {
+          prevDiff = -1;
+        }
+      }
+
+      function remove_event(ev) {
+        for (let i = 0; i < evCache.length; i++) {
+          if (evCache[i].ponterId == ev.pointerId) {
+            evCache.splice(i, 1);
+            break;
+          }
+        }
+      }
+      // イベントをログ出力するフラグ
+      var logEvents = false;
+
+      // ログ/デバッグ関数
+      function enableLog(ev) {
+        logEvents = logEvents ? false : true;
+      }
+
+      function log(prefix, ev) {
+        if (!logEvents) return;
+        var o = document.getElementsByTagName("output")[0];
+        var s =
+          prefix +
+          ": pointerID = " +
+          ev.pointerId +
+          " ; pointerType = " +
+          ev.pointerType +
+          " ; isPrimary = " +
+          ev.isPrimary;
+        o.innerHTML += s + "";
+      }
+
+      function clearLog(event) {
+        var o = document.getElementsByTagName("output")[0];
+        o.innerHTML = "";
+      }
+    </script>
+  </body>
+</html>

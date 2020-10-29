@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      sample();
+      function sample() {
+        for (let i = 0; i <= 10; i++) {
+          if (i % 2 === 0) {
+            console.log("2の倍数");
+            return;
+          }
+          if (i % 3 === 0) {
+            console.log("3の倍数");
+            continue;
+          }
+          console.log(i);
+        }
+      }
+    </script>
+  </body>
+</html>

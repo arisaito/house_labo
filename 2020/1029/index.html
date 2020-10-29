@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>camera</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="./src/script.js"></script>
+  </head>
+  <body>
+    <a-scene
+      vr-mode-ui="false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <video id="camera" class="camera" autoplay muted playsinline></video>
+      </a-assets>
+      <a-light
+        type="directional"
+        castShadow="true"
+        intensity="0.6"
+        position="0 1 0"
+      ></a-light>
+      <a-light type="ambient" intensity="0.6"></a-light>
+      <a-entity
+        geometry="primitive: box"
+        material="src: #camera"
+        position="0 0 -2"
+        scale="1 1 1"
+        rotation="0 0 0"
+        shadow="receive: true"
+      ></a-entity>
+      <a-plane
+        position="0 -0.5 -3"
+        rotation="-90 0 0"
+        scale="10 10 10"
+        color="#eeeeee"
+        shadow="receive: true"
+      ></a-plane>
+      <a-entity
+        camera
+        position="1.33 1.5 -0.3"
+        rotation="-30 39.75 0"
+      ></a-entity>
+      <a-sky color="#333333"></a-sky>
+    </a-scene>
+  </body>
+</html>

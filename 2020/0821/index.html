@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script> -->
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+
+    <!-- <script src="https://unpkg.com/aframe-animation-component/dist/aframe-animation-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component/dist/aframe-layout-component.min.js"></script> -->
+    <script src="https://unpkg.com/aframe-spe-particles-component@^1.0.4/dist/aframe-spe-particles-component.min.js"></script>
+    <!-- <script src="./index.js"></script> -->
+  </head>
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene
+      vr-mode-ui="false"
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false;"
+    >
+      <a-assets>
+        <a-asset-item id="crate-obj" src="./Cloud3/Clouds.obj"></a-asset-item>
+        <a-asset-item id="crate-mtl" src="./Cloud3/Clouds.mtl"></a-asset-item>
+        <img id="my-texture" src="./cloud/textures/texture1.png" />
+        <img id="my-texture" src="./cloud/textures/texture2.png" />
+        <img id="my-texture" src="./cloud/textures/texture3.png" />
+        <a-asset-item id="gltf-model" src="./cloud2/scene.gltf"></a-asset-item>
+      </a-assets>
+      <a-box
+        scale="5 5 0.1"
+        position="-1 0.5 -3"
+        rotation="0 45 0"
+        color="#4CC3D9"
+        material="transparent: true; opacity: 0.0;"
+      ></a-box>
+      <a-box
+        scale="5 5 0.1"
+        position="1 0.5 -3"
+        rotation="0 -45 0"
+        color="#4CC3D9"
+        material="transparent: true; opacity: 0.0;"
+      ></a-box>
+      <!--         material="opacity: true; transparent: true;"-->
+      <!-- <a-obj-model
+        scale="0.002 0.002 0.002"
+        src="#crate-obj"
+        mtl="#crate-mtl"
+        animation="property: position; from: 1.5 -1 -3; to: -1.5 -1 -3; loop: true; easing: linear; dur: 5000"
+        material="transparent: true; alphaTest: 1"
+      ></a-obj-model> -->
+
+      <!-- <a-box
+        color="#4CC3D9"
+        animation="property: position; from: 1.5 -1 -3; to: -1.5 -1 -3; loop: true; easing: linear; dur: 5000"
+        material="alphaTest: 1"
+      ></a-box> -->
+      <!-- <a-entity cloak position="-1 0.5 -3"></a-entity> -->
+      <!-- <a-entity position="0 0.5 -3" gltf-model="#gltf-model"></a-entity> -->
+
+      <a-entity
+        position="0 1 -3"
+        animation="property: position; from: 1.5 1 -3; to: -1.5 1 0; loop: true; easing: linear; dur: 15000"
+        spe-particles="texture: ./fog/fog.png; position-spread: 0.3 0 0.3; velocity-spread: .1 .05 .1; particle-count: 100; max-age: 10; size: 3,5; opacity: 1,1,1; randomize-position: true"
+      >
+      </a-entity>
+
+      <a-entity
+        camera
+        wasd-controls=""
+        look-controls=""
+        position="0 -1 1"
+      ></a-entity>
+    </a-scene>
+    <script>
+      // AFRAME.registerComponent("cloak", {
+      //   init: function () {
+      //     var geometry = new THREE.BoxGeometry(5, 5, 5);
+      //     var material = new THREE.MeshBasicMaterial({ colorWrite: false });
+      //     var cube = new THREE.Mesh(geometry, material);
+      //     this.el.object3D.add(cube);
+      //   },
+      // });
+    </script>
+  </body>
+</html>
