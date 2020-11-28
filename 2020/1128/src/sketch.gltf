@@ -1,0 +1,252 @@
+{
+	"asset": {
+		"generator": "Tilt Brush 23.2.28f36f08b",
+		"version": "2.0",
+		"copyright": "Unknown."
+	},
+	"buffers": [
+		{
+			"byteLength": 8450820,
+			"uri": "sketch.bin"
+		}
+	],
+	"accessors": [
+		{
+			"bufferView": 2,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 65280,
+			"max": [ 0.47022447, 1.87010193, 0.110279582 ],
+			"min": [ -0.247848257, 0.461356729, -0.429552555 ],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 783360,
+			"componentType": 5126,
+			"count": 65280,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 1,
+			"byteOffset": 0,
+			"componentType": 5121,
+			"normalized": true,
+			"count": 65280,
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 3,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 65280,
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 1566720,
+			"componentType": 5126,
+			"count": 65280,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 2350080,
+			"componentType": 5126,
+			"count": 65280,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 1566720,
+			"componentType": 5126,
+			"count": 65280,
+			"type": "VEC2"
+		},
+		{
+			"bufferView": 0,
+			"byteOffset": 0,
+			"componentType": 5123,
+			"count": 340992,
+			"max": [ 65279 ],
+			"min": [ 0 ],
+			"type": "SCALAR"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 3133440,
+			"componentType": 5126,
+			"count": 42393,
+			"max": [ 1.25306857, 2.10648584, 0.299551219 ],
+			"min": [ -0.568646371, 0.115368582, -0.872436523 ],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 3642156,
+			"componentType": 5126,
+			"count": 42393,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 1,
+			"byteOffset": 261120,
+			"componentType": 5121,
+			"normalized": true,
+			"count": 42393,
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 3,
+			"byteOffset": 1044480,
+			"componentType": 5126,
+			"count": 42393,
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 4150872,
+			"componentType": 5126,
+			"count": 42393,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 4659588,
+			"componentType": 5126,
+			"count": 42393,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 4150872,
+			"componentType": 5126,
+			"count": 42393,
+			"type": "VEC2"
+		},
+		{
+			"bufferView": 0,
+			"byteOffset": 681984,
+			"componentType": 5123,
+			"count": 223536,
+			"max": [ 42392 ],
+			"min": [ 0 ],
+			"type": "SCALAR"
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 1129056,
+			"byteOffset": 0,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 430692,
+			"byteOffset": 1129056,
+			"byteStride": 4,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 5168304,
+			"byteOffset": 1559748,
+			"byteStride": 12,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1722768,
+			"byteOffset": 6728052,
+			"byteStride": 16,
+			"target": 34962
+		}
+	],
+	"meshes": [
+		{
+			"name": "brush_Toon_g0_b0",
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 0,
+						"NORMAL": 1,
+						"COLOR_0": 2,
+						"TANGENT": 3,
+						"_TB_TIMESTAMP": 5,
+						"_TB_UNITY_TEXCOORD_0": 4,
+						"TEXCOORD_0": 6
+					},
+					"indices": 7,
+					"material": 0,
+					"mode": 4
+				}
+			]
+		},
+		{
+			"name": "brush_Toon_g0_b1",
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 8,
+						"NORMAL": 9,
+						"COLOR_0": 10,
+						"TANGENT": 11,
+						"_TB_TIMESTAMP": 13,
+						"_TB_UNITY_TEXCOORD_0": 12,
+						"TEXCOORD_0": 14
+					},
+					"indices": 15,
+					"material": 0,
+					"mode": 4
+				}
+			]
+		}
+	],
+	"materials": [
+		{
+			"alphaMode": "OPAQUE",
+			"name": "brush_Toon",
+			"extensions": {
+				"GOOGLE_tilt_brush_material": {
+					"guid": "4391385a-df73-4396-9e33-31e4e4930b27"
+				}
+			}
+		}
+	],
+	"nodes": [
+		{
+			"name": "brush_Toon_g0_b0",
+			"mesh": 0
+		},
+		{
+			"name": "node_SceneLight_0_i1",
+			"matrix": [0.01110274, -0.4059417, -0.9138317, 0, 0.9297149, 0.3406256, -0.1400167, 0, 0.368113, -0.8480483, 0.3811918, 0, 0.07860056, 0.04660454, -0.00995311, 1]
+		},
+		{
+			"name": "node_SceneLight_1_i2",
+			"matrix": [0.3631347, 0.4924038, -0.7909939, 0, 0.8096889, -0.5868241, 0.00641179, 0, -0.4610172, -0.6427875, -0.6117901, 0, 0.07860055, 0.03141664, 0.07618158, 1]
+		},
+		{
+			"name": "brush_Toon_g0_b1",
+			"mesh": 1
+		}
+	],
+	"scene": 0,
+	"scenes": [
+		{
+			"nodes": [
+				0,
+				1,
+				2,
+				3
+			],
+			"extras": {
+
+			}
+		}
+	],
+	"extensionsUsed": [
+		"GOOGLE_tilt_brush_material"
+	]
+}

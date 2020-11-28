@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>drawing</title>
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
+    ></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      model-viewer {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        /* background-color: #848ca5; */
+        background: rgb(158, 168, 193);
+        background: radial-gradient(
+          circle,
+          rgba(158, 168, 193, 1) 0%,
+          rgba(99, 105, 125, 1) 100%
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <model-viewer
+      src="./src/sketch.gltf"
+      ios-src="./src/Untitled_0.usdz"
+      alt="3Dモデル"
+      auto-rotate
+      camera-controls
+      ar
+      minimumRenderScale="1"
+    >
+      <!-- <button
+        slot="ar-button"
+        style="
+          font-size: 0.8rem;
+          background-color: white;
+          border-radius: 30rem;
+          border: none;
+          padding: 5px 15px;
+          position: absolute;
+          bottom: 16px;
+          right: 16px;
+        "
+      >
+        ✔ ARを体験する
+      </button> -->
+    </model-viewer>
+  </body>
+</html>
