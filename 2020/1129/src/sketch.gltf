@@ -1,0 +1,280 @@
+{
+	"asset": {
+		"generator": "Tilt Brush 23.2.28f36f08b",
+		"version": "2.0",
+		"copyright": "Unknown."
+	},
+	"buffers": [
+		{
+			"byteLength": 8953812,
+			"uri": "sketch.bin"
+		}
+	],
+	"accessors": [
+		{
+			"bufferView": 2,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 65412,
+			"max": [ 0.531781852, 0.808491409, 0.519661427 ],
+			"min": [ -0.930162251, -0.11696092, -0.279491127 ],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 784944,
+			"componentType": 5126,
+			"count": 65412,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 1,
+			"byteOffset": 0,
+			"componentType": 5121,
+			"normalized": true,
+			"count": 65412,
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 3,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 65412,
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 1569888,
+			"componentType": 5126,
+			"count": 65412,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 2354832,
+			"componentType": 5126,
+			"count": 65412,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 1569888,
+			"componentType": 5126,
+			"count": 65412,
+			"type": "VEC2"
+		},
+		{
+			"bufferView": 0,
+			"byteOffset": 0,
+			"componentType": 5123,
+			"count": 342720,
+			"max": [ 65411 ],
+			"min": [ 0 ],
+			"type": "SCALAR"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 3139776,
+			"componentType": 5126,
+			"count": 48681,
+			"max": [ 0.72300756, 0.543539882, 0.900488794 ],
+			"min": [ -0.338940948, -0.406951159, -0.224158809 ],
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 3723948,
+			"componentType": 5126,
+			"count": 48681,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 1,
+			"byteOffset": 261648,
+			"componentType": 5121,
+			"normalized": true,
+			"count": 48681,
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 3,
+			"byteOffset": 1046592,
+			"componentType": 5126,
+			"count": 48681,
+			"type": "VEC4"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 4308120,
+			"componentType": 5126,
+			"count": 48681,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 4892292,
+			"componentType": 5126,
+			"count": 48681,
+			"type": "VEC3"
+		},
+		{
+			"bufferView": 2,
+			"byteOffset": 4308120,
+			"componentType": 5126,
+			"count": 48681,
+			"type": "VEC2"
+		},
+		{
+			"bufferView": 0,
+			"byteOffset": 685440,
+			"componentType": 5123,
+			"count": 255024,
+			"max": [ 48680 ],
+			"min": [ 0 ],
+			"type": "SCALAR"
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 1195488,
+			"byteOffset": 0,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 456372,
+			"byteOffset": 1195488,
+			"byteStride": 4,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 5476464,
+			"byteOffset": 1651860,
+			"byteStride": 12,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1825488,
+			"byteOffset": 7128324,
+			"byteStride": 16,
+			"target": 34962
+		}
+	],
+	"meshes": [
+		{
+			"name": "brush_Icing_g0_b0",
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 0,
+						"NORMAL": 1,
+						"COLOR_0": 2,
+						"TANGENT": 3,
+						"_TB_TIMESTAMP": 5,
+						"_TB_UNITY_TEXCOORD_0": 4,
+						"TEXCOORD_0": 6
+					},
+					"indices": 7,
+					"material": 0,
+					"mode": 4
+				}
+			]
+		},
+		{
+			"name": "brush_Icing_g0_b1",
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 8,
+						"NORMAL": 9,
+						"COLOR_0": 10,
+						"TANGENT": 11,
+						"_TB_TIMESTAMP": 13,
+						"_TB_UNITY_TEXCOORD_0": 12,
+						"TEXCOORD_0": 14
+					},
+					"indices": 15,
+					"material": 0,
+					"mode": 4
+				}
+			]
+		}
+	],
+	"samplers": [
+		{
+			"magFilter": 9729,
+			"minFilter": 9987,
+			"wrapS": 10497,
+			"wrapT": 10497
+		}
+	],
+	"textures": [
+		{
+			"sampler": 0,
+			"source": 0
+		}
+	],
+	"images": [
+		{
+			"uri": "Brush_Icing-2f212815-f4d3-c1a4-681a-feeaf9c6dc37-v10.0-BumpMap.png"
+		}
+	],
+	"materials": [
+		{
+			"alphaMode": "OPAQUE",
+			"alphaCutoff": 0.5,
+			"pbrMetallicRoughness": {
+				"metallicFactor": 0,
+				"roughnessFactor": 0.850000024
+			},
+			"normalTexture": {
+				"index": 0,
+				"texCoord": 0
+			},
+			"name": "brush_Icing",
+			"extensions": {
+				"GOOGLE_tilt_brush_material": {
+					"guid": "2f212815-f4d3-c1a4-681a-feeaf9c6dc37"
+				}
+			}
+		}
+	],
+	"nodes": [
+		{
+			"name": "brush_Icing_g0_b0",
+			"mesh": 0
+		},
+		{
+			"name": "node_SceneLight_0_i1",
+			"matrix": [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, -1, 0, 0.04333333, 0.04333333, 0.02166666, 1]
+		},
+		{
+			"name": "node_SceneLight_1_i2",
+			"matrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, -0.065, 1]
+		},
+		{
+			"name": "brush_Icing_g0_b1",
+			"mesh": 1
+		}
+	],
+	"scene": 0,
+	"scenes": [
+		{
+			"nodes": [
+				0,
+				1,
+				2,
+				3
+			],
+			"extras": {
+
+			}
+		}
+	],
+	"extensionsUsed": [
+		"GOOGLE_tilt_brush_material"
+	]
+}
