@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+  </head>
+  <body style="overflow: hidden; margin: 0">
+    <script>
+      let photo;
+      let pixel = 5;
+
+      function preload() {
+        photo = loadImage("img3.png");
+      }
+
+      function setup() {
+        let canvas = createCanvas(windowWidth, windowHeight);
+        // 原点中心に
+        translate(windowWidth / 2, windowHeight / 2);
+        imageMode(CENTER);
+        image(photo, 0, 0, photo.width / 5, photo.height / 5);
+        loadPixels();
+
+        for (let x = -photo.width / 2; x < photo.width / 2; x += pixel) {
+          for (let y = -photo.height / 2; y < photo.height / 2; y += pixel) {
+            // let index = (y * photo.width + x) * 4;
+            let c = photo.get(photo.width / 2 + x, photo.height / 2 + y);
+            fill(c);
+            noStroke();
+            rect(x, y, pixel, pixel);
+          }
+        }
+        // filter(GRAY);
+      }
+      window.addEventListener("resize", () => {
+        setup();
+      });
+    </script>
+  </body>
+</html>
