@@ -1,12 +1,16 @@
+let windowWidth = 0;
+let windowHeight = 0;
 let video = null;
 let videoStream = null;
 let videoInput = null;
-
-let windowWidth = 0;
-let windowHeight = 0;
-
 let canvas = null;
 let context = null;
+let arcWidth = 0;
+let arcHeight = 0;
+let colorPreviewArc = null;
+let currentColorCode = null;
+let headerText = null;
+let isFirst = false;
 
 const initWindow = () => {
   windowWidth = window.innerWidth;
@@ -48,7 +52,7 @@ const getVideo = (isFirst) => {
       getColorFromCanvas();
       setInterval(() => {
         getColorFromCanvas();
-      }, 500);
+      }, 100);
       if (isFirst) {
         isFinishInit.video = true;
       }
@@ -98,26 +102,37 @@ const canvasUpdate = () => {
   canvas.width = windowWidth;
   canvas.height = windowHeight;
   context = canvas.getContext("2d");
+  context.beginPath();
+  let arcRadius = windowWidth / 2 - 10;
+  arcWidth = arcRadius * 2;
+  if (!isFirst) setArcStyle();
+  isFirst = true;
+  context.arc(
+    windowWidth / 2,
+    windowHeight / 3,
+    arcRadius,
+    (0 * Math.PI) / 180,
+    (360 * Math.PI) / 180
+  );
+  context.clip();
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
   requestAnimationFrame(canvasUpdate);
 };
 
+const setArcStyle = () => {
+  colorPreviewArc.style.width = arcWidth + "px";
+  colorPreviewArc.style.height = arcWidth + "px";
+};
+
 const getColorFromCanvas = () => {
-  const colorPrevieBox = document.getElementById("color-preview");
   let x = windowWidth / 2;
-  let y = windowHeight / 2;
+  let y = windowHeight / 2 - arcWidth / 3;
   let imagedata = context.getImageData(x, y, 1, 1);
   let r = imagedata.data[0];
   let g = imagedata.data[1];
   let b = imagedata.data[2];
-  colorPrevieBox.style.backgroundColor = `rgba(${r}, ${g}, ${b}, 1)`;
-  showColorCode(r, g, b);
-};
-
-const showColorCode = (r, g, b) => {
-  const colorCodeText = document.getElementById("color-code-text");
-  let conts = rgbToHex([r, g, b]);
-  colorCodeText.innerText = conts;
+  colorPreviewArc.style.backgroundColor = `rgba(${r}, ${g}, ${b}, 1)`;
+  currentColorCode = rgbToHex([r, g, b]);
 };
 
 const rgbToHex = (rgb) => {
@@ -131,8 +146,52 @@ const rgbToHex = (rgb) => {
   );
 };
 
+const initAtachTrigger = () => {
+  colorPreviewArc = document.getElementById("color-preview");
+  colorPreviewArc.addEventListener("click", () => {
+    createArcInstance();
+    showHeaderText();
+  });
+};
+
+const showHeaderText = () => {
+  const colorCodeText = document.getElementById("color-code-text");
+  headerText = document.getElementById("header-text");
+  if (currentColorCode) {
+    colorCodeText.innerText = currentColorCode;
+    // colorModal.style.background = currentColorCode;
+    headerText.classList.remove("is-hidden");
+  }
+  setTimeout(() => {
+    hideHeaderText();
+  }, 1000);
+};
+
+const hideHeaderText = () => {
+  headerText.classList.add("is-hidden");
+};
+
+const createArcInstance = () => {
+  const newArc = document.createElement("div");
+  newArc.style.zIndex = 2;
+  newArc.style.position = "fixed";
+  // newArc.style.bottom = 0;
+  // newArc.style.left = "50%";
+  // newArc.style.transform = "translateX(-50%)";
+  newArc.style.borderRadius = "100rem";
+  newArc.style.background = currentColorCode;
+  newArc.style.width = arcWidth + "px";
+  newArc.style.height = arcWidth + "px";
+  newArc.classList.add("bound");
+  colorPreviewArc.appendChild(newArc);
+  setTimeout(() => {
+    colorPreviewArc.removeChild(newArc);
+  }, 1000);
+};
+
 window.addEventListener("load", () => {
   initWindow();
+  initAtachTrigger();
   initVideoAsync({ isFirst: true });
 });
 
