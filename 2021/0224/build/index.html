@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>meta</title>
+    <script src="./static/js/app.bundle.js"></script>
+    <link rel="stylesheet" href="./static/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="enemy">
+        <img id="enemy-img" src="./static/image/kuma.png" alt="" />
+        <div id="enemy-life" class="enemy-life is-hidden">
+          <p id="damege-text" class="damege-text">150</p>
+          <div id="enemy-life-gage" class="enemy-life-gage"></div>
+          <div class="enemy-life-gage-bg"></div>
+        </div>
+        <div class="enemy-bg">
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+          <div class="enemy-bg-frame"></div>
+        </div>
+      </div>
+      <div id="main-window" class="main-window" something="true">
+        <p id="type-anim" class="type-anim"></p>
+        <p id="act-text" class="act-text is-hidden"></p>
+        <div id="fight-bg" class="fight-bg is-hidden">
+          <img class="real-fight-bg" src="./static/image/fight_bg.png" alt="" />
+          <div id="moving-line" class="moving-line"></div>
+          <div class="fight-bg-center-frame"></div>
+        </div>
+      </div>
+      <div class="player-status">
+        <p class="c-txt">HP</p>
+        <div class="player-hp-box"></div>
+        <p class="c-txt"><span>20</span>/20</p>
+      </div>
+      <ul class="button-list" something="idontknow">
+        <li class="button-list-item">
+          <button class="button-list-item-button is-selected">
+            <img
+              class="button-list-item-img"
+              src="./static/image/fight_selected.png"
+              alt="こうげき"
+            />
+          </button>
+        </li>
+        <li class="button-list-item">
+          <button class="button-list-item-button">
+            <img
+              class="button-list-item-img"
+              src="./static/image/act.png"
+              alt="こうどう"
+            />
+          </button>
+        </li>
+        <li class="button-list-item">
+          <button class="button-list-item-button">
+            <img
+              class="button-list-item-img"
+              src="./static/image/item.png"
+              alt="アイテム"
+            />
+          </button>
+        </li>
+        <li class="button-list-item">
+          <button class="button-list-item-button">
+            <img
+              class="button-list-item-img"
+              src="./static/image/mercy.png"
+              alt="みのがす"
+            />
+          </button>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
