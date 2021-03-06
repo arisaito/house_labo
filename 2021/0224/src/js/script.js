@@ -18,6 +18,8 @@ let actArray = [
       "＊　くまをひっぱたいた。<br>＊　おこってるようだが<br>　　なにを言ってるかわからない。",
   },
 ];
+let endingPhrase =
+  "＊　YOU WIN！<br>＊　0EXPと2ゴールドを　かくとく！<br>＊　（おわり）";
 let choiceButtons = null;
 let choiceButtonsIcon = [
   {
@@ -43,6 +45,7 @@ let inputHeartMoveInterval = null;
 let currentType = "command";
 let intervalArray = [];
 
+let enemyImg = null;
 let enemyLife = 200;
 let enemyLifeDisplay = null;
 let fightBg = null;
@@ -179,7 +182,8 @@ const showEnemyLifeGage = (damege) => {
   enemyLife -= damege;
   const damegeText = document.getElementById("damege-text");
   const enemyLifeDisplayGage = document.getElementById("enemy-life-gage");
-  const enemyImg = document.getElementById("enemy-img");
+  let enemyAttackTimer = null;
+  enemyImg = document.getElementById("enemy-img");
   enemyLifeDisplay = document.getElementById("enemy-life");
   enemyLifeDisplay.classList.remove("is-hidden");
   enemyImg.classList.add("is-dameged");
@@ -189,14 +193,8 @@ const showEnemyLifeGage = (damege) => {
   let enemyLifeDisplayDamege = damege * 2.5;
   let enemyLifeDisplayWidth = getComputedStyle(enemyLifeDisplayGage).width;
   enemyLifeDisplayWidth = Number(enemyLifeDisplayWidth.replace(/px/g, ""));
-  if (enemyLifeDisplayWidth - enemyLifeDisplayDamege >= 0) {
-    enemyLifeDisplayGage.style.width =
-      enemyLifeDisplayWidth - enemyLifeDisplayDamege + "px";
-  } else {
-    enemyLifeDisplayGage.style.width = "0px";
-  }
 
-  setTimeout(() => {
+  enemyAttackTimer = setTimeout(() => {
     hideEnemyLifeGage();
     clearMainWindow();
     // resetMainWindow();
@@ -205,6 +203,22 @@ const showEnemyLifeGage = (damege) => {
     movingLine.style.animation = "";
     enemyImg.classList.remove("is-dameged");
   }, 2000);
+
+  if (enemyLifeDisplayWidth - enemyLifeDisplayDamege >= 0) {
+    enemyLifeDisplayGage.style.width =
+      enemyLifeDisplayWidth - enemyLifeDisplayDamege + "px";
+  } else {
+    enemyLifeDisplayGage.style.width = "0px";
+    clearTimeout(enemyAttackTimer);
+    setTimeout(() => {
+      hideEnemyLifeGage();
+      hideEnemyImage();
+      clearMainWindow();
+      typeConts.classList.remove("is-hidden");
+      typeText(endingPhrase);
+      currentType = "ending";
+    }, 1000);
+  }
 };
 
 const hideEnemyLifeGage = () => {
@@ -301,8 +315,8 @@ const resetMainWindow = () => {
   });
   choiceButtons[0].classList.add("is-selected");
   choiceButtons[commandButtonIndex].firstElementChild.src =
-    choiceButtonsIcon[commandButtonIndex].selected;
-  // choiceButtons[0].firstElementChild.src = "./static/image/heart.png";
+    choiceButtonsIcon[commandButtonIndex].normal;
+  choiceButtons[0].firstElementChild.src = choiceButtonsIcon[0].selected;
   commandButtonIndex = 0;
   typeText(mainPhrase);
 };
@@ -355,11 +369,14 @@ const instanceEnemyAttack = () => {
   }, enemyAttackTimer);
 };
 
+let bulletArray = [];
+
 const instanceEmenyAttackChild = () => {
   let bulletNum = 20;
   let newBullet = document.createElement("img");
   newBullet.setAttribute("src", "./static/image/bullet.png");
   newBullet.classList.add("bullet");
+  bulletArray.push(newBullet);
   for (var i = 0; i < bulletNum; i++) {
     setBullet(newBullet);
   }
@@ -371,6 +388,7 @@ const setBullet = (clone) => {
   bulletStyle.left = 100 * Math.random() - "7" + "%";
   bulletStyle.animationDelay = 2 * Math.random() + "s";
   bulletWrapper.appendChild(bulletClone);
+  bulletArray.push(bulletClone);
   bulletClone.addEventListener("animationend", () => {
     bulletWrapper.removeChild(bulletClone);
     let newBullet = document.createElement("img");
@@ -378,6 +396,11 @@ const setBullet = (clone) => {
     newBullet.classList.add("bullet");
     setBullet(newBullet);
   });
+  // console.log(bulletArray);
+};
+
+const bulletCollision = (player, bullet) => {
+  console.log("あったター");
 };
 
 const inputHeartMove = (keyCode) => {
@@ -407,6 +430,14 @@ const hideEnemysAttack = () => {
     mainWindow.classList.remove("will-be-attacked");
     mainWindow.style.animation = "";
   }, 1000);
+};
+
+// ------------------------------
+// game end
+// ------------------------------
+
+const hideEnemyImage = () => {
+  enemyImg.classList.add("is-hidden");
 };
 
 window.addEventListener("load", () => {

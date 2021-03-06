@@ -144,6 +144,9 @@ body {
   &.is-dameged {
     animation: enemyDamegeAnim 0.6s ease-out;
   }
+  &.is-hidden {
+    animation: enemyKilled 0.6s ease-out forwards;
+  }
 }
 .main-window {
   width: 100%;
@@ -343,6 +346,15 @@ body {
   }
   100% {
     transform: translateX(o);
+  }
+}
+
+@keyframes enemyKilled {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
