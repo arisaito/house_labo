@@ -12,6 +12,9 @@
         background: #fff9f9;
         text-align: center;
       }
+      h1 {
+        font-size: 200%;
+      }
       .container {
         width: 100%;
         max-width: 700px;
@@ -42,6 +45,7 @@
       .iframe-outer {
         width: 90%;
         height: 400px;
+        margin: auto;
       }
     </style>
   </head>
@@ -56,14 +60,36 @@
       </ul>
       <div class="iframe-outer">
         <iframe
-          id="inlineFrameExample"
-          title="Inline Frame Example"
+          id="inline-frame"
+          title="untitle"
           width="100%"
           height="100%"
-          src="https://arisaito.github.io/house_labo/2021/0322/index.html"
+          src=""
         >
         </iframe>
       </div>
     </div>
+    <script>
+      let storage = localStorage;
+      console.log(storage);
+      console.log("initial: " + storage.iframeCount);
+      let iframeCount = storage.iframeCount;
+      if (!iframeCount) {
+        storage.setItem("iframeCount", 0);
+      }
+      iframeCount = Number(iframeCount);
+      console.log("iframeCount: " + iframeCount);
+      if (iframeCount < 10) {
+        let random = Math.random().toString(32).substring(2);
+        let iframe = document.getElementById("inline-frame");
+        let url = "https://arisaito.github.io/house_labo/2021/0322/index.html";
+        iframe.src = `${url}?${random}`;
+        let newCount = (iframeCount += 1);
+        console.log("newCount :" + newCount);
+        storage.setItem("iframeCount", newCount);
+      } else {
+        console.log("終わり");
+      }
+    </script>
   </body>
 </html>
