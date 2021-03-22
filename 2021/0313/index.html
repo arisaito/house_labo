@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+    <script>
+      const characterArray = [
+        "@",
+        "&",
+        "R",
+        "H",
+        "N",
+        "G",
+        "I",
+        "#",
+        "q",
+        "o",
+        "j",
+        "i",
+        "r",
+        ";",
+        "*",
+        ":",
+        "^",
+        '"',
+        "`",
+        ",",
+        ".",
+        "&nbsp",
+      ];
+      let canvas = null;
+      let context = null;
+      let container = null;
+      let uploader = null;
+
+      const initCreateCanvas = () => {
+        const canvasWidth = 100;
+        const canvasHeight = 100;
+        canvas = document.createElement("canvas");
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        context = canvas.getContext("2d");
+      };
+
+      const initAttachTrigger = () => {
+        container = document.getElementById("container");
+        uploader = document.getElementById("upload");
+        uploader.onchange = () => imageLoadHandler();
+      };
+
+      const imageLoadHandler = () => {
+        const files = uploader.files;
+        const file = fileInput.files;
+        console.log(files);
+        console.log(file);
+        console.log("ここ");
+        let image = new Image();
+        image = e.target;
+        console.log(image);
+        image.onload = () => {
+          let brightArray = new Array();
+
+          console.log(image);
+        };
+      };
+
+      window.onload = () => {
+        initCreateCanvas();
+        initAttachTrigger();
+      };
+    </script>
+  </head>
+  <body>
+    <input
+      id="upload"
+      type="file"
+      name="example"
+      accept="image/jpeg, image/png"
+    />
+    <div id="container"></div>
+
+    <script>
+      // let textStringArray = [];
+      // let textArray = [];
+      // let img = null;
+      // let step = 20;
+
+      // function preload() {
+      //   textArray = createTextArray();
+      //   img = loadImage(
+      //     "https://64.media.tumblr.com/022f55c3e5928528656c49d00ebb6af7/4396ba5a5d99b6df-f3/s1280x1920/263aa1856a95ffcc53a48c7728e8756b3e4c86e3.jpg"
+      //   );
+      // }
+
+      // function setup() {
+      //   createCanvas(300, 300);
+      //   background(255);
+      // }
+
+      // function draw() {
+      //   image(img, 0, 0);
+      //   img.loadPixels();
+      // }
+
+      // function createTextArray() {
+      //   console.log("hi");
+      // }
+    </script>
+  </body>
+</html>

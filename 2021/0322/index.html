@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iframe window</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        background: #fff9f9;
+        text-align: center;
+      }
+      .container {
+        width: 100%;
+        max-width: 700px;
+        margin: 4rem auto;
+      }
+      .pictures {
+        display: flex;
+        flex-direction: row;
+        margin: 5rem auto 7rem;
+      }
+      .pictures-window {
+        width: 30%;
+        height: 300px;
+        margin: auto;
+      }
+      .pictures-window img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      li {
+        text-decoration: none;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to My Homepage</h1>
+
+      <ul class="pictures">
+        <li class="pictures-window"><img src="./06.jpg" alt="" /></li>
+        <li class="pictures-window"><img src="./04.jpg" alt="" /></li>
+        <li class="pictures-window"><img src="./05.jpg" alt="" /></li>
+      </ul>
+      <iframe
+        id="inlineFrameExample"
+        title="Inline Frame Example"
+        width="600"
+        height="360"
+        src="https://arisaito.github.io/house_labo/"
+      >
+      </iframe>
+    </div>
+  </body>
+</html>
