@@ -39,6 +39,10 @@
         list-style-type: none;
         padding: 0;
       }
+      .iframe-outer {
+        width: 90%;
+        height: 400px;
+      }
     </style>
   </head>
   <body>
@@ -50,14 +54,16 @@
         <li class="pictures-window"><img src="./04.jpg" alt="" /></li>
         <li class="pictures-window"><img src="./05.jpg" alt="" /></li>
       </ul>
-      <iframe
-        id="inlineFrameExample"
-        title="Inline Frame Example"
-        width="600"
-        height="360"
-        src="https://arisaito.github.io/house_labo/"
-      >
-      </iframe>
+      <div class="iframe-outer">
+        <iframe
+          id="inlineFrameExample"
+          title="Inline Frame Example"
+          width="100%"
+          height="100%"
+          src="https://arisaito.github.io/house_labo/2021/0322/index.html"
+        >
+        </iframe>
+      </div>
     </div>
   </body>
 </html>
