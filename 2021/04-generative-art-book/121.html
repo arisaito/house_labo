@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      // let radius = 200;
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(100);
+        strokeWeight(2);
+        smooth();
+        translate(windowWidth / 2, windowHeight / 2);
+        // frameRate(10);
+        let radius = 100;
+        let centX = 0;
+        let centY = 0;
+
+        stroke(0, 30);
+        noFill();
+        ellipse(centX, centY, radius * 2, radius * 2);
+
+        stroke(20, 50, 70);
+        strokeWeight(1);
+
+        let x, y;
+        let noiseval = random(10);
+        let radVariance, thisRadius, rad;
+        beginShape();
+        fill(20, 50, 70, 50);
+        for (let ang = 0; ang <= 360; ang += 1) {
+          noiseval += 0.1;
+          radVariance = 30 * customNoise(noiseval);
+
+          thisRadius = radius + radVariance;
+          rad = radians(ang);
+          x = centX + thisRadius * cos(rad);
+          y = centY + thisRadius * sin(rad);
+          curveVertex(x, y);
+        }
+        endShape();
+      }
+
+      const customNoise = (value) => {
+        let count = value % 12;
+        let retValue = Math.pow(sin(value), count);
+        return retValue;
+      };
+
+      function generateCircle() {
+        background(100);
+        let x;
+        let y;
+        let centX = 0;
+        let centY = 0;
+        let lastX = -999;
+        let lastY = -999;
+        let radiusNoise = random(10);
+        // なるほど、ここでは angle（度数方）なんだな,,
+        // 直感的に理解しやすいからか
+        // で、後から radian に変換する
+        // なぜ
+        for (let ang = 0; ang <= 10000; ang += 1) {
+          radiusNoise += 0.05;
+          stroke(random(20), random(50), random(70), 80);
+
+          // radiansという便利な関数よ,,,
+          // p5.js の deg → radian 変換関数のようだな
+          let rad = radians(ang);
+          let thisRadius = radius + noise(radiusNoise) * 200 - 100;
+          // sin, cosをあまり理解してないのでここの式辛い
+          console.log(sin(rad));
+          // なるほど、sin() cos() 関数のときは引数をradで渡さないといけないのか
+          // そのためにもrad変換は必要そうだ
+          x = centX + thisRadius * cos(rad);
+          y = centY + thisRadius * sin(rad);
+          if (lastX > -999) {
+            line(x, y, lastX, lastY);
+          }
+
+          lastX = x;
+          lastY = y;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      let windowWidth = window.innerWidth;
+      let windowHeight = window.innerHeight;
+      let xspacing = 10;
+      let theta = 0.0;
+      // let amplitude = windowHeight / 3; // 振り幅
+      let amplitude = 70;
+      let period = 500;
+      let dx;
+      let yvalues;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        smooth();
+        // frameRate(10);
+        background(0);
+
+        // ここわからん
+        dx = (TWO_PI / period) * xspacing;
+        yvalues = new Array(floor(windowWidth / xspacing));
+      }
+      function draw() {
+        background(0);
+        calcWave();
+        renderWave();
+      }
+
+      function calcWave() {
+        theta += 0.02;
+        let x = theta;
+        for (let i = 0; i < yvalues.length; i++) {
+          yvalues[i] = sin(windowWidth) * amplitude;
+          x += dx;
+        }
+      }
+
+      function renderWave() {
+        noStroke();
+        fill(255);
+        for (let x = 0; x < yvalues.length; x++) {
+          ellipse(x * xspacing, height / 2 + yvalues[x], 5, 5);
+        }
+      }
+      // sin(rad) (or Math.sin(rad) は
+      // 引数のラジアンを渡すと-1 ~ 1までの値が返ってくるだけのものなのよ、、
+    </script>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      let diam = 10;
+      let scale = 0;
+      let speed = 2;
+      let r = 255;
+      let g = 0;
+      let b = 0;
+      function setup() {
+        const width = windowWidth;
+        const height = windowHeight;
+        createCanvas(width, height);
+
+        frameRate(30);
+        smooth();
+        background(180);
+        noStroke();
+        strokeWeight(5);
+      }
+
+      function draw() {
+        let columnNum = 2;
+        let multiply = 300;
+        for (let x = 0; x <= columnNum; x++) {
+          for (let y = 0; y <= columnNum; y++) {
+            ellipseGenerator(x * multiply, y * multiply);
+          }
+        }
+      }
+
+      const ellipseGenerator = (x, y) => {
+        fill(r, g, b, 30);
+        ellipse(x, y, 50);
+
+        // scale = 100;
+        // if (windowWidth > windowHeight) {
+        //   scale = windowHeight / 2.5;
+        // } else {
+        //   scale = windowWidth / 2.5;
+        // }
+        // if (diam <= scale) {
+        //   background(180);
+        //   // translate(width / 2, height / 2);
+        //   colorGenerator();
+        //   fill(r, g, b, 30);
+
+        //   ellipse(x, y, diam, diam);
+        //   console.log("ここ");
+        //   console.log(x);
+
+        //   strokeWeight(0);
+
+        //   let templimit = 25;
+        //   for (let tempdiam = diam; tempdiam > 10; tempdiam -= templimit) {
+        //     ellipse(x, y, tempdiam, tempdiam);
+        //   }
+        //   diam += speed;
+        // } else {
+        //   diam = 0;
+        // }
+      };
+
+      const colorGenerator = () => {
+        let colorSpeed = 5;
+        if (r === 255 && g === 0 && b < 255) {
+          while (b <= 255) {
+            b += colorSpeed;
+            return r, g, b;
+          }
+        } else if (r > 0 && g === 0 && b === 255) {
+          while (r >= 0) {
+            r -= colorSpeed;
+            return r, g, b;
+          }
+        } else if (r === 0 && g < 255 && b === 255) {
+          while (g < 255) {
+            g += colorSpeed;
+            return r, g, b;
+          }
+        } else if (r === 0 && g === 255 && b > 0) {
+          while (b >= 0) {
+            b -= colorSpeed;
+            return r, g, b;
+          }
+        } else if (r < 255 && g === 255 && b === 0) {
+          while (r <= 255) {
+            r += colorSpeed;
+            return r, g, b;
+          }
+        } else if (r === 255 && g > 0 && b === 0) {
+          while (g >= 0) {
+            g -= colorSpeed;
+            return r, g, b;
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

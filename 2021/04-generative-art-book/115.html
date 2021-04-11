@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(100);
+        strokeWeight(5);
+        smooth();
+
+        let radius = 100;
+        translate(windowWidth / 2, windowHeight / 2);
+        let centX = 0;
+        let centY = 0;
+        stroke(255);
+        noFill();
+        let x;
+        let y;
+        let lastX = -999;
+        let lastY = -999;
+        for (let ang = 0; ang <= 360; ang += 5) {
+          // radianをあまり理解してない人間なので。。。
+          let rad = radians(ang);
+          // sin, cosをあまり理解してないのでここの式辛い
+          x = centX + radius * cos(rad);
+          y = centY + radius * sin(rad);
+          point(x, y);
+        }
+      }
+
+      function draw() {}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      // y = a * sin((2 * PI / t) * x)
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(255);
+        noStroke();
+        fill(0);
+      }
+
+      function draw() {
+        let x, y;
+        let amp = 5; // amplitude
+        let t = 20; // period
+        x = 10;
+
+        let ellipseRadius = 10;
+        for (let i = 0; i < windowWidth / 10; i++) {
+          x += 10;
+          y = amp * sin(TWO_PI / t) * x;
+          ellipse(x, y, ellipseRadius, ellipseRadius);
+        }
+      }
+
+      // function calcWave() {
+      //   theta += 0.02;
+      //   let x = theta;
+      //   for (let i = 0; i < yvalues.length; i++) {
+      //     yvalues[i] = sin(x) * amplitude;
+      //     x += dx;
+      //   }
+
+      // }
+
+      // function renderWave() {
+      //   noStroke();
+      //   fill(255);
+      //   let ellipseRadius = 1;
+      //   for (let x = 0; x < yvalues.length; x++) {
+      //     ellipse(
+      //       x * xspacing,
+      //       height / 2 + yvalues[x],
+      //       ellipseRadius,
+      //       ellipseRadius
+      //     );
+      //   }
+      // }
+    </script>
+  </body>
+</html>

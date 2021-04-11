@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/earlyaccess/sawarabimincho.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: rgb(230, 230, 230);
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+      }
+      canvas {
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let sentenceArray = ["今日、", "今日は、"];
+      let sentenceIndexArray = [];
+      let x, y;
+      let margin = 30;
+      let width;
+      let height;
+      let bgColor = 230;
+      let index = 0;
+      let windowWidth = window.innerWidth;
+      if (windowWidth > 900) windowWidth = 900;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        // background("#f4f3f2");
+        background(bgColor);
+        frameRate(10);
+        smooth();
+        // fill(150, 50);
+        width = windowWidth - margin * 2;
+        height = windowHeight / 2 - margin * 2;
+        x = margin;
+        y = 0;
+        prepareSentence();
+      }
+
+      function draw() {
+        background(230);
+        drawTop();
+        topMarginRect();
+        drawBottom();
+        index = 0;
+      }
+
+      function prepareSentence() {
+        // let sentence = sentenceArray[randomIndex];
+        for (let i = 0; i < 100; i++) {
+          let randomIndex = Math.floor(random(2));
+          sentenceIndexArray.push(randomIndex);
+        }
+        console.log(sentenceIndexArray);
+      }
+
+      function drawTop() {
+        push();
+        translate(
+          windowWidth / 2,
+          windowHeight - windowHeight / 2 - height / 2 - margin / 2
+        );
+        let radius = 0;
+        windowWidth > windowHeight
+          ? (radius = windowHeight / 2)
+          : (radius = windowWidth / 2.3);
+
+        let centX = 0;
+        let centY = 0;
+        strokeWeight(1);
+
+        // let topX, topY;
+        for (let ang = 0; ang <= 360; ang++) {
+          let rad = radians(ang);
+          let x1 = centX + radius * cos(rad);
+          let y1 = centY + radius * sin(rad);
+
+          let opprad = rad + PI;
+          let x2 = centX + radius * cos(opprad);
+          let y2 = random(centY + radius * sin(opprad));
+          line(x1, y1, x2, y2);
+        }
+        pop();
+      }
+
+      function topMarginRect() {
+        push();
+        noStroke();
+        fill(bgColor);
+        rect(0, 0, windowWidth, margin);
+        rect(
+          0,
+          margin + height + margin / 2,
+          windowWidth,
+          windowHeight - margin + height
+        );
+        rect(0, 0, margin, windowHeight);
+        rect(windowWidth - margin, 0, margin, windowHeight);
+        pop();
+      }
+
+      function drawBottom() {
+        push();
+        translate(0, windowHeight / 2 + margin / 2);
+        while (x < windowWidth - margin || y < height - margin) {
+          // if (x >= windowWidth - margin && y >= height) return;
+          if (x < windowWidth - margin) {
+            writeText();
+          } else {
+            y += 30;
+            x = margin;
+            writeText();
+          }
+        }
+        x = margin;
+        y = 0;
+        pop();
+      }
+
+      function writeText() {
+        let fontSize = 25;
+        fill(50);
+        noStroke();
+        textAlign(LEFT, TOP);
+        textFont("Sawarabi Mincho");
+        textSize(fontSize);
+
+        let sentence = sentenceArray[sentenceIndexArray[index]];
+
+        if (x + fontSize * sentence.length < windowWidth) {
+          // sentece = sentenceArray[sentenceIndexArray[index]];
+          text(sentence, x, y, 100, 100);
+        }
+        index += 1;
+        if (index >= 100) index = 0;
+        x += fontSize * sentence.length;
+      }
+    </script>
+  </body>
+</html>

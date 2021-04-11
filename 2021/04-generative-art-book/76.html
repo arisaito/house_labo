@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      let diam = 100;
+      let margin = 70;
+      let scale = 0;
+      let speed = 0.2;
+      let r = 255;
+      let g = 0;
+      let b = 0;
+
+      function setup() {
+        const width = windowWidth;
+        const height = windowHeight;
+        scale = windowHeight / 2.5;
+        createCanvas(width, height);
+
+        frameRate(30);
+        smooth();
+        background(180);
+        noStroke();
+        strokeWeight(5);
+      }
+
+      function draw() {
+        let columnNum = 3;
+        let multiply = 100;
+
+        translate(diam * 3 - margin, diam * 1 - 50);
+        for (let x = 0; x <= columnNum; x++) {
+          for (let y = 0; y <= columnNum; y++) {
+            ellipseGenerator(
+              x * multiply + margin * x,
+              y * multiply + margin * y
+            );
+          }
+        }
+      }
+
+      const ellipseGenerator = (x, y) => {
+        if (diam <= scale) {
+          colorGenerator();
+          fill(r, g, b, 25);
+          ellipse(x, y, diam, diam);
+          noStroke(9);
+
+          let templimit = 1;
+          for (let tempdiam = diam; tempdiam > 10; tempdiam -= templimit) {
+            ellipse(x, y, tempdiam, tempdiam);
+          }
+          diam += speed;
+        } else {
+          diam = 0;
+        }
+      };
+
+      const colorGenerator = () => {
+        let colorSpeed = 0.5;
+        if (r === 255 && g === 0 && b < 255) {
+          while (b <= 255) {
+            b += colorSpeed;
+            return r, g, b;
+          }
+        } else if (r > 0 && g === 0 && b === 255) {
+          while (r >= 0) {
+            r -= colorSpeed;
+            return r, g, b;
+          }
+        } else if (r === 0 && g < 255 && b === 255) {
+          while (g < 255) {
+            g += colorSpeed;
+            return r, g, b;
+          }
+        } else if (r === 0 && g === 255 && b > 0) {
+          while (b >= 0) {
+            b -= colorSpeed;
+            return r, g, b;
+          }
+        } else if (r < 255 && g === 255 && b === 0) {
+          while (r <= 255) {
+            r += colorSpeed;
+            return r, g, b;
+          }
+        } else if (r === 255 && g > 0 && b === 0) {
+          while (g >= 0) {
+            g -= colorSpeed;
+            return r, g, b;
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

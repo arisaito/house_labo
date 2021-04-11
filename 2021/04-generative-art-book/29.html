@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      function setup() {
+        const width = windowWidth;
+        const height = windowHeight;
+        createCanvas(width, height);
+        background(150);
+        stroke(0, 50);
+        fill(255, 200);
+        const xStart = random(10);
+        let yNoise = random(10);
+        translate(width / 2, height / 2);
+        for (let y = -(height / 8); y <= height / 8; y += 3) {
+          yNoise += 0.02;
+          let xNoise = xStart;
+          for (let x = -(width / 8); x <= width / 8; x += 3) {
+            xNoise += 0.02;
+            drawPoint(x, y, noise(xNoise, yNoise));
+          }
+        }
+      }
+      function drawPoint(x, y, noiseFactor) {
+        push();
+        // ???
+        translate(x * noiseFactor * 4, y * noiseFactor * 4, -y);
+        const edgeSize = noiseFactor * 26;
+        ellipse(0, 0, edgeSize, edgeSize);
+        pop();
+      }
+    </script>
+  </body>
+</html>
