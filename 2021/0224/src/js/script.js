@@ -21,7 +21,7 @@ let actArray = [
 const endingPhrase =
   "＊　YOU WIN！<br>＊　0EXPと2ゴールドを　かくとく！<br>＊　（おわり）";
 const itemPhrase =
-  "＊　どうやら開発者は<br>　　これを実装する余裕が<br>　　なかったようだ…";
+  "＊　どうやら かいはつしゃは<br>　　これを　じっそうする　よゆうが<br>　　なかったようだ…";
 const gameoverPhrase =
   "あきらめては　いけない…<br>リロードして<br>ケツイをちからに　かえるんだ…";
 let choiceButtons = null;
@@ -77,6 +77,13 @@ let actTextItem = null;
 let typePhraseIndex = 0;
 let commandButtonIndex = 0;
 let actButtonIndex = 0;
+
+const initDevice = () => {
+  const mobileWindow = document.getElementById("mobile-window");
+  if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
+    mobileWindow.classList.remove("is-hidden");
+  }
+};
 
 const initAttach = () => {
   mainWindow = document.getElementById("main-window");
@@ -534,6 +541,7 @@ const hideEnemyImage = () => {
 };
 
 window.addEventListener("load", () => {
+  initDevice();
   initAttach();
   initCommandEvent();
   typeText(mainPhrase);
