@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/earlyaccess/sawarabimincho.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: rgb(230, 230, 230);
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+      }
+      canvas {
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let img;
+      function preload() {
+        img = loadImage("img.jpg");
+      }
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(200);
+        smooth();
+        image(img, 0, 0, windowWidth, windowHeight);
+        getPixel();
+      }
+
+      function getPixel() {
+        let range = 1;
+        for (let x = 0; x <= windowWidth; x += range) {
+          for (let y = windowHeight; y > 0; y -= range) {
+            let index = Math.round(random());
+            // 確率操作してくれな
+            let color = get(x, y);
+            let r = color[1];
+            let g = color[2];
+            let b = color[3];
+
+            // 明度が高い時
+
+            if (index == 1) {
+              // 何かしらピクセルを取得する処理
+
+              let length = random(windowHeight / 4, windowHeight - y);
+              // let length = windowHeight / 2;
+              // let length = 100;
+              stroke(r, g, b, 1);
+              noFill();
+              line(x, y, x, y + length);
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

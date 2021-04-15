@@ -1,4 +1,4 @@
-let mainPhrase = "＊　うざいくま があらわれた。<br>＊　ただの クソザコ。";
+const mainPhrase = "＊　うざいくま があらわれた。<br>＊　ただの クソザコ。";
 let actArray = [
   {
     action: "ぶんせき",
@@ -18,8 +18,12 @@ let actArray = [
       "＊　くまをひっぱたいた。<br>＊　おこってるようだが<br>　　なにを言ってるかわからない。",
   },
 ];
-let endingPhrase =
+const endingPhrase =
   "＊　YOU WIN！<br>＊　0EXPと2ゴールドを　かくとく！<br>＊　（おわり）";
+const itemPhrase =
+  "＊　どうやら開発者は<br>　　これを実装する余裕が<br>　　なかったようだ…";
+const gameoverPhrase =
+  "あきらめては　いけない…<br>リロードして<br>ケツイをちからに　かえるんだ…";
 let choiceButtons = null;
 let choiceButtonsIcon = [
   {
@@ -39,8 +43,12 @@ let choiceButtonsIcon = [
     selected: "./static/image/mercy_selected.png",
   },
 ];
+
 let mainWindow = null;
 let typeTextTimeout = null;
+let typeGameoverTimeout = null;
+let fightModeTimeout = null;
+let enemyAttackEndReset = null;
 let inputHeartMoveInterval = null;
 let currentType = "command";
 let intervalArray = [];
@@ -52,6 +60,9 @@ let fightBg = null;
 let movingLine = null;
 
 let enemyAttackTimer = 5000;
+let newHeartImg = null;
+
+let isUndying = false;
 
 // ------------------------------
 // main window conts
@@ -71,6 +82,7 @@ const initAttach = () => {
   mainWindow = document.getElementById("main-window");
   typeConts = document.getElementById("type-anim");
   actText = document.getElementById("act-text");
+  itemText = document.getElementById("item-text");
   choiceButtons = document.querySelectorAll(".button-list-item-button");
   fightBg = document.getElementById("fight-bg");
 };
@@ -82,7 +94,7 @@ const typeText = (phrase) => {
       typeText(phrase);
     }, 50);
   } else {
-    i = 0;
+    typePhraseIndex = 0;
   }
 };
 
@@ -104,6 +116,10 @@ const initCommandEvent = () => {
     } else if (currentType === "fight") {
       if (e.keyCode === 13) {
         attackEnter();
+      }
+    } else if (currentType === "item" || currentType === "mercy") {
+      if (e.keyCode === 13) {
+        resetMainWindow();
       }
     }
   });
@@ -160,9 +176,14 @@ const fightFunc = () => {
   fightBg.classList.remove("is-hidden");
   movingLine = document.getElementById("moving-line");
   movingLine.classList.add("is-moved");
+  fightModeTimeout = setTimeout(() => {
+    clearMainWindow();
+    enemysAttackFunc();
+  }, 1500);
 };
 
 const attackEnter = () => {
+  clearTimeout(fightModeTimeout);
   const windowWidth = document.body.clientWidth;
 
   let lineRect = movingLine.getBoundingClientRect();
@@ -287,9 +308,10 @@ const showActPhrase = (index) => {
 // ------------------------------
 
 const itemFunc = () => {
-  // currentType = "item";
-  // clearMainWindow();
-  return;
+  currentType = "item";
+  clearMainWindow();
+  typeConts.classList.remove("is-hidden");
+  typeText(itemPhrase);
 };
 
 // ------------------------------
@@ -297,9 +319,10 @@ const itemFunc = () => {
 // ------------------------------
 
 const mercyFunc = () => {
-  // currentType = "mercy";
-  // clearMainWindow();
-  return;
+  currentType = "mercy";
+  clearMainWindow();
+  typeConts.classList.remove("is-hidden");
+  typeText(itemPhrase);
 };
 
 // ------------------------------
@@ -330,8 +353,6 @@ const clearMainWindow = () => {
   fightBg.classList.add("is-hidden");
 };
 
-let newHeartImg = null;
-
 // ------------------------------
 // enemy attack
 // ------------------------------
@@ -340,67 +361,139 @@ const enemysAttackFunc = () => {
   currentType = "enemy-attack";
   mainWindow.classList.add("will-be-attacked");
   newHeartImg = document.createElement("img");
-  newHeartImg.setAttribute("src", "./static/image/heart.png");
-  newHeartImg.setAttribute("width", "30px");
-  newHeartImg.setAttribute("height", "30px");
-  newHeartImg.style.position = "absolute";
-  newHeartImg.style.top = "50%";
-  newHeartImg.style.left = "calc(50% - 15px)";
-  mainWindow.appendChild(newHeartImg);
-  instanceEnemyAttack();
+  createNewHeartImg(newHeartImg);
+  const gif = document.createElement("img");
+  let newCollisionTimer = collisionTimer();
+  addEnemyAttackGif(gif);
   setTimeout(() => {
     newHeartImg.remove();
+    gif.remove();
+    clearInterval(newCollisionTimer);
     hideEnemysAttack();
   }, enemyAttackTimer);
-  setTimeout(() => {
+  enemyAttackEndReset = setTimeout(() => {
     resetMainWindow();
   }, enemyAttackTimer + 500);
 };
 
-let bulletWrapper = null;
-
-const instanceEnemyAttack = () => {
-  bulletWrapper = document.createElement("div");
-  bulletWrapper.classList.add("bullet-wrapper");
-  mainWindow.appendChild(bulletWrapper);
-  instanceEmenyAttackChild();
-  setTimeout(() => {
-    mainWindow.removeChild(bulletWrapper);
-  }, enemyAttackTimer);
+const createNewHeartImg = () => {
+  newHeartImg.setAttribute("src", "./static/image/heart.png");
+  newHeartImg.setAttribute("width", "30px");
+  newHeartImg.setAttribute("height", "30px");
+  newHeartImg.setAttribute("id", "enemy-attack-player");
+  newHeartImg.style.position = "absolute";
+  newHeartImg.style.top = "50%";
+  newHeartImg.style.left = "calc(50% - 15px)";
+  mainWindow.appendChild(newHeartImg);
 };
 
-let bulletArray = [];
+const addEnemyAttackGif = (gif) => {
+  gif.setAttribute("src", "./static/image/kuma.gif");
+  gif.classList.add("enemy-attack-gif");
+  mainWindow.appendChild(gif);
+};
 
-const instanceEmenyAttackChild = () => {
-  let bulletNum = 20;
-  let newBullet = document.createElement("img");
-  newBullet.setAttribute("src", "./static/image/bullet.png");
-  newBullet.classList.add("bullet");
-  bulletArray.push(newBullet);
-  for (var i = 0; i < bulletNum; i++) {
-    setBullet(newBullet);
+const collisionTimer = () => {
+  return setInterval(() => {
+    collisionCheck();
+  }, 100);
+};
+
+const collisionCheck = () => {
+  if (isUndying) return;
+  let [gifX, gifY] = enemyPosition();
+  let [playerX, playerY] = playerPosition();
+
+  const limitDistance = 15;
+  if (
+    difference(gifX, playerX) < limitDistance ||
+    difference(gifY, playerY) < limitDistance
+  ) {
+    isUndying = true;
+    playerDamageAnim();
+    playerDamageGage();
+    playerHPNumDisplay();
   }
 };
 
-const setBullet = (clone) => {
-  let bulletClone = clone.cloneNode(true);
-  let bulletStyle = bulletClone.style;
-  bulletStyle.left = 100 * Math.random() - "7" + "%";
-  bulletStyle.animationDelay = 2 * Math.random() + "s";
-  bulletWrapper.appendChild(bulletClone);
-  bulletArray.push(bulletClone);
-  bulletClone.addEventListener("animationend", () => {
-    bulletWrapper.removeChild(bulletClone);
-    let newBullet = document.createElement("img");
-    newBullet.setAttribute("src", "./static/image/bullet.png");
-    newBullet.classList.add("bullet");
-    setBullet(newBullet);
-  });
-  // console.log(bulletArray);
+const difference = (a, b) => {
+  return Math.abs(a - b);
 };
 
-const bulletCollision = (player, bullet) => {
-  console.log("あったター");
+const playerDamageAnim = () => {
+  const player = document.getElementById("enemy-attack-player");
+  player.style.animation = "playerDamageAnim 1s linear";
+  setTimeout(() => {
+    player.style.animation = "none";
+    isUndying = false;
+  }, 1000);
+};
+
+const playerDamageGage = () => {
+  const gageDamage = 4;
+  // const gageDamage = 50;
+  const playerHP = document.getElementById("player-hp-box");
+  const playerHPWidth = getComputedStyle(playerHP).width;
+  const playerHPWidthNum = Number(playerHPWidth.replace(/px/g, ""));
+  if (playerHPWidthNum - gageDamage >= 0) {
+    playerHP.style.width = playerHPWidthNum - gageDamage + "px";
+  } else {
+    playerHP.style.width = "0px";
+    showGameover();
+    clearTimeout(enemyAttackEndReset);
+    setTimeout(() => {
+      typeGameover();
+    }, 2300);
+  }
+};
+
+const showGameover = () => {
+  // resetMainWindow();
+  const gameoverWindow = document.getElementById("gameover-window");
+  const gameoverWindowText = document.getElementById("gameover-window-text");
+  gameoverWindow.classList.remove("is-hidden");
+  gameoverWindowText.classList.remove("is-hidden");
+};
+
+const typeGameover = () => {
+  const gameoverTypeText = document.getElementById("gameover-type-anim");
+  gameoverTypeText.innerHTML = gameoverPhrase.substring(0, typePhraseIndex++);
+  if (typePhraseIndex <= gameoverPhrase.length) {
+    typeTextTimeout = setTimeout(() => {
+      typeGameover(gameoverPhrase);
+    }, 50);
+  } else {
+    clearTimeout(typeTextTimeout);
+    typePhraseIndex = 0;
+  }
+};
+
+const playerHPNumDisplay = () => {
+  const numDamage = 1.25;
+  const hpNumNode = document.getElementById("player-status-hp-num");
+  let hpNum = Number(hpNumNode.textContent);
+  if (hpNum - numDamage >= 0) {
+    hpNum -= numDamage;
+    hpNumNode.innerText = Math.round(hpNum);
+  } else {
+    hpNumNode.innerText = 0;
+  }
+};
+
+const enemyPosition = () => {
+  const gif = document.getElementsByClassName("enemy-attack-gif")[0];
+  let gifRect = gif.getBoundingClientRect();
+  let x = Number(gifRect.left) + Number(gifRect.right) / 2;
+  let y = Number(gifRect.top) + Number(gifRect.bottom) / 2;
+  return [x, y];
+};
+
+const playerPosition = () => {
+  const player = document.getElementById("enemy-attack-player");
+  const playerRect = player.getBoundingClientRect();
+  let x = Number(playerRect.left) + Number(playerRect.right) / 2;
+  let y = Number(playerRect.top) + Number(playerRect.bottom) / 2;
+  return [x, y];
 };
 
 const inputHeartMove = (keyCode) => {

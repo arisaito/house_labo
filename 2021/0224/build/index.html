@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>meta</title>
+    <title>UNDERSOMETHING</title>
     <script src="./static/js/app.bundle.js"></script>
     <link rel="stylesheet" href="./static/css/style.css" />
   </head>
@@ -40,11 +40,23 @@
           <div id="moving-line" class="moving-line"></div>
           <div class="fight-bg-center-frame"></div>
         </div>
+        <div id="gameover-window" class="gameover-window is-hidden">
+          <img
+            id="gameover-window-text"
+            class="gameover-window-text is-hidden"
+            src="./static/image/gameover.jpeg"
+            alt=""
+          />
+          <p id="gameover-type-anim" class="gameover-type-anim"></p>
+        </div>
       </div>
       <div class="player-status">
-        <p class="c-txt">HP</p>
-        <div class="player-hp-box"></div>
-        <p class="c-txt"><span>20</span>/20</p>
+        <p class="c-txt player-status-hp">HP</p>
+        <div id="player-hp-box" class="player-hp-box"></div>
+        <div id="player-hp-box-bg" class="player-hp-box-bg"></div>
+        <p class="c-txt player-status-hp-num">
+          <span id="player-status-hp-num">20</span>/20
+        </p>
       </div>
       <ul class="button-list" something="idontknow">
         <li class="button-list-item">
