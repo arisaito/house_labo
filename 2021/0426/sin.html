@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+    <title>-----</title>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      let scale = 100;
+      let amplitude = 100;
+      let theta = 0;
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(100);
+      }
+
+      function draw() {
+        translate(windowWidth / 2, windowHeight / 2);
+        background(100);
+        noStroke();
+        fill(255);
+        // -1 ~ 1の中で0.02ずつ移動
+        // つまりthetaは角度でありスピード
+        theta += 0.02;
+        ellipse(0, sin(theta) * amplitude, scale);
+      }
+    </script>
+  </body>
+</html>

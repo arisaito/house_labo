@@ -1,0 +1,26 @@
+<body>
+  <div id="target">hello</div>
+  <script>
+    let target = null;
+    const promiseFunc = new Promise((resolve, reject) => {
+      target = document.getElementById("target");
+      if (target) {
+        resolve(true);
+      } else {
+        reject(false);
+      }
+    });
+
+    promiseFunc.then(
+      (value) => {
+        // resolveの時
+        console.log(value);
+      },
+      (error) => {
+        // rejectの時
+        console.log(error);
+      }
+    );
+    console.log("先に出力");
+  </script>
+</body>

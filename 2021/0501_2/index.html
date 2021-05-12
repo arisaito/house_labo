@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        background: black;
+      }
+      .kuma {
+        position: fixed;
+        top: calc(50% - 75px);
+        left: calc(50% - 75px);
+        width: 150px;
+        height: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="kuma" class="kuma" src="kuma.gif" />
+    <script>
+      const kuma = document.getElementById("kuma");
+      let start;
+      let a = 0;
+      let b = 0;
+
+      const buttonPressed = (button) => {
+        if (typeof button == "object") {
+          return button.pressed;
+        }
+        return button == 1.0;
+      };
+
+      const gameLoop = () => {
+        const gamepads = navigator.getGamepads
+          ? navigator.getGamepads()
+          : navigator.webkitGetGamepads
+          ? navigator.webkitGetGamepads
+          : [];
+        if (!gamepads) {
+          return;
+        }
+
+        const gp = gamepads[0];
+        if (buttonPressed(gp.buttons[3])) {
+          b--;
+        } else if (buttonPressed(gp.buttons[0])) {
+          b++;
+        }
+        if (buttonPressed(gp.buttons[1])) {
+          a++;
+        } else if (buttonPressed(gp.buttons[2])) {
+          a--;
+        }
+
+        const kumaLeft = kuma.getBoundingClientRect().left;
+        const kumaTop = kuma.getBoundingClientRect().top;
+        const speed = 5;
+
+        kuma.style.left = kumaLeft + a * speed + "px";
+        kuma.style.top = kumaTop + b * speed + "px";
+        a = 0;
+        b = 0;
+
+        start = requestAnimationFrame(gameLoop);
+      };
+
+      window.addEventListener("gamepadconnected", (e) => {
+        gameLoop();
+      });
+    </script>
+  </body>
+</html>

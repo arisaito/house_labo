@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      let cellSize;
+      let columns;
+      let rows;
+      let board;
+      let next;
+
+      let strokeWeightNum = 0.1;
+      let bgColor = "#101516";
+      let fillColor = "#ff5492";
+      let strokeColor = "#7f2a47";
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        cellSize = 10;
+
+        columns = floor(width / cellSize);
+        rows = floor(height / cellSize);
+
+        // 配列に 横分のcell * 縦分のcellが格納
+        // board が現状分？でnextが1フレーム後の分
+        board = new Array(columns);
+        for (let i = 0; i < columns; i++) {
+          board[i] = new Array(rows);
+        }
+        next = new Array(columns);
+        for (i = 0; i < columns; i++) {
+          next[i] = new Array(rows);
+        }
+        init();
+      }
+
+      function draw() {
+        background(bgColor);
+        // generateで states を決める
+        generate();
+
+        // ここは states に応じた描画処理だけ
+        for (let i = 0; i < columns; i++) {
+          for (let j = 0; j < rows; j++) {
+            stroke(strokeColor);
+            strokeWeight(strokeWeightNum);
+            // 0 / 1 の状態に応じて塗り分ける処理
+            if (board[i][j] == 1) fill(fillColor);
+            else fill(bgColor);
+            if (board[i][j] == 1 && next[i][j] == 0) fill(strokeColor);
+            rect(
+              i * cellSize + strokeWeightNum,
+              j * cellSize + strokeWeightNum,
+              cellSize - strokeWeightNum,
+              cellSize - strokeWeightNum
+            );
+          }
+        }
+      }
+
+      function mousePressed() {
+        init();
+      }
+
+      // 最初のstatesをランダムに決める
+      function init() {
+        for (let i = 0; i < columns; i++) {
+          for (let j = 0; j < rows; j++) {
+            if (i == 0 || j == 0 || i == columns - 1 || j == rows - 1)
+              // 枠のフチは 0 入れてんな（なんで？）
+              board[i][j] = 0;
+            // 枠のフチじゃない中身のとこは
+            else board[i][j] = floor(random(2));
+          }
+        }
+      }
+
+      function generate() {
+        for (let x = 1; x < columns - 1; x++) {
+          for (let y = 1; y < rows - 1; y++) {
+            let neighbors = 0;
+            for (let i = -1; i <= 1; i++) {
+              for (let j = -1; j <= 1; j++) {
+                neighbors += board[x + i][y + j];
+              }
+            }
+
+            neighbors -= board[x][y];
+            // rules of life
+
+            // loneliness
+            if (board[x][y] == 1 && neighbors < 2) next[x][y] = 0;
+            // overpopulation
+            else if (board[x][y] == 1 && neighbors > 3) next[x][y] = 0;
+            // reqroduction
+            else if (board[x][y] == 0 && neighbors == 3) next[x][y] = 1;
+            //stasis
+            else next[x][y] = board[x][y];
+          }
+        }
+
+        let temp = board;
+        board = next;
+        next = temp;
+      }
+    </script>
+  </body>
+</html>

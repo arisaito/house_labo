@@ -1,0 +1,39 @@
+body {
+  padding: 0;
+  margin: 0;
+  line-height: 0.5rem;
+  font-size: 0.5rem;
+  overflow: auto;
+  /* transform: rotate3d(1, 4, 1, 70deg); */
+  
+}
+.wave01 {
+  transform: rotate3d(1, -1, 1, 89deg) scale(50, 0.5);
+  /* width: 200%;
+  position: fixed;
+  top: -30%;
+  left: -94vw; */
+  font-size: 0.55rem;
+  width: 12%;
+  top: -61%;
+  position: fixed;
+  left: 0;
+  z-index: 2;
+}
+.wave02 {
+  transform: rotate3d(1, -1, 1, 89deg);
+  width: 200vw;
+  position: fixed;
+  top: -31%;
+  left: -64vw;
+  z-index: 1;
+}
+.wave03 {
+  transform: rotate3d(1, -1, 1, 89deg) scale(5, 0.5);
+  width: 100vw;
+  opacity: 0.4;
+  z-index: 0;
+  /* position: fixed;
+  top: -31%;
+  left: -64vw; */
+}

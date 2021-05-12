@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>drawing</title>
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
+    ></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      model-viewer {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgb(230, 230, 230);
+        background: radial-gradient(
+          circle,
+          rgba(230, 230, 230, 1) 0%,
+          rgb(99, 105, 125, 0.3) 100%
+        );
+      }
+    </style>
+    <script>
+      let modelViewer = null;
+      let interactionPromptIcon = null;
+
+      const initGetShadowDom = () => {
+        modelViewer = document.querySelector("model-viewer");
+        let modelViewerShadow = modelViewer.shadowRoot;
+        let modelViewerChildNode = Array.from(modelViewerShadow.childNodes);
+        modelViewerChildNode.forEach((childNode) => {
+          if (childNode.nodeName === "DIV") {
+            interactionPromptIcon = childNode.childNodes[9];
+          }
+        });
+      };
+
+      const initRemoveRotateIcon = () => {
+        if (!modelViewer.hasAttribute("auto-rotate")) {
+          interactionPromptIcon.style.display = "none";
+          modelViewer.setAttribute("interaction-prompt-style", "basic");
+        }
+      };
+
+      window.onload = () => {
+        initGetShadowDom();
+        initRemoveRotateIcon();
+      };
+    </script>
+  </head>
+  <body>
+    <model-viewer
+      src="./src/sketch.gltf"
+      ios-src="./src/Untitled_5.usdz"
+      camera-controls
+      ar
+      minimumRenderScale="1"
+      camera-orbit="23deg 46deg 105%"
+      exposure="0.5"
+    >
+    </model-viewer>
+  </body>
+</html>
