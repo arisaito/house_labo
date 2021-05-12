@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+      }
+      canvas {
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let img;
+
+      function preload() {
+        img = loadImage("photo.JPG");
+      }
+
+      function setup() {
+        let w;
+        windowHeight > windowWidth * 1.5
+          ? (w = windowWidth)
+          : (w = windowHeight / 1.5);
+        createCanvas(w, windowHeight);
+        smooth();
+        image(img, 0, 0, width, height);
+        // image(img, 0, height / 2 - img.height / 2);
+        getPixel();
+      }
+
+      function getPixel() {
+        for (x = 0; x <= width; x += 1) {
+          for (y = height; y >= 0; y -= 1) {
+            const color = get(x, y);
+            r = color[0];
+            g = color[1];
+            b = color[2];
+            // 150です
+            if (150 < r && 150 < g && 150 < b) {
+              // if (index === 1)
+              drawLine(x, y, r, g, b);
+            }
+          }
+        }
+      }
+
+      function drawLine(x, y, r, g, b) {
+        let length = 300;
+        stroke(`rgba(${r}, ${g}, ${b}, 1)`);
+        strokeWeight(1);
+        noFill();
+        line(x, y, x, y + length);
+      }
+    </script>
+  </body>
+</html>

@@ -22,7 +22,11 @@
   </head>
   <body>
     <script>
-      let capture;
+      let img;
+
+      function preload() {
+        img = loadImage("photo.JPG");
+      }
 
       function setup() {
         let w;
@@ -30,13 +34,9 @@
           ? (w = windowWidth)
           : (w = windowHeight / 1.5);
         createCanvas(w, windowHeight);
-        capture = createCapture(VIDEO);
-        capture.hide();
-      }
-
-      function draw() {
-        let img = capture.get();
-        image(img, 0, height / 2 - img.height / 2);
+        smooth();
+        image(img, 0, 0, width, height);
+        // image(img, 0, height / 2 - img.height / 2);
         getPixel();
       }
 
@@ -61,7 +61,9 @@
 
       function drawLine(x, y, r, g, b, direction) {
         let length = height / 3;
-        stroke(r, g, b);
+        // blendMode(OVERLAY);
+        // blendMode(SOFT_LIGHT);
+        stroke(`rgba(${r}, ${g}, ${b}, 1)`);
         strokeWeight(1);
         noFill();
         if (direction === "up") line(x, y, x, y - length);
