@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <title>Document</title>
+  </head>
+  <body style="margin: 0; overflow: hidden">
+    <script>
+      let windowWidth = window.innerWidth;
+      let windowHeight = window.innerHeight;
+      let length = 0;
+      windowWidth > windowHeight
+        ? (length = windowHeight)
+        : (length = windowWidth);
+
+      let width = length;
+      let height = length;
+
+      let xstart = 0;
+      let ystart = 0;
+      let xnoise = 0;
+      let ynoise = 0;
+
+      function setup() {
+        createCanvas(width, height);
+        // createCanvas(500, 500);
+        smooth();
+        background(255);
+        // frameRate(24);
+        xstart = random(10);
+        ystart = random(10);
+        drawNoise();
+      }
+
+      let count2 = 0;
+
+      function drawNoise() {
+        background(255);
+        xstart += 0.1;
+        ystart += 0.1;
+
+        xnoise = xstart;
+        ynoise = ystart;
+
+        for (let y = 0; y <= height; y += 3) {
+          ynoise += 0.08;
+          xnoise = xstart;
+          for (let x = 0; x <= width; x += 3) {
+            xnoise += 0.08;
+            let alpha = noise(xnoise, ynoise) * 255;
+            if (count2 < 10) {
+              console.log("カウント2");
+              console.log(xnoise);
+              console.log(ynoise);
+              console.log(noise(xnoise, ynoise));
+            }
+            count2++;
+            drawPoint(x, y, noise(xnoise, ynoise));
+          }
+        }
+      }
+
+      function drawPoint(x, y, noiseFactor) {
+        push();
+        translate(x, y);
+        rotate(noiseFactor * radians(540));
+        let edgeSize = noiseFactor * 35;
+        let grey = 100 + noiseFactor * 250;
+        let alpha = 150 + noiseFactor * 120;
+        noStroke();
+        fill(grey, alpha);
+        ellipse(0, 0, edgeSize, edgeSize / 2);
+        pop();
+      }
+    </script>
+  </body>
+</html>
