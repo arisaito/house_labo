@@ -1,74 +1,111 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.2.0/dist/aframe-environment-component.min.js"></script>
   </head>
   <style>
     body {
-      background: black;
+      background: white;
     }
-    .meta-enter {
+    .meta {
       width: 100%;
       height: 100%;
       position: fixed;
       top: 0;
       left: 0;
       z-index: 10;
-      background-color: black;
+      background-color: white;
       display: flex;
       flex-direction: column;
     }
-    .meta-enter > * {
+    .meta > * {
       margin: auto;
       font-size: 1rem;
     }
     .is-hidden {
       display: none;
     }
-    .a-canvas {
-      transform: rotate3d(1, 4, 1, 16deg) translate3d(0px, 0px, 100px);
+
+    #a-scene1 {
+      z-index: 5;
+    }
+    #a-scene2 {
+      z-index: 4;
+    }
+    #a-scene3 {
+      z-index: 3;
+    }
+    #a-scene1 > .a-canvas {
+      transform: rotate3d(1, 3, 1, 67deg) scale3d(0.9, 0.9, 1);
+    }
+    #a-scene2 > .a-canvas {
+      transform: rotate3d(0, 4, 0, 45deg) scale3d(1, 2, 1)
+        translate3d(15px, 11px, -32px) rotate(-150deg);
+      filter: hue-rotate(116deg) blur(2px);
+    }
+    #a-scene3 > .a-canvas {
+      transform: translate3d(0px, 0px, -1000px) rotate(60deg) scale(3);
+      filter: contrast(0.9);
     }
     .a-modal {
       display: none;
     }
+    .error {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      text-align: center;
+    }
+    .error > p {
+      margin: auto auto 1rem;
+    }
+    .error > img {
+      margin: 0.5rem auto auto;
+      max-width: 300px;
+    }
   </style>
   <body>
-    <div id="meta-enter" class="meta-enter">
-      <button id="meta-enter-button">ENTER</button>
+    <div id="meta" class="meta">
+      <button id="meta-enter">ENTER</button>
     </div>
-    <a-scene vr-mode-ui="enabled: false">
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder
-        position="1 0.75 -3"
-        radius="0.5"
-        height="1.5"
-        color="#FFC65D"
-      ></a-cylinder>
-      <a-plane
-        position="0 0 -4"
-        rotation="-90 0 0"
-        width="4"
-        height="4"
-        color="#7BC8A4"
-      ></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
-      <a-entity id="camera-wrapper">
-        <a-entity
-          camera
-          id="camera"
-          look-controls
-          position="0 1.5 0"
-        ></a-entity>
-      </a-entity>
+    <div id="error" class="error" style="display: none">
+      <p class="">PC is unsupported</p>
+      <img src="./qr.png" alt="" />
+    </div>
+
+    <a-scene id="a-scene1" vr-mode-ui="enabled: false">
+      <a-entity environment="preset: forest"></a-entity>
+      <a-entity camera position="0 1.5 0" look-controls=""></a-entity>
+    </a-scene>
+
+    <a-scene id="a-scene2" vr-mode-ui="enabled: false">
+      <a-entity environment="preset: threetowers"></a-entity>
+      <a-entity camera position="0 1.5 0" look-controls=""></a-entity>
+    </a-scene>
+
+    <a-scene id="a-scene3" vr-mode-ui="enabled: false">
+      <a-entity environment="preset: volcano"></a-entity>
+      <a-entity camera position="0 1.5 0"></a-entity>
     </a-scene>
     <script>
-      const enterButton = document.getElementById("meta-enter-button");
+      if (
+        !navigator.userAgent.match(/(iPhone|iPod|Android.*Mobile)/i) &&
+        !navigator.userAgent.match(/(iPad|(?!(Android.*Mobile)+)Android)/i)
+      ) {
+        console.log("PC");
+        const error = document.getElementById("error");
+        error.style.display = "flex";
+      }
+
+      const enterButton = document.getElementById("meta-enter");
       enterButton.addEventListener("click", () => {
-        const metaEnter = document.getElementById("meta-enter");
-        const camera = document.getElementById("camera");
-        const cameraWrapper = document.getElementById("camera-wrapper");
-        const y = camera.getAttribute("rotation").y;
-        cameraWrapper.setAttribute("rotation", { y: -1 * y });
+        const metaEnter = document.getElementById("meta");
         metaEnter.classList.add("is-hidden");
 
         if (

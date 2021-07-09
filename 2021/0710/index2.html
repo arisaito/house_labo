@@ -1,0 +1,177 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="./aframe-gif-shader.js"></script>
+    <script src="https://rawgit.com/blairmacintyre/aframe-look-at-billboard-component/master/dist/aframe-look-at-billboard-component.min.js"></script>
+  </head>
+  <style>
+    body {
+      background: black;
+    }
+    .meta-enter {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+    }
+    .meta-enter > * {
+      margin: auto;
+      font-size: 1rem;
+    }
+    .is-hidden {
+      display: none;
+    }
+    /* .a-canvas {
+      transform: rotate3d(1, 4, 1, 16deg) translate3d(0px, 0px, 100px);
+    } */
+    .a-modal {
+      display: none;
+    }
+  </style>
+  <body>
+    <div id="meta-enter" class="meta-enter">
+      <button id="meta-enter-button">WATCH</button>
+    </div>
+    <p
+      id="text"
+      style="position: fixed; bottom: 0; left: 0; z-index: 10; display: none"
+    >
+      追え！
+    </p>
+    <a-scene vr-mode-ui="enabled: false">
+      <!-- <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-cylinder
+        position="1 0.75 -3"
+        radius="0.5"
+        height="1.5"
+        color="#FFC65D"
+      ></a-cylinder>
+      <a-plane
+        position="0 0 -4"
+        rotation="-90 0 0"
+        width="4"
+        height="4"
+        color="#7BC8A4"
+      ></a-plane> -->
+      <a-sky src="./bg1.png"></a-sky>
+      <a-entity
+        position="-0.089 1.5 -1"
+        scale="1.3 1 1"
+        geometry="primitive:plane;"
+        material="shader:gif;src:url(test.gif);color:white;opacity:.9"
+        billboard
+      ></a-entity>
+      <a-entity id="camera-wrapper">
+        <a-entity
+          camera
+          id="camera"
+          position="0 1.5 0"
+          look-controls=""
+        ></a-entity>
+      </a-entity>
+    </a-scene>
+    <script>
+      const enterButton = document.getElementById("meta-enter-button");
+      const camera = document.getElementById("camera");
+      const cameraWrapper = document.getElementById("camera-wrapper");
+      const text = document.getElementById("text");
+      const metaEnter = document.getElementById("meta-enter");
+      let lastPos = null;
+
+      const tick = () => {
+        const currentPosition = camera.object3D.rotation;
+        // console.log(currentPosition);
+        // console.log(lastPos == currentPosition);
+        // console.log(currentPosition);
+        // console.log(lastPos);
+        if (lastPos != null && lastPos != currentPosition) {
+          console.log("違う");
+        }
+        lastPos = currentPosition;
+
+        // Compare to this.lastPosition (a vector3 you create)
+        // cameraWrapper.lastPosition.clone(cameraWrapper.object3D.position);
+        requestAnimationFrame(tick);
+      };
+      tick();
+
+      // let muki = camera.components["look-controls"].pitchObject.rotation.x;
+      // muki.addEventListener("change", () => {
+      //   alert("hi");
+      // });
+
+      // let isPassed3sec = false;
+      // const catchOrientation = () => {
+      //   if (isPassed3sec) return;
+      //   isPassed3sec = true;
+      //   text.style.display = "block";
+      //   setTimeout(() => {
+      //     isPassed3sec = false;
+      //     text.style.display = "none";
+      //   }, 3000);
+      // };
+
+      // let motionCount = 0;
+      // window.addEventListener("devicemotion", function (e) {
+      //   if (isPassed3sec) return;
+      //   let accX = e.acceleration.x;
+      //   if (accX > 3) {
+      //     isPassed3sec = true;
+      //     motionCount++;
+      //     text.style.display = "block";
+      //     setTimeout(() => {
+      //       isPassed3sec = false;
+      //       text.style.display = "none";
+      //     }, 3000);
+      //   }
+      // });
+
+      const initOrienCheck = () => {
+        if (
+          DeviceMotionEvent &&
+          DeviceMotionEvent.requestPermission &&
+          typeof DeviceMotionEvent.requestPermission === "function"
+        ) {
+          DeviceMotionEvent.requestPermission();
+        } else {
+        }
+        if (
+          DeviceOrientationEvent &&
+          DeviceOrientationEvent.requestPermission &&
+          typeof DeviceOrientationEvent.requestPermission === "function"
+        ) {
+          DeviceOrientationEvent.requestPermission();
+        }
+      };
+
+      enterButton.addEventListener("click", () => {
+        console.log(camera);
+
+        const y = camera.getAttribute("rotation").y;
+        cameraWrapper.setAttribute("rotation", { y: -1 * y });
+        metaEnter.classList.add("is-hidden");
+
+        if (
+          DeviceMotionEvent &&
+          DeviceMotionEvent.requestPermission &&
+          typeof DeviceMotionEvent.requestPermission === "function"
+        ) {
+          DeviceMotionEvent.requestPermission();
+        }
+        if (
+          DeviceOrientationEvent &&
+          DeviceOrientationEvent.requestPermission &&
+          typeof DeviceOrientationEvent.requestPermission === "function"
+        ) {
+          DeviceOrientationEvent.requestPermission();
+        }
+      });
+    </script>
+  </body>
+</html>
