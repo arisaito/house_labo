@@ -36,7 +36,7 @@
       z-index: 3;
     }
     #a-scene1 > .a-canvas {
-      transform: rotate3d(1, 3, 1, 67deg) scale3d(0.9, 0.9, 1);
+      transform: rotate3d(1, 3, 1, 10deg);
     }
     #a-scene2 > .a-canvas {
       transform: rotate3d(0, 4, 0, 45deg) scale3d(1, 2, 1)
@@ -44,8 +44,8 @@
       filter: hue-rotate(116deg) blur(2px);
     }
     #a-scene3 > .a-canvas {
-      transform: translate3d(0px, 0px, -1000px) rotate(60deg) scale(3);
-      filter: contrast(0.9);
+      /* transform: translate3d(0px, 0px, -1000px) rotate(60deg) scale(3);
+      filter: contrast(0.9); */
     }
     .a-modal {
       display: none;
@@ -85,13 +85,14 @@
       <a-entity camera position="0 1.5 0" look-controls=""></a-entity>
     </a-scene>
 
-    <a-scene id="a-scene2" vr-mode-ui="enabled: false">
+    <!-- <a-scene id="a-scene2" vr-mode-ui="enabled: false">
       <a-entity environment="preset: threetowers"></a-entity>
       <a-entity camera position="0 1.5 0" look-controls=""></a-entity>
-    </a-scene>
+    </a-scene> -->
 
     <a-scene id="a-scene3" vr-mode-ui="enabled: false">
-      <a-entity environment="preset: volcano"></a-entity>
+      <a-sky src="./bg1.png"></a-sky>
+      <!-- <a-entity environment="preset: default"></a-entity> -->
       <a-entity camera position="0 1.5 0"></a-entity>
     </a-scene>
     <script>
