@@ -1,0 +1,31 @@
+body {
+  /* overflow: hidden; */
+  font-size: 0.6rem;
+  font-style: oblique;
+  /* font-style: italic; */
+  /* font-family: Times New Roman; */
+}
+.marquee-anim {
+  /* display:inline-block;  */
+  white-space: nowrap;
+}
+.marquee-anim {
+  margin: 0;
+  padding: 0;
+  width: auto;
+  line-height: 0.6rem;
+  display: inline-block;
+  animation-name: marquee;
+  animation-timing-function: linear;
+  animation-duration: 15s;
+  animation-iteration-count: infinite;
+}
+@keyframes marquee {
+  from {
+    transform: translate(0%);
+  }
+  99%,
+  to {
+    transform: translate(-100%);
+  }
+}
