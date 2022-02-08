@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022/02/09 letter</title>
+    <style>
+      body {
+        margin: 1rem;
+        background: rgb(158, 168, 193);
+        background: linear-gradient(
+          180deg,
+          rgba(158, 168, 193, 0.5) 0%,
+          rgba(17, 28, 43, 0.9) 100%
+        );
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      img {
+        width: 100%;
+        max-width: 500px;
+        display: block;
+        margin: 5rem auto;
+        /* transform: rotate3d(1, 6, 1, 42deg); */
+      }
+      .overlay {
+        background: #457096;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        pointer-events: none;
+        mix-blend-mode: color-burn;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="container">
+      <img src="./image/03.gif" alt="" />
+      <img src="./image/02.jpg" alt="" />
+      <img src="./image/01.gif" alt="" />
+    </div>
+  </body>
+</html>
