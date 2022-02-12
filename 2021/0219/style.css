@@ -19,7 +19,7 @@ body {
 .container-in-container {
   width: 100%;
   height: 100%;
-  max-height: 730px;
+  /* max-height: 730px; */
   position: fixed;
   top: 0;
   left: 0;
@@ -39,12 +39,18 @@ video {
   top: 0%; */
 }
 .color-preview {
+  cursor: pointer;
   z-index: 1;
   position: fixed;
   bottom: 0%;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 100rem;
+}
+.new-arc {
+  z-index: 2;
+  position: fixed;
+  border-radius: 100%;
 }
 .header-text {
   position: fixed;
@@ -63,11 +69,95 @@ video {
 .color-code-text {
   margin-top: 0.3rem;
 }
-
-.bound {
-  animation: bound-anim 0.6s ease-in forwards;
+.tap-text {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(1rem * 1.4);
+  z-index: 1;
+  color: white;
+  transition: 0.2s;
+}
+.tap-text .is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.tap-text p {
+  margin: 0;
+  padding: 0;
 }
 
+.bound {
+  /* animation: bound-anim 0.6s ease-in forwards; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-animation: bound-anim 1.5s ease-in forwards;
+}
+@keyframes testanim {
+  0% {
+    /* transform: translateX(0); */
+    top: 0;
+    left: 0;
+  }
+  100% {
+    left: 30%;
+    top: 25%;
+  }
+}
+
+@keyframes bound-anim {
+  0% {
+    left: 0;
+    top: 0;
+  }
+  20% {
+    /* 下　バウンド */
+    left: 30%;
+    top: 25%;
+  }
+  /* 上　あがる */
+  35% {
+    left: 80%;
+    top: 0%;
+  }
+  38% {
+    left: 100%;
+    top: -3%;
+  }
+  41% {
+    left: 120%;
+    top: -8%;
+  }
+  44% {
+    /* 上　あがる */
+    left: 130%;
+    top: -10%;
+  }
+  47% {
+    left: 150%;
+    top: -5%;
+  }
+  60% {
+    /* 下　バウンド */
+    left: 200%;
+    top: 25%;
+  }
+  80% {
+    /* 上　あがる */
+    left: 280%;
+    top: -15%;
+    opacity: 1;
+  }
+  99% {
+    left: 350%;
+    top: -10%;
+    opacity: 0;
+  }
+}
+
+/* 
 @keyframes bound-anim {
   0% {
     top: 0;
@@ -87,4 +177,4 @@ video {
     top: -15%;
     opacity: 0;
   }
-}
+} */

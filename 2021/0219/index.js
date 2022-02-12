@@ -6,18 +6,22 @@ let videoInput = null;
 let canvas = null;
 let context = null;
 let arcWidth = 0;
-let arcHeight = 0;
+let canvasWidth = 0;
 let colorPreviewArc = null;
 let currentColorCode = null;
 let headerText = null;
-let isFirst = false;
+let isFirst = true;
+
 let isPC = false;
+let isTab = false;
 const cameraSize = { w: 1080, h: 1080 };
 
-const initWindow = () => {
-  windowWidth = window.innerWidth;
-  windowHeight = window.innerHeight;
-  document.body.style.minHeight = window.innerHeight + "px";
+let headerTextTimer = null;
+let colorCodeText;
+let tapText;
+let isFirstTap = true;
+
+const initDevice = () => {
   if (
     !navigator.mediaDevices ||
     !navigator.mediaDevices.enumerateDevices ||
@@ -25,21 +29,37 @@ const initWindow = () => {
   ) {
     console.log("このブラウザには対応していません。");
   }
-  if (
-    navigator.userAgent.match(/(iPhone|iPod|Android.*Mobile)/i) ||
+  if (navigator.userAgent.match(/(iPhone|iPod|Android.*Mobile)/i)) {
+    return;
+  } else if (
     navigator.userAgent.match(/(iPad|(?!(Android.*Mobile)+)Android)/i)
   ) {
-    return;
+    isTab = true;
   } else {
     isPC = true;
-    windowWidth = window.innerHeight / 2;
-    windowHeight = window.innerHeight;
-    canvas = document.querySelector("canvas");
-    canvas.style.top = "10%";
-    colorPreviewArc = document.getElementById("color-preview");
-    colorPreviewArc.style.bottom = "10%";
-    return;
+    // canvas = document.querySelector("canvas");
+    // canvas.style.top = "10%";
+    // colorPreviewArc = document.getElementById("color-preview");
+    // colorPreviewArc.style.bottom = "10%";
   }
+};
+
+const initSetup = () => {
+  windowWidth = window.innerWidth;
+  windowHeight = window.innerHeight;
+  isPC ? (canvasWidth = windowHeight / 1.8) : (canvasWidth = windowWidth);
+  isPC ? (arcWidth = canvasWidth) : (arcWidth = canvasWidth - 10);
+  if (isTab) arcWidth = canvasWidth / 1.3;
+  if (!isPC && !isTab) {
+    const contaconta = document.getElementById("container-in-container");
+    console.log(contaconta);
+    contaconta.style.maxHeight = "730px";
+  }
+  tapText = document.getElementById("tap-text-text");
+  if (isPC) {
+    tapText.innerText = "Click";
+  }
+  document.body.style.minHeight = window.innerHeight + "px";
 };
 
 const initVideoAsync = (status) => {
@@ -64,12 +84,13 @@ const getVideo = (isFirst) => {
       video.srcObject = stream;
       video.play();
       videoStream = stream;
-      canvasUpdate();
+      canvasSetup();
+      renderCanvas();
       getColorFromCanvas();
       setInterval(() => {
         getColorFromCanvas();
       }, 100);
-      if (isFirst) {
+      if (!isFirst) {
         isFinishInit.video = true;
       }
     })
@@ -82,34 +103,33 @@ const setVideo = () => {
     video: {
       deviceId: videoInput,
       facingMode: "environment",
-      // height: { min: 720, max: 1080 },
-      // width: { min: 1280, max: 1920 },
       width: { ideal: 500 },
       height: { ideal: 500 },
     },
   };
 };
 
-const canvasUpdate = () => {
+const canvasSetup = () => {
   canvas = document.getElementById("canvas");
-  canvas.width = windowWidth;
-  canvas.height = windowWidth;
+  canvas.width = canvasWidth;
+  canvas.height = canvasWidth;
   context = canvas.getContext("2d");
   context.beginPath();
-  let arcRadius = windowWidth / 2 - 10;
-  arcWidth = arcRadius * 2;
-  if (!isFirst) setArcStyle();
-  isFirst = true;
+  if (isFirst) setArcStyle();
+  isFirst = false;
   context.arc(
     canvas.width / 2,
     canvas.height / 2,
-    arcRadius,
+    arcWidth / 2,
     (0 * Math.PI) / 180,
     (360 * Math.PI) / 180
   );
   context.clip();
+};
+
+const renderCanvas = () => {
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
-  requestAnimationFrame(canvasUpdate);
+  requestAnimationFrame(renderCanvas);
 };
 
 const setArcStyle = () => {
@@ -118,13 +138,9 @@ const setArcStyle = () => {
 };
 
 const getColorFromCanvas = () => {
-  let x = windowWidth / 2;
+  let x = canvasWidth / 2;
   let y;
-  if (isPC) {
-    y = windowHeight / 2 - arcWidth / 2;
-  } else {
-    y = windowHeight / 2 - arcWidth / 2 + arcWidth / 10;
-  }
+  y = canvasWidth / 2;
   let imagedata = context.getImageData(x, y, 1, 1);
   let r = imagedata.data[0];
   let g = imagedata.data[1];
@@ -147,20 +163,30 @@ const rgbToHex = (rgb) => {
 const initAtachTrigger = () => {
   colorPreviewArc = document.getElementById("color-preview");
   colorPreviewArc.addEventListener("click", () => {
+    if (isFirstTap) {
+      isFirstTap = false;
+      hideTapText();
+    }
     createArcInstance();
     showHeaderText();
   });
+
+  colorCodeText = document.getElementById("color-code-text");
+  headerText = document.getElementById("header-text");
+};
+
+const hideTapText = () => {
+  tapText.classList.add("is-hidden");
 };
 
 const showHeaderText = () => {
-  const colorCodeText = document.getElementById("color-code-text");
-  headerText = document.getElementById("header-text");
+  clearTimeout(headerTextTimer);
   if (currentColorCode) {
     colorCodeText.innerText = currentColorCode;
     headerText.classList.remove("is-hidden");
     navigator.clipboard.writeText(currentColorCode);
   }
-  setTimeout(() => {
+  headerTextTimer = setTimeout(() => {
     hideHeaderText();
   }, 1000);
 };
@@ -171,9 +197,7 @@ const hideHeaderText = () => {
 
 const createArcInstance = () => {
   const newArc = document.createElement("div");
-  newArc.style.zIndex = 2;
-  newArc.style.position = "fixed";
-  newArc.style.borderRadius = "100rem";
+  newArc.classList.add("new-arc");
   newArc.style.background = currentColorCode;
   newArc.style.width = arcWidth + "px";
   newArc.style.height = arcWidth + "px";
@@ -181,11 +205,25 @@ const createArcInstance = () => {
   colorPreviewArc.appendChild(newArc);
   setTimeout(() => {
     colorPreviewArc.removeChild(newArc);
-  }, 1000);
+  }, 2000);
 };
 
 window.addEventListener("load", () => {
-  initWindow();
+  initDevice();
+  initSetup();
   initAtachTrigger();
   initVideoAsync({ isFirst: true });
+});
+
+// 以下　おまじない系
+
+const disableDefaultScale = (e) => {
+  if (e.touches.length >= 2) e.preventDefault();
+};
+window.addEventListener("touchstart", disableDefaultScale, { passive: false });
+
+window.addEventListener("pageshow", (e) => {
+  if (e.persisted) {
+    window.location.reload();
+  }
 });
