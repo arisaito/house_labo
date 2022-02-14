@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <title>2022/02/13 letter</title>
+    <style>
+      body {
+        margin: 1rem;
+        overflow: hidden;
+      }
+      .container {
+        position: fixed;
+        top: 0%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* background: url("./image/bg.jpg") no-repeat center center / cover; */
+        overflow-y: scroll;
+      }
+      video {
+        width: 90%;
+        max-width: 500px;
+        display: block;
+        margin: 5rem auto;
+      }
+      .modal {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        transition: 0.3s;
+      }
+      .modal-container {
+        margin: auto;
+        background-color: white;
+        width: 80%;
+        max-width: 400px;
+        padding: 2rem 1rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        text-align: center;
+        color: #202020;
+        line-height: 1.5rem;
+      }
+      .modal-button {
+        background: skyblue;
+        color: white;
+        padding: 0.8rem;
+        width: 150px;
+        font-weight: bold;
+        margin: auto;
+        border: none;
+        text-align: center;
+        display: block;
+        border-radius: 10rem;
+        cursor: pointer;
+      }
+      .is-hidden {
+        pointer-events: none;
+        opacity: 0;
+      }
+      .a-enter-vr-button {
+        z-index: 1;
+      }
+      .a-modal {
+        display: none;
+      }
+      .loading {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: white;
+        z-index: 15;
+        display: flex;
+        flex-direction: column;
+        transition: 0.3s;
+      }
+      .loading > * {
+        margin: auto;
+      }
+      .loading > *:nth-child(1) {
+        margin-bottom: 0rem;
+      }
+      .loading > *:nth-child(2) {
+        margin-top: 1rem;
+      }
+      /*!
+ * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
+ * Copyright 2015 Daniel Cardoso <@DanielCardoso>
+ * Licensed under MIT
+ */
+      .la-ball-clip-rotate,
+      .la-ball-clip-rotate > div {
+        position: relative;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      .la-ball-clip-rotate {
+        display: block;
+        font-size: 0;
+        color: #fff;
+      }
+      .la-ball-clip-rotate.la-dark {
+        color: #333;
+      }
+      .la-ball-clip-rotate > div {
+        display: inline-block;
+        float: none;
+        background-color: currentColor;
+        border: 0 solid currentColor;
+      }
+      .la-ball-clip-rotate {
+        width: 32px;
+        height: 32px;
+      }
+      .la-ball-clip-rotate > div {
+        width: 32px;
+        height: 32px;
+        background: transparent;
+        border-width: 2px;
+        border-bottom-color: transparent;
+        border-radius: 100%;
+        -webkit-animation: ball-clip-rotate 0.75s linear infinite;
+        -moz-animation: ball-clip-rotate 0.75s linear infinite;
+        -o-animation: ball-clip-rotate 0.75s linear infinite;
+        animation: ball-clip-rotate 0.75s linear infinite;
+      }
+      .la-ball-clip-rotate.la-sm {
+        width: 16px;
+        height: 16px;
+      }
+      .la-ball-clip-rotate.la-sm > div {
+        width: 16px;
+        height: 16px;
+        border-width: 1px;
+      }
+      .la-ball-clip-rotate.la-2x {
+        width: 64px;
+        height: 64px;
+      }
+      .la-ball-clip-rotate.la-2x > div {
+        width: 64px;
+        height: 64px;
+        border-width: 4px;
+      }
+      .la-ball-clip-rotate.la-3x {
+        width: 96px;
+        height: 96px;
+      }
+      .la-ball-clip-rotate.la-3x > div {
+        width: 96px;
+        height: 96px;
+        border-width: 6px;
+      }
+      /*
+ * Animation
+ */
+      @-webkit-keyframes ball-clip-rotate {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        50% {
+          -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @-moz-keyframes ball-clip-rotate {
+        0% {
+          -moz-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        50% {
+          -moz-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+        100% {
+          -moz-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @-o-keyframes ball-clip-rotate {
+        0% {
+          -o-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        50% {
+          -o-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+        100% {
+          -o-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes ball-clip-rotate {
+        0% {
+          -webkit-transform: rotate(0deg);
+          -moz-transform: rotate(0deg);
+          -o-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        50% {
+          -webkit-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+          -o-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          -moz-transform: rotate(360deg);
+          -o-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading" class="loading">
+      <div class="la-ball-clip-rotate la-dark">
+        <div></div>
+      </div>
+      <p>Loading</p>
+    </div>
+    <div id="modal" class="modal">
+      <div class="modal-container">
+        <p class="">
+          OKを押すとポップアップが出るけど<br />
+          「許可」を押してね！
+        </p>
+        <button id="modal-button" class="modal-button">OK</button>
+      </div>
+    </div>
+    <a-scene loading-screen="enabled: false" vr-mode-ui="enabled: false">
+      <a-assets>
+        <!-- <video
+          id="video"
+          preload="auto"
+          src="./image/video.mp4"
+          crossorigin="anonymous"
+          loop="true"
+        ></video> -->
+        <!-- autoplay -->
+        <img id="still" src="./image/still04.jpg" />
+      </a-assets>
+      <a-videosphere src="#still" rotation="0 -100 0"></a-videosphere>
+
+      <a-camera></a-camera>
+    </a-scene>
+    <script>
+      const button = document.getElementById("modal-button");
+      const modal = document.getElementById("modal");
+      // const video = document.getElementById("video");
+      const loading = document.getElementById("loading");
+      const scene = document.querySelector("a-scene");
+      let isLoaded = false;
+
+      button.addEventListener("click", () => {
+        modal.classList.add("is-hidden");
+
+        if (
+          DeviceMotionEvent &&
+          DeviceMotionEvent.requestPermission &&
+          typeof DeviceMotionEvent.requestPermission === "function"
+        ) {
+          DeviceMotionEvent.requestPermission();
+        }
+        if (
+          DeviceOrientationEvent &&
+          DeviceOrientationEvent.requestPermission &&
+          typeof DeviceOrientationEvent.requestPermission === "function"
+        ) {
+          DeviceOrientationEvent.requestPermission();
+        }
+        // video.play();
+      });
+
+      // video.addEventListener("loadeddata", () => {
+      //   console.log(isLoaded);
+      //   if (!isLoaded) {
+      //     isLoaded = true;
+      //     return;
+      //   }
+      //   loading.classList.add("is-hidden");
+      // });
+
+      scene.addEventListener("loaded", () => {
+        // console.log(isLoaded);
+        // if (!isLoaded) {
+        //   isLoaded = true;
+        //   return;
+        // }
+        loading.classList.add("is-hidden");
+      });
+    </script>
+  </body>
+</html>
