@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022/02/17 letter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <style>
+      #defaultCanvas0 {
+        position: fixed;
+        top: 0;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      body {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      #container {
+        max-width: 900px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      #page01 {
+        text-align: center;
+        position: relative;
+        margin-top: 300px;
+      }
+      h2 {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .h1-sample {
+        margin: 0px;
+        padding: 0px;
+        font-size: 3rem;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const ellipseScale = 15;
+      setup = () => {
+        canvas = createCanvas(windowWidth, windowHeight);
+        background(230, 100, 230);
+      };
+
+      draw = () => {
+        glitter();
+      };
+
+      glitter = () => {
+        push();
+        for (var i = 0; i < 200; i++) {
+          push();
+          // translate(x, y)
+          // translate(random(-windowWidth, 0), (frameCount % 300) * random(0, 4));
+          translate(random(-windowWidth, 0), random(0, windowHeight));
+          randomColor = color(random(240, 255), 100, random(210, 255));
+          fill(randomColor);
+          noStroke();
+          ellipse(windowWidth, 0, ellipseScale, ellipseScale);
+          pop();
+        }
+        pop();
+      };
+    </script>
+  </body>
+</html>

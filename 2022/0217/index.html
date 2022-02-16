@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022/02/17 letter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <style>
+      #defaultCanvas0 {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        pointer-events: none;
+      }
+      body {
+        margin: 0;
+      }
+      .container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background: url("./image/bg.jpg") no-repeat center center/ contain;
+      }
+      .bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background: url("./image/bg-bg-bg.png") no-repeat center center/ cover;
+      }
+      .ui-header {
+        position: fixed;
+        top: 1rem;
+        left: 0rem;
+        z-index: 10;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        z-index: 10;
+      }
+
+      .marquee {
+        animation: marquee-anim 15s linear infinite;
+      }
+
+      @keyframes marquee-anim {
+        0% {
+          transform: translate(110vw, 0);
+        }
+        100% {
+          transform: translate(-100vw, 0);
+        }
+      }
+      .save-button {
+        font-size: 0.9rem;
+        z-index: 10;
+        position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        border: rgb(255, 175, 198);
+        background: transparent;
+        color: rgb(255, 175, 198);
+        padding: 0.6rem;
+        border: 1px solid rgb(255, 175, 198);
+        width: 80px;
+        text-align: center;
+      }
+      .text {
+        font-size: 0.9rem;
+        color: rgb(255, 175, 198);
+        font-family: "Courier New", Courier, monospace;
+      }
+      .modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        background: white;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        box-sizing: border-box;
+        text-align: center;
+        transition: 0.3s;
+        z-index: 20;
+      }
+      .close {
+        background: rgb(255, 175, 198);
+        color: white;
+        border: none;
+        padding: 0.6rem;
+        width: 100px;
+        font-weight: bold;
+        border-radius: 0.5rem;
+      }
+      .is-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="ui-header marquee text">
+      はーい！こちら落書き板です！指で落書きしてね！
+    </p>
+    <div id="save-button" class="button save-button marquee">保存</div>
+    <div class="container"></div>
+    <div class="bg"></div>
+    <div id="modal" class="modal is-hidden">
+      <img id="image" src="" alt="" />
+      <p class="text">長押し保存してね</p>
+      <button id="close" class="close">とじる</button>
+    </div>
+    <script>
+      let bg;
+      let y;
+      const ellipseScale = 15;
+      let bgWidth = 3030;
+      let bgHeight = 3712;
+      let scale = bgHeight / bgWidth;
+      let canvas;
+
+      setup = () => {
+        // bg = loadImage("./image/bg.jpg");
+
+        // isMobile();
+        // let canvasWidth = isMobile ? windowWidth : windowHeight;
+        // let canvasHeight = canvasWidth * scale;
+        // canvas = createCanvas(canvasWidth, canvasHeight);
+        // background(bg);
+        canvas = createCanvas(windowWidth, windowHeight);
+      };
+
+      isMobile = () => {
+        return windowHeight > windowWidth ? true : false;
+      };
+
+      touchMoved = () => {
+        smooth();
+        randomColor = color(random(240, 255), 150, random(200, 255));
+        // stroke(255, 175, 198);
+        stroke(randomColor);
+        strokeWeight(10);
+        line(mouseX, mouseY, pmouseX, pmouseY);
+        return false;
+      };
+
+      const showModal = () => {
+        document.getElementById("modal").classList.remove("is-hidden");
+      };
+      const hideModal = () => {
+        document.getElementById("modal").classList.add("is-hidden");
+      };
+
+      const saveButton = document.getElementById("save-button");
+      const image = document.getElementById("image");
+      saveButton.addEventListener(
+        "click",
+        () => {
+          const data = canvas.canvas.toDataURL("image/png", 0.9);
+          image.src = data;
+          showModal();
+        },
+        false
+      );
+
+      const closeButton = document.getElementById("close");
+      closeButton.addEventListener("click", hideModal, false);
+    </script>
+  </body>
+</html>
