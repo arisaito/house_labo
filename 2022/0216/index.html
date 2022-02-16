@@ -4,43 +4,63 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2022/02/09 letter</title>
+    <title>2022/02/16 letter</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+      integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./script.js"></script>
     <style>
       body {
         margin: 0;
-        background: rgb(232, 237, 241);
+        min-height: 100vh;
+        color: #495f7c;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
       }
-      .container {
+      body::-webkit-scrollbar {
+        display: none;
+      }
+      .container-2 {
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        /* height: 100%; */
         display: flex;
         flex-direction: column;
-        align-items: center;
+        overflow: hidden;
+        transition: 0.25s;
       }
-      img {
-        width: 100%;
-        max-width: 500px;
-        display: block;
-        margin: 0 auto;
-        /* transform: rotate3d(1, 6, 1, 42deg); */
+      .filter-2 {
+        padding: 1rem 0;
+        width: 90%;
+        height: 1800vh;
+        margin: 1rem auto;
+        border-radius: 11px;
+        overflow-y: scroll;
+        /* height: 1000vh; */
+        /* background: #e2e8ea; */
+      }
+      .scroll-filter::-webkit-scrollbar {
+        /* Chrome, Safari 対応 */
+        display: none;
+      }
+      #webgl {
+        position: fixed;
+        top: 0;
+        left: 0;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <img src="./image/01.jpg" alt="" />
-      <img src="./image/02.jpg" alt="" />
-      <img src="./image/03.JPG" alt="" />
-      <img src="./image/04.jpg" alt="" />
-      <img src="./image/05.jpg" alt="" />
-      <img src="./image/06.jpg" alt="" />
-      <img src="./image/07.jpg" alt="" />
-      <img src="./image/08.jpg" alt="" />
-      <img src="./image/09.jpg" alt="" />
-      <img src="./image/10.jpg" alt="" />
-      <img src="./image/11.JPG" alt="" />
-      <img src="./image/12.jpg" alt="" />
-      <img src="./image/13.jpg" alt="" />
-      <img src="./image/14.jpg" alt="" />
-      <img src="./image/15.jpg" alt="" />
+    <div class="container-2">
+      <div id="scroll-filter" class="filter-2">scroll me</div>
     </div>
+    <div id="webgl"></div>
+    <script></script>
   </body>
 </html>
