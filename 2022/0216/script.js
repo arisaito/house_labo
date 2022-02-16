@@ -111,7 +111,7 @@
     material = new THREE.MeshPhongMaterial(MATERIAL_PARAM);
 
     // プレーンジオメトリの生成とメッシュ化
-    geometry = new THREE.PlaneGeometry(20.0, 20.0);
+    geometry = new THREE.PlaneGeometry(40.0, 40.0);
     ground = new THREE.Mesh(geometry, material);
     ground.rotation.x = -Math.PI / 2.0;
     ground.position.set(0.0, -3.0, 0.0);
@@ -127,8 +127,9 @@
           const w = 0.5;
           const h = tex.image.height / (tex.image.width / w);
           const z = Number(num) * 10;
+          const geo = new THREE.PlaneGeometry(20.0, 20.0);
           const mat = new THREE.MeshPhongMaterial({ map: tex });
-          const plane = new THREE.Mesh(geometry, mat);
+          const plane = new THREE.Mesh(geo, mat);
           plane.scale.set(w, h, 1);
           plane.position.set(0, 0, -z);
           photoGroup.add(plane);
