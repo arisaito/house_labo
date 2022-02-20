@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022/02/20 letter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <style>
+      #defaultCanvas0 {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        pointer-events: none;
+      }
+      body {
+        margin: 2rem;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: -1;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      .bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("./image/01.jpg") rgb(68, 50, 108) no-repeat center
+          center / contain;
+        z-index: -1;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="container"></div>
+    <script>
+      let bg;
+      let y;
+      const ellipseScale = 15;
+      let bgWidth = 1168;
+      let bgHeight = 2259;
+      let scale = bgHeight / bgWidth;
+
+      let canvas;
+      let canvasWidth = 0;
+      let canvasHeight = 0;
+
+      let scale1 = 80;
+      let amplitude = 0;
+      let theta = 0;
+      let tickCount = 0;
+
+      let isReverce = false;
+
+      const color01 = [29, 70, 178];
+      const color02 = [212, 68, 68];
+      let currentColor = color01.slice();
+
+      let isRChenged = false;
+      let isGChenged = false;
+      let isBChenged = false;
+      let isColor01 = true;
+
+      setup = () => {
+        bg = loadImage("./image/01.jpg");
+        if (isMobile()) {
+          canvasWidth = windowWidth;
+          canvasHeight = canvasWidth * scale;
+        } else {
+          canvasHeight = windowHeight;
+          canvasWidth = canvasHeight / scale;
+        }
+        canvas = createCanvas(canvasWidth, canvasHeight);
+        amplitude = canvasHeight / 2 - scale1 / 2;
+      };
+      draw = () => {
+        background(68, 50, 108, 0.0);
+
+        noStroke();
+
+        // 色の変更
+        if (isColor01) {
+          if (currentColor[0] < color02[0]) {
+            currentColor[0] += 1;
+          } else {
+            isRChenged = true;
+          }
+          if (currentColor[1] > color02[1]) {
+            currentColor[1] -= 1;
+          } else {
+            isGChenged = true;
+          }
+          if (currentColor[2] > color02[2]) {
+            currentColor[2] -= 1;
+          } else {
+            isBChenged = true;
+          }
+          if (isRChenged && isGChenged && isBChenged) {
+            isColor01 = false;
+            currentColor = color02.slice();
+            isRChenged = false;
+            isGChenged = false;
+            isBChenged = false;
+          }
+        } else {
+          if (currentColor[0] > color01[0]) {
+            currentColor[0] -= 1;
+          } else {
+            isRChenged = true;
+          }
+          if (currentColor[1] < color01[1]) {
+            currentColor[1] += 1;
+          } else {
+            isGChenged = true;
+          }
+          if (currentColor[2] < color01[2]) {
+            currentColor[2] += 1;
+          } else {
+            isBChenged = true;
+          }
+          if (isRChenged && isGChenged && isBChenged) {
+            isColor01 = true;
+            currentColor = color01.slice();
+            isRChenged = false;
+            isGChenged = false;
+            isBChenged = false;
+          }
+        }
+        fill(currentColor[0], currentColor[1], currentColor[2]);
+
+        // -1 ~ 1の中で0.02ずつ移動
+        // つまりthetaは角度でありスピード
+        theta += 0.02;
+        tickCount += 1;
+        translate(
+          canvasWidth / 2 + 2 * sin(theta * 0.1) * 100,
+          canvasHeight / 2 + sin(theta * 1) * amplitude
+        );
+        ellipse(0, 0, scale1);
+        smooth();
+      };
+
+      isMobile = () => {
+        return windowHeight > windowWidth ? true : false;
+      };
+    </script>
+  </body>
+</html>
