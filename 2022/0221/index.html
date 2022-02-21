@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022/02/21 letter</title>
+    <style>
+      body {
+        margin: 1rem;
+        overflow: hidden;
+      }
+      .container {
+        position: fixed;
+        top: 0%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #181c28;
+        overflow-y: scroll;
+      }
+      video {
+        width: 100%;
+        max-width: 500px;
+        display: block;
+        margin: auto;
+        mix-blend-mode: color-dodge;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- <video src="https://lucklog.info/mov/動画ファイル名.mp4">
+</video> -->
+      <video
+        id="control-video"
+        class="video-modal-video"
+        src="./image/video.mp4"
+        autoplay
+        muted
+        playsinline
+        loop
+      ></video>
+    </div>
+  </body>
+</html>
