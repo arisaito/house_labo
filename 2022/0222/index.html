@@ -30,14 +30,14 @@
       let tickCount = 0;
       let color01;
       let color02;
-      let boxScale = 60;
+      let boxScale = 80;
 
       setup = () => {
         const canvas = createCanvas(windowWidth, windowHeight, WEBGL);
         angleMode(DEGREES);
         const cam = createCamera();
         cam.setPosition(0, 0, 200);
-        // if (isMobile()) boxScale = 60;
+        if (isMobile()) boxScale = 60;
       };
 
       draw = () => {
@@ -69,6 +69,7 @@
         } else if (currentNum === 1) {
           cylinder(boxScale / 1.5, boxScale * 1.5);
         } else if (currentNum === 2) {
+          translate(0, boxScale / 4);
           cone(boxScale / 1.3, boxScale * 1.8);
         } else {
           rotateX(90);
