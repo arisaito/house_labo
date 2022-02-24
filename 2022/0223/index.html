@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022/02/23 letter</title>
+    <style>
+      body {
+        margin: 0rem;
+        overflow: hidden;
+      }
+      #defaultCanvas0 {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        pointer-events: none;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://unpkg.com/chromotome@1.19.1/dist/index.umd.js"></script>
+  </head>
+  <body>
+    <div id="webgl" class="container"></div>
+    <script>
+      const tome = chromotome;
+      let tickCount = 0;
+      const mountainScale = 130;
+      const yPos = 170;
+      const xRange = 130;
+      const zMargin = 50;
+
+      const mountainNum = 14;
+      let mountainArray = new Array();
+
+      const dirLightColor = { r: 255, g: 255, b: 255 };
+      const camPosition = { x: 0, y: 30, z: 800 };
+
+      const skyColor = "#82bad6";
+
+      const mountainColor = [
+        "#E2F0FF",
+        "#d9dff7",
+        "#E2E7F6",
+        "#c0d0f7",
+        "#f9edef",
+        "#cfdbfc",
+        "#F5F9FF",
+        "#ceedff",
+        "#d9f5f9",
+        "#B3E8FF",
+        "#F4F9FF",
+      ];
+
+      setup = () => {
+        const canvas = createCanvas(windowWidth, windowHeight, WEBGL);
+        angleMode(DEGREES);
+
+        const cam = createCamera();
+        cam.setPosition(camPosition.x, camPosition.y, camPosition.z);
+        cam.lookAt(0, 300, 0);
+
+        // if (isMobile()) boxScale = 60;
+
+        for (let i = 0; i < mountainNum; i++) {
+          let z = ((camPosition.z + zMargin) / mountainNum) * i;
+          let y = yPos + z * 0.05;
+          let x;
+          let xMargin = 70;
+          if (i % 2 === 0) {
+            x = xRange - random() * xMargin;
+          } else {
+            x = -xRange + random() * xMargin;
+          }
+          // let color = tome.get().colors[0];
+          let randomNum = pickMountainColor();
+          let c = color(mountainColor[randomNum]);
+          mountainArray.push({ x, y, z, color: c });
+        }
+      };
+
+      pickMountainColor = () => {
+        return Math.round(random(mountainColor.length - 1));
+      };
+
+      draw = () => {
+        tickCount++;
+        background(color(skyColor));
+        light();
+        for (let i = 0; i < mountainArray.length; i++) {
+          generateMountain(i);
+        }
+      };
+
+      light = () => {
+        // directionalLight(
+        //   dirLightColor.r,
+        //   dirLightColor.g,
+        //   dirLightColor.b,
+        //   camPosition.x,
+        //   camPosition.y + camPosition.z,
+        //   -camPosition.z
+        // );
+        ambientLight(230, 240, 250);
+      };
+
+      generateMountain = (i) => {
+        push();
+        // noStroke();
+        stroke(250);
+        // normalMaterial();
+        fill(mountainArray[i].color);
+        mountainArray[i].z++;
+        mountainArray[i].y += 0.05;
+
+        translate(mountainArray[i].x, mountainArray[i].y, mountainArray[i].z);
+        sphere(mountainScale, 20, 8);
+
+        if (mountainArray[i].z > camPosition.z + zMargin) {
+          mountainArray[i].z = 0;
+          mountainArray[i].y = yPos;
+
+          let randomNum = pickMountainColor();
+          mountainArray[i].color = color(mountainColor[randomNum]);
+        }
+        pop();
+      };
+
+      isMobile = () => {
+        if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+    </script>
+  </body>
+</html>
