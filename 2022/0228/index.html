@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022/02/28 letter</title>
+    <style>
+      body {
+        margin: 2rem;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        /* background-image: linear-gradient(red, yellow); */
+        background-repeat: no-repeat;
+        /* animation: gradientAnim 10s infinite linear; */
+      }
+      /* .bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("./image/bg.PNG") no-repeat center center/ cover;
+        z-index: -1;
+        overflow: hidden;
+      } */
+      img {
+        width: 95%;
+        max-width: 400px;
+        height: auto;
+        display: block;
+        margin: auto;
+      }
+      @keyframes gradientAnim {
+        0% {
+          background-image: linear-gradient(#551010, #553710);
+        }
+        20% {
+          background-image: linear-gradient(#553710, #555110);
+        }
+        40% {
+          background-image: linear-gradient(#555110, #3f5510);
+        }
+        60% {
+          background-image: linear-gradient(#3f5510, #104455);
+        }
+        80% {
+          background-image: linear-gradient(#104455, #101955);
+        }
+        100% {
+          background-image: linear-gradient(#101955, #511055);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="container">
+      <img src="./image/img.JPG" alt="" />
+    </div>
+  </body>
+</html>
