@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022/03/01 letter</title>
+    <style>
+      body {
+        margin: 2rem;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: white;
+        /* animation: gradientAnim 10s infinite linear; */
+      }
+      /* .bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("./image/bg.PNG") no-repeat center center/ cover;
+        z-index: -1;
+        overflow: hidden;
+      } */
+      img {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="container">
+      <img src="./image/img.jpg" alt="" />
+    </div>
+  </body>
+</html>
