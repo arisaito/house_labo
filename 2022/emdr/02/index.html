@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <title>emdr</title>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-mixin></a-mixin>
+      </a-assets>
+      <a-sphere
+        radius="0.05"
+        color="white"
+        animation="property: position; from: -3 2 -10; to: 0 0 0; dur: 500; easing: easeInOutQuad; loop: true;"
+      ></a-sphere>
+      <a-sphere
+        radius="0.05"
+        color="white"
+        animation="property: position; from: 5 5 -10; to: 0 0 0; dur: 700; easing: easeInOutQuad; loop: true;"
+      ></a-sphere>
+      <a-sphere
+        radius="0.05"
+        color="white"
+        animation="property: position; from: 0 3 -10; to: 0 0.1 0; dur: 200; easing: easeInOutQuad; loop: true;"
+      ></a-sphere>
+      <a-sphere
+        radius="0.05"
+        color="white"
+        animation="property: position; from: -4 8 -10; to: 0 0.2 0; dur: 300; easing: easeInOutQuad; loop: true;"
+      ></a-sphere>
+      <a-light type="ambient" intensity="1.0"></a-light>
+      <a-entity camera="" position="0 0.3 0"></a-entity>
+      <a-sky color="black"></a-sky>
+    </a-scene>
+  </body>
+</html>
