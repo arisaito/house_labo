@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+    <title>2022/02/16 letter</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      model-viewer {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: #fcf6e4;
+      }
+      .ar-button {
+        background: transparent;
+        border: 0.5px solid #8b7e54;
+        color: #8b7e54;
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.6rem;
+        width: 130px;
+        font-size: 0.8rem;
+      }
+      .ui-header {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        font-size: 0.8rem;
+        color: #8b7e54;
+        /* font-family: "Courier New", Courier, monospace; */
+        z-index: 10;
+        margin: 0;
+        padding: 0;
+        width: calc(100% - 130px - 0.6rem * 2 - 2rem);
+        /* white-space: ; */
+        /* word-break: break-all; */
+        overflow: hidden;
+      }
+      /* .ui-footer {
+        position: fixed;
+        bottom: 1rem;
+        left: 0;
+        font-size: 0.8rem;
+        color: #8b7e54;
+        font-family: "Courier New", Courier, monospace;
+        z-index: 10;
+        margin: 0;
+        padding: 0;
+        width: 550%;
+        text-align: left;
+      } */
+
+      .marquee {
+        animation: marquee-anim 45s linear infinite;
+      }
+
+      @keyframes marquee-anim {
+        0% {
+          transform: translate(110vw, 0);
+        }
+        100% {
+          transform: translate(-100%, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p class="ui-header">
+      指でドラッグすると回転、ピンチインピンチアウトすると拡大縮小できます。<br />
+      「ARで見る」ボタンは、iOSの場合Safariブラウザ、<br />
+      Androidの場合Google Chromeブラウザを使うと体験することができます。
+    </p>
+    <model-viewer
+      alt="美学校スタジオ"
+      src="./image/bigakko-studio-red.glb"
+      ar
+      ar-modes="webxr scene-viewer quick-look"
+      camera-controls
+    >
+      <button id="custom-ar-button" class="ar-button" slot="ar-button">
+        ARで見る
+      </button>
+    </model-viewer>
+  </body>
+</html>
