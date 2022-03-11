@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+    <title></title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      model-viewer {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: #63635f;
+      }
+      .ar-button {
+        background: transparent;
+        border: 0.5px solid #e1e9ff;
+        color: #e1e9ff;
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.6rem;
+        width: 130px;
+        font-size: 0.8rem;
+      }
+
+      .marquee {
+        animation: marquee-anim 45s linear infinite;
+      }
+
+      @keyframes marquee-anim {
+        0% {
+          transform: translate(110vw, 0);
+        }
+        100% {
+          transform: translate(-100%, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <model-viewer
+      src="./image/02.glb"
+      ar
+      ar-modes="webxr scene-viewer quick-look"
+      camera-controls
+    >
+      <button id="custom-ar-button" class="ar-button" slot="ar-button">
+        ARで見る
+      </button>
+    </model-viewer>
+  </body>
+</html>
