@@ -4,74 +4,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="./static/css/style.css" />
     <script src="./static/js/script.bundle.js"></script>
-    <style>
-      .container {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-      }
-      .main-textarea {
-        margin: auto;
-        padding: 0.5em;
-        color: rgb(27, 26, 26);
-        font-size: 1rem;
-        border: solid 2px white;
-        border-radius: 4px;
-        resize: none;
-      }
-      textarea:focus {
-        border-color: white;
-        outline: 0;
-      }
-      textarea::placeholder {
-        color: rgb(204, 204, 204);
-      }
-      /* 旧Edge対応 */
-      textarea::-ms-input-placeholder {
-        color: rgb(204, 204, 204);
-      }
-      /* IE対応 */
-      textarea:-ms-input-placeholder {
-        color: rgb(204, 204, 204);
-      }
-      .youcanfly {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-      }
-      .youcanfly-text {
-        margin: auto;
-        font-size: 3rem;
-        color: red;
-      }
-      .youcanfly-video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        background: white;
-      }
-      .youcanfly-video-item {
-        max-width: 500px;
-        height: 90%;
-        margin: auto;
-      }
-      .is-hidden {
-        display: none;
-      }
-    </style>
   </head>
   <body>
     <div id="youcanfly" class="youcanfly is-hidden">
@@ -86,6 +18,49 @@
         ></video>
       </div>
     </div>
+    <div id="profile" class="profile is-hidden">
+      <div class="profile-inner">
+        <div id="profile-close" class="profile-close">×</div>
+        <h2>そだあかり SODA Akari</h2>
+        <p>
+          植物と美術の関係からパフォーマンスやペインティング、インスタレーション等様々な表現を試行錯誤中。また、二人監督二人主演の映画制作ユニット「凹凸」としても活動中。<br />
+          <br />
+          2021年多摩美術大学絵画学科油画専攻修了<br />
+          <br />
+          展示略歴<br />
+          2021.11 2人展「Clark hack letter」/Gallery33 south<br />
+          2021.10 共同制作移動展示「祭り」/アトリエと東京都内<br />
+          2021.6 ユニット凹凸による映画予告編パイロット上映会/スペースくらげ<br />
+          2021.1-2
+          卒業制作展示「多摩美術大学学部修了展学内展示」/多摩美術大学八王子キャンパス,「五美術大学展示」/新国立美術館<br />
+          2020.11 オンライン芸祭展示「チャッピー」/オンラインホームページ<br />
+          2020.8 グループ展「可愛い子には旅をさせよ」/gallery niue<br />
+          2019.12 個展「だめ展」/gallery niue<br />
+          2019.11
+          多摩美術大学芸祭展示「アトリエ407」/多摩美術大学八王子キャンパス絵画東棟<br />
+          2018.11
+          多摩美術大学芸祭展示「フィルターのかかった部屋」/多摩美術大学八王子キャンパス
+          絵画東棟<br />
+          2018.3 アタミアートウィーク2018 /熱海市内<br />
+          2017.7
+          多摩美術大学オープンキャンパス/多摩美術大学八王子キャンパス絵画北棟選抜展<br />
+          2017.7
+          グループ展「じぶんがいない」/多摩美術大学八王子キャンパス情報デザイン棟<br />
+          <br />
+          Web<br />
+          「アートにエールを」に作品掲載
+          <a href="https://cheerforart.jp/detail/2681">リンク</a><br />
+          <br />
+          東京新聞インタビュー
+          <a href="https://standup.digital.tokyo-np.jp/voice01/moesoda/"
+            >リンク</a
+          ><br />
+          <br />
+          SNS<br />
+          <a href="https://linktr.ee/yaebart">リンク</a>
+        </p>
+      </div>
+    </div>
     <div class="container">
       <textarea
         id="main-textarea"
@@ -97,6 +72,5 @@
         autofocus
       ></textarea>
     </div>
-    <script></script>
   </body>
 </html>
