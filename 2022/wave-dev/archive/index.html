@@ -76,12 +76,19 @@
       </ul>
       <div class="archive-content">
         <div id="archive-modal" class="archive-modal is-hidden">
-          <div class="archive-modal-inner">
-            <div id="archive-modal-close" class="archive-modal-close"></div>
-            <img
-              id="archive-modal-img"
-              src="../static/image/archive/all/00.jpg"
-            />
+          <div class="archive-modal-keeper">
+            <div class="archive-modal-inner">
+              <div id="archive-modal-loading" class="archive-modal-loading">
+                <div class="la-ball-clip-rotate la-dark">
+                  <div></div>
+                </div>
+              </div>
+
+              <div id="archive-modal-close" class="archive-modal-close">
+                × CLOSE
+              </div>
+              <img id="archive-modal-img" src="" />
+            </div>
           </div>
         </div>
         <div id="archive-gallery" class="archive-gallery is-hidden">
@@ -93,7 +100,7 @@
             </div>
           </div>
           <div id="archive-gallery-photo" class="archive-gallery-photo"></div>
-          <p class="archive-gallery-credit">展示風景 撮影: 小倉久典</p>
+          <p class="archive-gallery-credit">展示撮影: 小倉久典</p>
         </div>
         <div id="archive-ascene" class="archive-ascene">
           <a-scene vr-mode-ui="enabled: false" embedded scene>
@@ -101,16 +108,19 @@
               id="archive-ascene-overlay"
               class="archive-ascene-overlay is-hidden"
             >
-              <p>360度画像で展示風景を見ることができます<br /></p>
+              <p>
+                360度画像<br />
+                指でドラッグすると視点を変更できます。
+              </p>
               <button id="archive-ascene-overlay-start">START</button>
             </div>
             <a-assets>
-              <img id="scene00" src="../static/image/360/00.JPG" />
-              <img id="scene01" src="../static/image/360/01.JPG" />
-              <img id="scene02" src="../static/image/360/02.JPG" />
-              <img id="scene03" src="../static/image/360/03.JPG" />
-              <img id="scene04" src="../static/image/360/04.JPG" />
-              <img id="scene05" src="../static/image/360/05.JPG" />
+              <img id="scene00" src="../static/image/360/00.jpg" />
+              <img id="scene01" src="../static/image/360/01.jpg" />
+              <img id="scene02" src="../static/image/360/02.jpg" />
+              <img id="scene03" src="../static/image/360/03.jpg" />
+              <img id="scene04" src="../static/image/360/04.jpg" />
+              <img id="scene05" src="../static/image/360/05.jpg" />
               <a-mixin
                 id="rotate-anim"
                 animation="property: rotation; to: 0 360 0; dur: 90000; loop: true; easing: linear; pauseEvents: stopEvent"
