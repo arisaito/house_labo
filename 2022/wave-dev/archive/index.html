@@ -91,6 +91,11 @@
             </div>
           </div>
         </div>
+        <div id="archive-loading" class="archive-loading is-hidden">
+          <div class="la-ball-clip-rotate la-dark">
+            <div></div>
+          </div>
+        </div>
         <div id="archive-gallery" class="archive-gallery is-hidden">
           <div class="archive-gallery-item">
             <h3 id="archive-gallery-title" class="archive-gallery-title"></h3>
@@ -100,10 +105,22 @@
             </div>
           </div>
           <div id="archive-gallery-photo" class="archive-gallery-photo"></div>
-          <p class="archive-gallery-credit">展示撮影: 小倉久典</p>
+          <p id="archive-gallery-credit" class="archive-gallery-credit">
+            展示撮影: 小倉久典
+          </p>
         </div>
         <div id="archive-ascene" class="archive-ascene">
-          <a-scene vr-mode-ui="enabled: false" embedded scene>
+          <a-scene
+            vr-mode-ui="enabled: false"
+            loading-screen="enable: false"
+            embedded
+            scene
+          >
+            <div id="archive-ascene-loading" class="archive-ascene-loading">
+              <div class="la-ball-clip-rotate la-dark">
+                <div></div>
+              </div>
+            </div>
             <div
               id="archive-ascene-overlay"
               class="archive-ascene-overlay is-hidden"
