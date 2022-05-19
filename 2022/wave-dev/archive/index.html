@@ -66,7 +66,7 @@
       </div>
       <h1 class="archive-title">展示記録</h1>
       <ul class="archive-menu">
-        <li class="archive-menu-item is-selected">全体</li>
+        <li class="archive-menu-item is-selected">全景</li>
         <li class="archive-menu-item">Arisa Ito</li>
         <li class="archive-menu-item">ぅょぅょバード</li>
         <li class="archive-menu-item">小倉久典</li>
@@ -87,7 +87,13 @@
               <div id="archive-modal-close" class="archive-modal-close">
                 × CLOSE
               </div>
-              <img id="archive-modal-img" src="" />
+              <div id="archive-modal-img-prev" class="archive-modal-img-prev">
+                <div class="archive-modal-img-prev-item"></div>
+              </div>
+              <img id="archive-modal-img" class="archive-modal-img" src="" />
+              <div id="archive-modal-img-next" class="archive-modal-img-next">
+                <div class="archive-modal-img-next-item"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -176,6 +182,7 @@
               class="sky"
               src="#scene04"
               material="opacity: 0.0"
+              rotation="0 30 0"
             ></a-sky>
             <a-sky
               id="sky05"
@@ -194,21 +201,17 @@
             </a-entity>
           </a-scene>
           <div class="archive-ascene-menu">
-            <p>
-              <span
-                id="archive-ascene-menu-prev"
-                class="archive-ascene-menu-prev"
-                >＜</span
-              >
-              シーン<span id="archive-ascene-index" class="archive-ascene-index"
+            <div id="archive-ascene-menu-prev" class="archive-ascene-menu-prev">
+              <div class="archive-ascene-menu-prev-item"></div>
+            </div>
+            <p class="archive-ascene-menu-text">
+              シーン  <span id="archive-ascene-index" class="archive-ascene-index"
                 >1</span
               >
               / 6
-              <span
-                id="archive-ascene-menu-next"
-                class="archive-ascene-menu-next"
-                >＞</span
-              >
+              <div id="archive-ascene-menu-next" class="archive-ascene-menu-next">
+              <div class="archive-ascene-menu-next-item"></div>
+            </div>
             </p>
           </div>
         </div>
