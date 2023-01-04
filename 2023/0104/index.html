@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+
+    <script>
+      const getRandomColor = () => {
+        return parseInt(
+          `0x${Math.floor(Math.random() * 16777215).toString(16)}`
+        );
+      };
+      AFRAME.registerComponent("box", {
+        init: function () {
+          const box = this.el.object3D.children[0];
+          const num = 200;
+          const limit = 2;
+
+          for (var i = 0; i < num; i++) {
+            const clone = box.clone();
+            clone.position.x = Math.random() * (limit + limit) - limit;
+            clone.position.y = Math.random() * (limit + limit) - limit;
+            clone.position.z = Math.random() * (limit + limit) - limit;
+            clone.rotation.x = Math.random() * (limit + limit) - limit;
+            clone.rotation.y = Math.random() * (limit + limit) - limit;
+            clone.rotation.z = Math.random() * (limit + limit) - limit;
+            clone.scale.x = Math.random() * (limit / 2 + limit / 2) - limit / 2;
+            clone.scale.y = Math.random() * (limit / 2 + limit / 2) - limit / 2;
+            clone.scale.z = Math.random() * (limit / 2 + limit / 2) - limit / 2;
+
+            const mat = clone.material.clone();
+            clone.material = mat;
+            clone.material.depthTest = false;
+            const newColor = getRandomColor();
+            clone.material.color = new THREE.Color(newColor);
+            this.el.parentNode.object3D.add(clone);
+          }
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene scene>
+      <a-box box position="0 2 -5" rotation="0 45 45" scale="2 2 2"></a-box>
+      <a-sky color="blue"></a-sky>
+      <a-light type="ambient" intensity="1.2"></a-light>
+      <a-light position="1 10 1" type="directional" intensity="0.5"></a-light>
+      <a-entity camera look-controls=""></a-entity>
+    </a-scene>
+  </body>
+</html>

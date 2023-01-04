@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script>
+      // const getRandomColor = () => {
+      //   return parseInt(
+      //     `0x${Math.floor(Math.random() * 16777215).toString(16)}`
+      //   );
+      // };
+
+      AFRAME.registerComponent("main-model", {
+        init: function () {
+          this.el.addEventListener("model-loaded", () => {
+            const entity = this.el;
+            console.log(entity);
+            const scene = this.el.sceneEl;
+            console.log(scene);
+            const obj = this.el.getObject3D("mesh");
+
+            obj.traverse((node) => {
+              if (node.isMesh) {
+                console.log(node);
+                node.material.depthTest = false;
+                // node.material.needsUpdate = true;
+              }
+            });
+
+            const num = 3;
+            for (let i = 0; i < num; i++) {
+              for (let j = 0; j < num; j++) {
+                const instance = entity.cloneNode(true);
+                instance.setAttribute("position", `${i * 3} 0 ${j * 3}`);
+                scene.appendChild(instance);
+              }
+            }
+          });
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="bed" src="./bed.glb"></a-asset-item>
+      </a-assets>
+      <a-entity
+        id="bed-entity"
+        gltf-model="#bed"
+        position="0 0 0"
+        main-model
+      ></a-entity>
+      <a-sphere
+        position="-0.5 1.1 -0.5"
+        scale="0.1 0.1 0.1"
+        color="yellow"
+        material="depthTest: false"
+        animation="property: position; to: -0.5 0.5 -0.5; dur: 700; dir: alternate; easing: easeInSine; loop: true"
+      ></a-sphere>
+      <!-- <a-sky color="blue"></a-sky> -->
+      <a-light type="ambient" intensity="0.9"></a-light>
+      <a-light position="1 10 1" type="directional" intensity="0.7"></a-light>
+      <a-entity
+        camera
+        position="0 1 1"
+        look-controls=""
+        wasd-controls=""
+      ></a-entity>
+    </a-scene>
+  </body>
+</html>
