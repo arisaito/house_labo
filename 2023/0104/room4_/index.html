@@ -1,0 +1,313 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script>
+      let loadCount = 0;
+      let modelNum = 3;
+      let modelIdArray = new Array();
+      let modelArray = new Array();
+      let rotationArray = new Array(0, 90, -90, 180);
+
+      let architectIdArray = new Array();
+      let architectArray = new Array();
+
+      let scene;
+
+      AFRAME.registerComponent("architecture", {
+        init: function () {
+          const entity = this.el;
+          if (architectIdArray.indexOf(entity.id) !== -1) return;
+          architectIdArray.push(entity.id);
+
+          this.el.addEventListener("model-loaded", async () => {
+            if (
+              architectIdArray.length > 0 &&
+              architectIdArray.indexOf(entity.id) < 0
+            )
+              return;
+            modelIdArray.push(entity.id);
+
+            if (!scene) scene = document.querySelector("a-scene");
+            const obj = this.el.getObject3D("mesh");
+
+            await obj.traverse((node) => {
+              if (node.isMesh) {
+                node.material.depthTest = false;
+                node.material.renderOrder = -1;
+                // node.material.needsUpdate = true;
+              }
+            });
+            architectArray.push(this.el);
+
+            addArchitecture();
+          });
+        },
+      });
+
+      AFRAME.registerComponent("furniture", {
+        init: function () {
+          const entity = this.el;
+          if (modelIdArray.indexOf(entity.id) !== -1) return;
+          modelIdArray.push(entity.id);
+
+          this.el.addEventListener("model-loaded", async () => {
+            if (!scene) scene = document.querySelector("a-scene");
+            const obj = this.el.getObject3D("mesh");
+            console.log(this.el);
+
+            await obj.traverse((node) => {
+              if (node.isMesh) {
+                node.material.depthTest = false;
+                // node.material.needsUpdate = true;
+              }
+            });
+
+            modelArray.push(this.el);
+            loadCount++;
+
+            if (loadCount === modelNum) {
+              addObject();
+            }
+          });
+        },
+      });
+
+      // const addCarpet = () => {
+      //   const carpet = document.getElementById("carpet-entity");
+      //   modelArray.push(carpet);
+      //   loadCount++;
+      //   if (loadCount === modelNum) addObject();
+      // };
+
+      const getRandomNum = (min, max) => {
+        return Math.floor(Math.random() * (max - min) + min);
+      };
+
+      const addObject = () => {
+        const num = 20;
+        const limit = 8;
+        if (!scene) scene = document.querySelector("a-scene");
+
+        for (var i = 0; i < num; i++) {
+          const clone = modelArray[getRandomNum(0, modelNum)].cloneNode(true);
+          clone.setAttribute(
+            "position",
+            `${Math.random() * (limit + limit) - limit} 0 ${
+              Math.random() * (limit + limit) - limit
+            }`
+          );
+          if (clone.id === "carpet-entity") {
+            clone.setAttribute(
+              "rotation",
+              `-90 0 ${rotationArray[getRandomNum(0, 3)]}`
+            );
+          } else {
+            clone.setAttribute(
+              "rotation",
+              `0 ${rotationArray[getRandomNum(0, 3)]} 0`
+            );
+          }
+
+          scene.appendChild(clone);
+        }
+      };
+
+      const addArchitecture = () => {
+        const num = 10;
+        const range = [
+          [-3, -5],
+          [3, 5],
+        ];
+        if (!scene) scene = document.querySelector("a-scene");
+
+        for (var i = 0; i < num; i++) {
+          const index = getRandomNum(0, architectArray.length - 1);
+          // const clone = architectArray[index].cloneNode(true)
+          const clone = architectArray[index].object3D.clone().children[0];
+          console.log("jhi");
+          console.log(clone);
+          const obj = clone.getObject3D("mesh");
+
+          obj.traverse((node) => {
+            if (node.isMesh) {
+              node.material.depthTest = false;
+              // node.material.needsUpdate = true;
+            }
+          });
+
+          const xIndex = getRandomNum(0, range.length);
+          const x = getRandomNum(range[xIndex][0], range[xIndex][1]);
+          const zIndex = getRandomNum(0, range.length);
+          const z = getRandomNum(range[zIndex][0], range[zIndex][1]);
+
+          clone.setAttribute("position", `${x} 0 ${z}`);
+          clone.setAttribute(
+            "rotation",
+            `0 ${rotationArray[getRandomNum(0, 3)]} 0`
+          );
+          scene.appendChild(clone);
+        }
+      };
+
+      const addEnv = () => {
+        let reflectionMap = new THREE.TextureLoader().load("./sky.jpg");
+        reflectionMap.encoding = THREE.sRGBEncoding;
+        reflectionMap.mapping = THREE.EquirectangularReflectionMapping;
+        if (!scene) scene = document.querySelector("a-scene");
+        scene.object3D.environment = reflectionMap;
+      };
+
+      window.addEventListener("DOMContentLoaded", () => {
+        addEnv();
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene renderer="colorManagement: true" render-order="layer1" scene>
+      <a-assets>
+        <a-asset-item id="bed" src="./bed.glb"></a-asset-item>
+        <a-asset-item id="sofa" src="./sofa.glb"></a-asset-item>
+        <a-asset-item id="table" src="./table.glb"></a-asset-item>
+        <a-asset-item id="window" src="./window.glb"></a-asset-item>
+        <a-asset-item id="terrain" src="./terrain.glb"></a-asset-item>
+        <a-asset-item id="ball" src="./ball.glb"></a-asset-item>
+        <!-- <img id="carpet" src="./carpet.jpg" /> -->
+        <img id="floor" src="./floor2_.jpg" />
+        <!-- <img id="roof" src="./floor.jpg" /> -->
+        <img id="env01" src="./envMap/01.jpg" />
+        <img id="env02" src="./envMap/02.jpg" />
+        <img id="sky" src="./sky.jpg" />
+      </a-assets>
+
+      <a-sky material="src: #sky"></a-sky>
+      <!-- <a-plane
+        id="carpet-entity"
+        position="1 0 0"
+        scale="1.0 1.5 1.0"
+        rotation="-90 0 0"
+        material="src: #carpet"
+      ></a-plane> -->
+      <a-box
+        id="floor-entity"
+        position="0 0 0"
+        scale="10 10 0.1"
+        rotation="-90 0 0"
+        material="src: #floor; roughness:1"
+        repeat="5 5"
+      ></a-box>
+      <a-box
+        id="roof-entity"
+        position="0 3 0"
+        scale="10 10 0.1"
+        rotation="-90 0 0"
+        material="src: #floor; roughness:1"
+        repeat="5 5"
+      ></a-box>
+
+      <a-entity
+        id="bed-entity"
+        gltf-model="#bed"
+        position="0 0 0"
+        scale="0.5 0.5 0.5"
+        furniture
+      ></a-entity>
+      <a-entity
+        id="sofa-entity"
+        gltf-model="#sofa"
+        position="-1 0 0"
+        scale="0.7 0.7 0.7"
+        furniture
+      ></a-entity>
+      <a-entity
+        id="table-entity"
+        gltf-model="#table"
+        position="1 0 -2"
+        scale="0.7 0.7 0.7"
+        furniture
+      ></a-entity>
+
+      <!-- animation="property: position; to: -0.5 0.5 -0.5; dur: 700; dir: alternate; easing: easeInSine; loop: true" -->
+
+      <a-entity
+        id="window-entity"
+        gltf-model="#window"
+        position="-1 0 -3"
+        scale="0.6 0.6 0.6"
+        architecture
+      ></a-entity>
+
+      <!-- wall -->
+      <a-entity
+        gltf-model="#window"
+        position="-4 0 0"
+        rotation="0 90 0"
+        scale="0.6 0.6 0.6"
+      ></a-entity>
+      <a-entity
+        gltf-model="#window"
+        position="4 0 0"
+        rotation="0 -90 0"
+        scale="0.6 0.6 0.6"
+      ></a-entity>
+      <a-entity
+        gltf-model="#window"
+        position="0 0 4"
+        scale="0.6 0.6 0.6"
+      ></a-entity>
+
+      <a-entity
+        id="terrain-entity"
+        gltf-model="#terrain"
+        position="5 -10 -25"
+        scale="4 4 4"
+        terrain
+      ></a-entity>
+      <a-entity
+        gltf-model="#terrain"
+        position="15 -11 0"
+        scale="5 5 5"
+        terrain
+      ></a-entity>
+      <a-entity
+        gltf-model="#terrain"
+        position="-15 -9 1"
+        scale="4 4 4"
+        terrain
+      ></a-entity>
+      <a-entity
+        id="terrain-entity"
+        gltf-model="#terrain"
+        position="5 -10 25"
+        scale="4 4 4"
+        terrain
+      ></a-entity>
+
+      <!-- bound -->
+      <a-entity
+        id="ball-entity"
+        gltf-model="#ball"
+        position="1 1 -2"
+        scale="0.6 0.6 0.6"
+        animation="property: position; to: 1 0.3 -2; dur: 620; dir: alternate; easing: easeInSine; loop: true"
+        material="depthTest: false"
+      ></a-entity>
+
+      <!-- gun -->
+      <!-- <a-sphere
+        position="0 1.6 -7"
+        scale="0.1 0.1 0.1"
+        animation="property: position; to: 0 1.6 7; dur: 10000; dir: alternate; easing: easeInSine; loop: true"
+        material="roughness:0; metalness:1; depthTest: false"
+      ></a-sphere> -->
+
+      <a-light type="ambient" intensity="0.4"></a-light>
+      <a-light position="1 10 1" type="directional" intensity="0.7"></a-light>
+      <a-entity
+        camera
+        position="0 1 1"
+        look-controls=""
+        wasd-controls=""
+      ></a-entity>
+    </a-scene>
+  </body>
+</html>
