@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>UIS</title>
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="index.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <audio id="audio01" class="audio" src="./audio/audio01.mp3"></audio>
+    <audio id="audio02" class="audio" src="./audio/audio02.mp3"></audio>
+    <audio id="audio03" class="audio" src="./audio/audio03.mp3"></audio>
+    <audio id="audio04" class="audio" src="./audio/audio04.mp3"></audio>
+    <audio id="audio05" class="audio" src="./audio/audio05.mp3"></audio>
+    <audio id="audio06" class="audio" src="./audio/audio06.mp3"></audio>
+    <div id="loading-bg" class="loading-bg"></div>
+    <div id="sumaho-bg" class="sumaho-bg"></div>
+    <div id="toudai-bg" class="toudai-bg grade"></div>
+    <div id="container" class="container">
+      <div class="frame" id="frame01"></div>
+      <div class="frame2" id="frame02"></div>
+      <p id="pen-output" class="pen-output"></p>
+      <div class="ui">
+        <div id="ui01" class="ui01 ui-parts">
+          <img src="./img/kuma.png" alt="" />
+        </div>
+        <div id="ui02" class="ui02 ui-parts">
+          <img src="./img/sumaho.png" alt="" />
+        </div>
+        <div id="ui03" class="ui03 ui-parts">
+          <img src="./img/yakan.png" alt="" />
+        </div>
+        <div id="ui04" class="ui04 ui-parts">
+          <img src="./img/phon.png" alt="" />
+        </div>
+        <div id="ui05" class="ui05 ui-parts">
+          <img src="./img/man.png" alt="" />
+        </div>
+        <div id="ui06" class="ui06 ui-parts">
+          <img src="./img/dia.png" alt="" />
+        </div>
+        <div id="ui07" class="ui07 ui-parts">
+          <img src="./img/roudai.png" alt="" />
+        </div>
+        <div id="ui08" class="ui08 ui-parts">
+          <img src="./img/shin.png" alt="" />
+        </div>
+        <div id="ui09" class="ui09 ui-parts">
+          <img src="./img/car.png" alt="" />
+        </div>
+        <div id="ui10" class="ui10 ui-parts">
+          <img src="./img/pen.png" alt="" />
+        </div>
+        <div id="ui11" class="ui11 ui-parts">
+          <img src="./img/run.png" alt="" />
+        </div>
+      </div>
+      <div class="modal-bg" id="modal-bg"></div>
+      <div class="modal01 modal" id="modal01">
+        <div class="modal__inner">
+          <div class="modal__conts">
+            <p class="c-txt__first">Hi</p>
+            <img id="icon-hi" class="icon-hi" src="./img/hi.png" alt="" />
+            <br />
+            <div class="btn" id="btn01">Hi</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-man modal is-hidden" id="modal-man">
+        <div class="modal__inner">
+          <div class="modal__conts">
+            <p class="c-txt">Random</p>
+            <div class="modal__oji-img">
+              <img id="oji-img" class="oji-img" src="" alt="" />
+            </div>
+            <div class="btn" id="btn-man">CLOSE</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-run modal is-hidden" id="modal-run">
+        <div id="progress-bg" class="progress-bg"></div>
+        <div id="btn-run-close" class="btn btn-run-close is-hidden">おわり</div>
+        <div class="modal__inner">
+          <div class="modal__conts">
+            <p id="modal-run__txt" class="c-txt__run">
+              スマホをシャカシャカ振ろう！<br /><br />
+              ※iOS13以上
+            </p>
+            <div class="btn" id="btn-run">CLOSE</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-pen modal is-hidden" id="modal-pen">
+        <div class="modal__inner">
+          <div class="modal__conts">
+            <input type="text" id="pen-input" class="pen-input" />
+            <input
+              type="button"
+              class="btn"
+              id="btn-pen"
+              onclick="penInputSend()"
+              value="GO"
+            />
+          </div>
+        </div>
+      </div>
+      <a-scene vr-mode-ui="enabled: false">
+        <a-entity
+          id="generator"
+          position="8 8 8"
+          rotation="20 20 0"
+          visible="false"
+        ></a-entity>
+        <a-light id="ambient-light" type="ambient" intensity="1.0"></a-light>
+
+        <!-- <a-sky id="sky" color="#fcfefe"></a-sky> -->
+        <a-sky
+          id="sky"
+          visible="false"
+          radius="100"
+          theta-length="360"
+          material="shader:gradientshader;topColor:#ffc4d0; bottomColor:#476fac"
+        ></a-sky>
+        <a-entity
+          animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 20000; easing: linear; loop: true"
+        >
+          <a-light
+            type="directional"
+            position="-5 10 10"
+            intensity="0.8"
+          ></a-light>
+          <a-entity camera look-controls> </a-entity>
+
+          <a-icosahedron
+            id="dia"
+            position="0 0 -3"
+            color="aqua"
+            visible="false"
+            material="transparent: true"
+            animation="property: rotation; from: 0 0 0; to: 360 360 0; dur: 7000; loop: true; easing: linear"
+          ></a-icosahedron>
+        </a-entity>
+      </a-scene>
+    </div>
+  </body>
+</html>
