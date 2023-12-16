@@ -5,6 +5,7 @@ body {
   color: black;
   font-size: 0.9rem;
   margin: 0;
+  background: white;
 }
 
 a-scene {
@@ -388,6 +389,7 @@ a-scene {
   border: 1px solid #ddd;
   box-sizing: border-box;
   margin-bottom: 10px;
+  font-size: 16px;
 }
 @media (min-width: 480px) {
   .pen-input {

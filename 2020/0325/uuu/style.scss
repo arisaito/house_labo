@@ -6,6 +6,7 @@ body {
   color: black;
   font-size: 0.9rem;
   margin: 0;
+  background: white;
 }
 
 a-scene {
@@ -392,6 +393,7 @@ a-scene {
   border: 1px solid #ddd;
   box-sizing: border-box;
   margin-bottom: 10px;
+  font-size: 16px;
   @include tab {
     width: 60%;
     max-width: 400px;
@@ -399,6 +401,9 @@ a-scene {
     margin: auto;
   }
 }
+// input[type="text"] {
+//   font-size: 16px;
+// }
 
 @keyframes shinPulse {
   10% {
