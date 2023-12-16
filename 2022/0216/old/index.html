@@ -19,31 +19,34 @@
         color: #495f7c;
         font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
           sans-serif;
-        overflow: hidden;
       }
       body::-webkit-scrollbar {
         display: none;
       }
-      .container {
+      .container-2 {
         z-index: 1;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        /* height: 100%; */
         display: flex;
-        overflow-y: scroll;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.25s;
       }
-      .filter {
-        position: relative;
+      .filter-2 {
         padding: 1rem 0;
         width: 90%;
-        height: 30000px;
-        margin: auto;
+        height: 1800vh;
+        margin: 1rem auto;
         border-radius: 11px;
         overflow-y: scroll;
+        /* height: 1000vh; */
+        /* background: #e2e8ea; */
       }
       .scroll-filter::-webkit-scrollbar {
+        /* Chrome, Safari 対応 */
         display: none;
       }
       #webgl {
@@ -54,8 +57,8 @@
     </style>
   </head>
   <body>
-    <div id="container" class="container">
-      <div id="scroll-filter" class="filter">scroll me</div>
+    <div class="container-2">
+      <div id="scroll-filter" class="filter-2">scroll me</div>
     </div>
     <div id="webgl"></div>
     <script></script>

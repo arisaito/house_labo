@@ -2,7 +2,9 @@
   window.addEventListener(
     "DOMContentLoaded",
     () => {
+      // 初期化処理
       init();
+      // 描画処理
       run = true;
       render();
     },
@@ -17,26 +19,24 @@
     }
   };
 
-  let run = true;
-  let scene;
-  let camera;
-  let renderer;
-  let geometry;
-  let material;
-  let ground;
-  let directionalLight;
-  let ambientLight;
+  let run = true; // レンダリングループフラグ
+  let isDown = false; // スペースキーが押されているかどうかのフラグ
+
+  // three.js に関連するオブジェクト用の変数
+  let scene; // シーン
+  let camera; // カメラ
+  let renderer; // レンダラ
+  let geometry; // ジオメトリ
+  let material; // マテリアル
+  let ground; // プレーンメッシュ
+  let directionalLight; // ディレクショナル・ライト（平行光源）
+  let ambientLight; // アンビエントライト（環境光）
 
   let scrollAmount = 0;
   let photoGroup;
 
-  let container;
-  let photoNum = 14;
-  let scrollUnit = 970;
-  let scrollLimit;
-
   console.log(isMobile());
-
+  // カメラに関するパラメータ
   const CAMERA_PARAM = {
     fovy: 60,
     aspect: window.innerWidth / window.innerHeight,
@@ -47,49 +47,48 @@
     z: isMobile() ? 10.0 : 10.0,
     lookAt: new THREE.Vector3(0.0, 0.0, 0.0),
   };
-
+  // レンダラに関するパラメータ
   const RENDERER_PARAM = {
     clearColor: 0xbac8d3,
     width: window.innerWidth,
     height: window.innerHeight,
   };
-
+  // マテリアルのパラメータ
   const MATERIAL_PARAM = {
-    color: 0x495f7c,
-    specular: 0xffffff,
+    color: 0x495f7c, // マテリアル自体の色
+    specular: 0xffffff, // スペキュラ成分（反射光）の色
   };
-
+  // ポイント専用マテリアルのパラメータ @@@
+  const MATERIAL_PARAM_POINT = {
+    color: 0xffffff, // マテリアル自体の色
+    size: 0.05, // 点の大きさ
+  };
+  // ライトに関するパラメータの定義
   const DIRECTIONAL_LIGHT_PARAM = {
-    color: 0xffffff,
-    intensity: 1,
-    x: 1.0,
-    y: 1.0,
-    z: 1.0,
+    color: 0xffffff, // 光の色
+    intensity: 1, // 光の強度
+    x: 1.0, // 光の向きを表すベクトルの X 要素
+    y: 1.0, // 光の向きを表すベクトルの Y 要素
+    z: 1.0, // 光の向きを表すベクトルの Z 要素
   };
-
+  // アンビエントライトに関するパラメータの定義
   const AMBIENT_LIGHT_PARAM = {
-    color: 0xffffff,
-    intensity: 0.2,
+    color: 0xffffff, // 光の色
+    intensity: 0.2, // 光の強度
   };
 
   const getScrollAmount = () => {
-    scrollAmount = container.scrollTop;
-    photoGroup.position.z = scrollAmount * 0.01;
+    scrollAmount = window.pageYOffset;
   };
 
   const init = () => {
+    // シーン
     scene = new THREE.Scene();
 
-    container = document.getElementById("container");
-    const scrollFilter = document.getElementById("scroll-filter");
-    scrollLimit = scrollUnit * (photoNum + 0.5);
-    console.log(scrollLimit);
-    scrollFilter.style.height = scrollLimit + "px";
-
-    container.addEventListener("scroll", getScrollAmount, false);
+    window.addEventListener("scroll", getScrollAmount, false);
 
     scene.fog = new THREE.Fog(0xbac8d3, 10, 20);
-
+    // レンダラ
     renderer = new THREE.WebGLRenderer();
     renderer.setClearColor(new THREE.Color(RENDERER_PARAM.clearColor));
     renderer.setSize(RENDERER_PARAM.width, RENDERER_PARAM.height);
@@ -98,6 +97,7 @@
     const wrapper = document.querySelector("#webgl");
     wrapper.appendChild(renderer.domElement);
 
+    // カメラ
     camera = new THREE.PerspectiveCamera(
       CAMERA_PARAM.fovy,
       CAMERA_PARAM.aspect,
@@ -107,6 +107,7 @@
     camera.position.set(CAMERA_PARAM.x, CAMERA_PARAM.y, CAMERA_PARAM.z);
     camera.lookAt(CAMERA_PARAM.lookAt);
 
+    // マテリアル（以下のメッシュ生成ではこのマテリアルを使いまわす）
     material = new THREE.MeshPhongMaterial(MATERIAL_PARAM);
 
     // プレーンジオメトリの生成とメッシュ化
@@ -137,6 +138,7 @@
     }
     scene.add(photoGroup);
 
+    // ディレクショナルライト
     directionalLight = new THREE.DirectionalLight(
       DIRECTIONAL_LIGHT_PARAM.color,
       DIRECTIONAL_LIGHT_PARAM.intensity
@@ -146,20 +148,31 @@
     directionalLight.position.z = DIRECTIONAL_LIGHT_PARAM.z;
     scene.add(directionalLight);
 
+    // アンビエントライト
     ambientLight = new THREE.AmbientLight(
       AMBIENT_LIGHT_PARAM.color,
       AMBIENT_LIGHT_PARAM.intensity
     );
     scene.add(ambientLight);
+
+    // 軸ヘルパー
+    //     axesHelper = new THREE.AxesHelper(5.0);
+    //     scene.add(axesHelper);
+
+    // コントロール
+    //     controls = new THREE.OrbitControls(camera, renderer.domElement);
   };
 
   const onResize = () => {
+    // サイズを取得
     const width = window.innerWidth;
     const height = window.innerHeight;
 
+    // レンダラーのサイズを調整する
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
 
+    // カメラのアスペクト比を正す
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
   };
@@ -169,10 +182,13 @@
   });
 
   const render = () => {
+    // 再帰呼び出し
     if (run === true) {
       requestAnimationFrame(render);
     }
+    photoGroup.position.z = -scrollAmount * -0.01;
 
+    // 描画
     renderer.render(scene, camera);
   };
 })();
