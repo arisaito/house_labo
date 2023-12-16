@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>UIS</title>
+    <title>Fun UI Simulator</title>
     <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
     <script src="index.js"></script>
@@ -23,7 +23,7 @@
     <audio id="audio05" class="audio" src="./audio/audio05.mp3"></audio>
     <audio id="audio06" class="audio" src="./audio/audio06.mp3"></audio>
     <div id="loading-bg" class="loading-bg"></div>
-    <div id="sumaho-bg" class="sumaho-bg"></div>
+    <div id="secret-bg" class="secret-bg"></div>
     <div id="toudai-bg" class="toudai-bg grade"></div>
     <div id="container" class="container">
       <div class="frame" id="frame01"></div>
@@ -43,7 +43,7 @@
           <img src="./img/phon.png" alt="" />
         </div>
         <div id="ui05" class="ui05 ui-parts">
-          <img src="./img/man.png" alt="" />
+          <img src="./img/tarot.png" alt="" />
         </div>
         <div id="ui06" class="ui06 ui-parts">
           <img src="./img/dia.png" alt="" />
@@ -75,25 +75,25 @@
           </div>
         </div>
       </div>
-      <div class="modal-man modal is-hidden" id="modal-man">
+      <div class="modal-tarot modal is-hidden" id="modal-tarot">
         <div class="modal__inner">
           <div class="modal__conts">
-            <p class="c-txt">Random</p>
-            <div class="modal__oji-img">
-              <img id="oji-img" class="oji-img" src="" alt="" />
+            <p class="c-txt__tarot">Random number<br />(from free photo)</p>
+            <div class="modal__tarot-img">
+              <img id="tarot-img" class="tarot-img" src="" alt="" />
             </div>
-            <div class="btn" id="btn-man">CLOSE</div>
+            <div class="btn" id="btn-tarot">CLOSE</div>
           </div>
         </div>
       </div>
       <div class="modal-run modal is-hidden" id="modal-run">
         <div id="progress-bg" class="progress-bg"></div>
-        <div id="btn-run-close" class="btn btn-run-close is-hidden">おわり</div>
+        <div id="btn-run-close" class="btn btn-run-close is-hidden">FINISH</div>
         <div class="modal__inner">
           <div class="modal__conts">
             <p id="modal-run__txt" class="c-txt__run">
-              スマホをシャカシャカ振ろう！<br /><br />
-              ※iOS13以上
+              Shake your smartphone!<br />
+              ※Only iOS13 or above
             </p>
             <div class="btn" id="btn-run">CLOSE</div>
           </div>

@@ -22,20 +22,30 @@ let audio06;
 
 let lightupFlag = false;
 let yakanFlag = false;
-let ojiImg;
-let ojiPhoto;
+let tarotImg;
+let tarotPhotoNum = 12;
 let diaFlag = false;
 let sumahoFlag = false;
 let shinFlag = 0;
+let secretBg;
 
 window.addEventListener("load", () => {
   initDevice();
+
+  container = document.getElementById("container");
+  secretBg = document.getElementById("secret-bg");
+  if (mobileFlag) {
+    secretBg.classList.add("sumaho-bg");
+  } else {
+    secretBg.classList.add("pc-bg");
+    container.classList.add("zoom-out-pc");
+  }
+
   loadingbg = document.getElementById("loading-bg");
   modalbg = document.getElementById("modal-bg");
   modal01 = document.getElementById("modal01");
   btn01 = document.getElementById("btn01");
   generator = document.getElementById("generator");
-  container = document.getElementById("container");
   frame01 = document.getElementById("frame01");
   frame02 = document.getElementById("frame02");
   ui = document.querySelector(".ui");
@@ -46,7 +56,6 @@ window.addEventListener("load", () => {
   audio04 = document.getElementById("audio04");
   audio05 = document.getElementById("audio05");
   audio06 = document.getElementById("audio06");
-  ojiPhoto = [1, 2, 3, 4, 5, 6, 7];
 
   setTimeout(() => {
     loadingbg.style.transition = "1.5s";
@@ -106,7 +115,7 @@ window.addEventListener("load", () => {
       } else if (i === 3) {
         phon();
       } else if (i === 4) {
-        oji();
+        tarot();
       } else if (i === 5) {
         diamond();
       } else if (i === 6) {
@@ -174,7 +183,7 @@ lightup = () => {
 
 yakanAlert = () => {
   const waita = () => {
-    window.alert("お湯が湧きました");
+    window.alert("The water is boiling");
     yakanFlag = false;
   };
   if (yakanFlag === false) {
@@ -185,19 +194,23 @@ yakanAlert = () => {
   }
 };
 
-oji = () => {
-  let modalMan = document.getElementById("modal-man");
-  let btnMan = document.getElementById("btn-man");
-  let randomNum = Math.floor(Math.random() * ojiPhoto.length);
-  ojiImg = document.getElementById("oji-img");
+tarot = () => {
+  let modalTarot = document.getElementById("modal-tarot");
+  let btnTarot = document.getElementById("btn-tarot");
+  let randomNum = Math.floor(Math.random() * Number(tarotPhotoNum));
+  tarotImg = document.getElementById("tarot-img");
   modalbg.classList.remove("is-hidden");
-  modalMan.classList.remove("is-hidden");
-  ojiImg.setAttribute("src", `./img/man/0${randomNum}.jpg`);
-  btnMan.addEventListener("click", () => {
-    modalMan.classList.add("is-hidden");
+  modalTarot.classList.remove("is-hidden");
+  String(randomNum);
+  if (randomNum < 10) {
+    randomNum = "0" + randomNum;
+  }
+  tarotImg.setAttribute("src", `./img/tarot/${randomNum}.jpg`);
+  btnTarot.addEventListener("click", () => {
+    modalTarot.classList.add("is-hidden");
     modalbg.classList.add("is-hidden");
     setTimeout(() => {
-      ojiImg.setAttribute("src", ``);
+      tarotImg.setAttribute("src", ``);
     }, 200);
   });
 };
@@ -229,7 +242,6 @@ diamond = () => {
 phon = () => {
   audio = [audio01, audio02, audio03, audio04, audio05, audio06];
   let num = Math.floor(Math.random() * audio.length);
-  console.log(num);
   audio[num].play();
 };
 
@@ -242,7 +254,7 @@ run = () => {
   let btnRunClose = document.getElementById("btn-run-close");
   let motionCount = 0;
   if (mobileFlag === false) {
-    txt.innerText = "このボタンはスマホ限定で遊べます";
+    txt.innerText = "Smartphone only";
   }
   modalRun.style.top = "0%";
   btnRunClose.classList.add("is-hidden");
@@ -267,28 +279,21 @@ run = () => {
 };
 
 sumaho = () => {
-  let sumahoBg = document.getElementById("sumaho-bg");
   if (sumahoFlag === false) {
     ui11.style.opacity = 0.3;
     ui11.style.pointerEvents = "none";
-    sumahoBg.style.opacity = 1.0;
+    secretBg.style.opacity = 1.0;
     frame01.style.opacity = 0.0;
     frame02.style.opacity = 0.0;
-    container.style.zoom = "45%";
-    container.style.zoom = "45%";
-    container.style.width = "45%";
-    container.style.height = "45%";
+    container.classList.add("zoom-out");
     sumahoFlag = true;
   } else {
     ui11.style.opacity = 1.0;
     ui11.style.pointerEvents = "auto";
-    sumahoBg.style.opacity = 0.0;
+    secretBg.style.opacity = 0.0;
     frame01.style.opacity = 1.0;
     frame02.style.opacity = 1.0;
-    container.style.zoom = "100%";
-    container.style.zoom = "100%";
-    container.style.width = "100%";
-    container.style.height = "100%";
+    container.classList.remove("zoom-out");
     sumahoFlag = false;
   }
 };
