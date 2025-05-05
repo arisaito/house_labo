@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SECRET SAYS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Coral+Pixels&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="./assets/index-C4sOxH4Q.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DUH8eeeD.css">
+  </head>
+  <body style="visibility: hidden">
+    <div id="app">
+      <div id="opening" class="opening is-show">
+        <div id="opening-kv" class="opening-kv is-show">
+          <h1 id="kv-title" class="kv-title opening-title"></h1>
+          <div class="kv-footer">
+            <div class="kv-footer-sound">
+              <p>SOUND</p>
+              <div class="sound-button-wrapper">
+                <button id="sound-on" class="sound-button">ON</button>
+                <button id="sound-off" class="sound-button is-active">
+                  OFF
+                </button>
+              </div>
+            </div>
+            <div class="kv-footer-control">
+              <p class="kv-footer-control-pc">
+                ＜視点移動＞画面をドラッグ ＜発砲＞銃をクリック／Spaceキー
+              </p>
+              <div class="kv-footer-control-sp">
+                <p>CONTROLS</p>
+                <p>＜視点移動＞画面をスワイプ ＜発砲＞銃をタップ</p>
+              </div>
+            </div>
+            <button id="kv-start" class="kv-start opening-button">START</button>
+          </div>
+
+          <video
+            id="kv-video"
+            src="./assets/video/op.mp4"
+            loop
+            muted
+            playsinline
+            style="display: none"
+          ></video>
+        </div>
+      </div>
+      <div id="ending" class="ending">
+        <div id="ending-logo" class="ending-logo is-show"></div>
+        <div class="ending-credit-wrapper">
+          <div id="ending-credit" class="ending-credit"></div>
+        </div>
+      </div>
+      <div id="canvas-wrapper" class="canvas-wrapper">
+        <div id="asset-wrapper" class="asset-wrapper">
+          <span id="text-overlay" class="text-overlay"></span>
+          <div class="text-caption-wrapper">
+            <span id="text-caption" class="text-caption is-show"></span>
+          </div>
+          <div class="heart-wrapper" id="heart-wrapper"></div>
+          <div class="bullet-wrapper" id="bullet-wrapper"></div>
+          <div id="gun-layer" class="gun-layer is-show"></div>
+        </div>
+      </div>
+      <div id="retry" class="retry">
+        <button id="retry-button" class="retry-button">PLAY AGAIN</button>
+      </div>
+    </div>
+  </body>
+</html>

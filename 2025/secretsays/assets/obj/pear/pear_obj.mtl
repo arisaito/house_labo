@@ -1,0 +1,25 @@
+# Max2Mtl Version 4.0 Mar 10th, 2001
+#
+# Multi/Sub 03_-_Default (2) to come 
+#
+newmtl 03_-_Default
+Ka  0.7 0.8 0.4
+Kd  0.7 0.8 0.4
+Ks  0.7 0.8 0.4
+d  1.0
+Ns  8.6
+illum 2
+map_Kd kruska_txt.jpg
+bump kruska_txt.jpg
+#
+newmtl Material__28
+Ka  0.3 0.1 0.1
+Kd  0.3 0.1 0.1
+Ks  0.6 0.5 0.4
+d  1.0
+Ns  7.7
+illum 2
+#
+# Multi/Sub 03_-_Default done 
+#
+# EOF
