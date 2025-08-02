@@ -5,16 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>table</title>
     <style>
+      body {
+        background: #fbf7f5;
+      }
       .wrapper {
         display: flex;
         transform: rotate3d(1, 1, 1, -46deg);
         width: 100%;
-        /* animation: spin3d 80s linear infinite; */
         transform-style: preserve-3d;
+        position: absolute;
+        top: 10%;
       }
       .inner {
         display: flex;
+        flex-direction: row;
       }
+      /* table {
+        margin: auto;
+      } */
       table td {
         background-color: #ffe4e1;
       }
@@ -29,7 +37,7 @@
     </style>
   </head>
   <body>
-    <div class="wrapper">
+    <div class="wrapper" id="wrapper">
       <div class="inner" id="inner">
         <table border="1">
           <tr>
@@ -640,14 +648,13 @@
       </div>
     </div>
     <script>
-      const directions = ["row", "row-reverse", "column", "column-reverse"];
-
-      const container = document.getElementById("inner");
+      const directions = ["row", "column", "row-reverse", "column-reverse"];
+      const container = document.getElementById("wrapper");
+      let index = 0;
 
       setInterval(() => {
-        const randomDir =
-          directions[Math.floor(Math.random() * directions.length)];
-        container.style.flexDirection = randomDir;
+        container.style.flexDirection = directions[index];
+        index = (index + 1) % directions.length;
       }, 1500);
     </script>
   </body>
