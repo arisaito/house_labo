@@ -12,6 +12,9 @@
         /* animation: spin3d 80s linear infinite; */
         transform-style: preserve-3d;
       }
+      .inner {
+        display: flex;
+      }
       table td {
         background-color: #ffe4e1;
       }
@@ -27,11 +30,11 @@
   </head>
   <body>
     <div class="wrapper">
-      <div class="inner">
+      <div class="inner" id="inner">
         <table border="1">
           <tr>
             <td>　</td>
-            <td>　</td>
+            <td></td>
             <td>　</td>
             <td>　</td>
             <td>　</td>
@@ -636,5 +639,16 @@
         </table>
       </div>
     </div>
+    <script>
+      const directions = ["row", "row-reverse", "column", "column-reverse"];
+
+      const container = document.getElementById("inner");
+
+      setInterval(() => {
+        const randomDir =
+          directions[Math.floor(Math.random() * directions.length)];
+        container.style.flexDirection = randomDir;
+      }, 1500);
+    </script>
   </body>
 </html>
