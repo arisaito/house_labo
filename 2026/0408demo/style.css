@@ -1,0 +1,88 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: "DotGothic16", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: black;
+  color: white;
+  padding: 0;
+}
+
+.container {
+  height: 100%;
+  position: relative;
+}
+
+.image-container {
+  position: absolute;
+  /* top: 0; */
+  /* left: 0; */
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  height: 47%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 300%;
+  height: auto;
+  object-fit: cover;
+}
+
+.serif-container {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  box-sizing: border-box;
+  /* width: 100%; */
+  height: calc(50vh - 1rem * 2);
+  /* margin: 1rem; */
+  border: 9px solid white;
+}
+
+.scene {
+  padding: 1.5rem;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  letter-spacing: 0.2rem;
+  font-size: 7rem;
+}
+
+.next-cursor {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 5rem;
+  color: white;
+  line-height: 1;
+}
+
+.size-sm {
+  /* font-size: 7rem;
+  margin: 0.5rem; */
+}
+.size-md {
+  /* font-size: 7rem;
+  margin: 0.5rem; */
+}
+.size-lg {
+  /* font-size: 8rem; */
+  /* color: tomato; */
+  color: yellow;
+}
