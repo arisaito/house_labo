@@ -46,7 +46,7 @@ body {
   right: 1rem;
   box-sizing: border-box;
   /* width: 100%; */
-  height: calc(50vh - 1rem * 2);
+  height: calc(100vh - 1rem * 2);
   /* margin: 1rem; */
   border: 9px solid white;
 }
@@ -61,7 +61,7 @@ body {
   opacity: 0;
   pointer-events: none;
   letter-spacing: 0.2rem;
-  font-size: 7rem;
+  font-size: 8.5rem;
 }
 
 .next-cursor {

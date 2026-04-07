@@ -3,7 +3,7 @@ export const scenes = [
   {
     // 遠い国の戦争のニュースに慣れないで
     words: [
-      { text: "遠い国", size: "md" },
+      { text: "とおい国", size: "md" },
       { text: "の", size: "sm" },
       { text: "戦争", size: "lg" },
       { text: "の", size: "sm" },
