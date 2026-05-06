@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -27,6 +27,24 @@
         max-width: 500px;
         display: block;
         margin: 5rem auto;
+      }
+      /* pc */
+      @media (min-width: 768px) {
+        video {
+          width: auto;
+          max-width: 80%;
+          margin: auto;
+          max-height: calc(80vh);
+        }
+      }
+      @media (hover: hover) {
+        video {
+          opacity: 0.3;
+          transition: opacity 0.3s;
+        }
+        video:hover {
+          opacity: 1;
+        }
       }
     </style>
   </head>
