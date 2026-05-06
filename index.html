@@ -32,6 +32,9 @@
       width: 80%;
       margin: auto;
     }
+    .caption {
+      font-size: 0.9rem;
+    }
     footer {
       text-align: center;
       margin: 5rem 0 0;
@@ -49,7 +52,7 @@
       <div class="container-block">
         <h1>HOUSE LABO</h1>
         <marquee width="80%">
-          <p>Webサイトのれんしゅう</p>
+          <p>Web Experiments - Webサイトのれんしゅう</p>
         </marquee>
       </div>
       <div class="container-block">
@@ -107,7 +110,9 @@
           <a href="2022/0206/index.html">0206</a> - 書簡 - Maebashi<br />
           <a href="2022/0205/index.html">0205</a> - 書簡 - 相似<br />
           <br />
-          ※書簡シリーズは、一日一枚のハガキに短歌とWebサイトのQRコードを印刷して知人に送る、という形式が取られた作品シリーズです。
+          <span class="caption">
+            ※書簡シリーズは、一日一枚のハガキに短歌とWebサイトのQRコードを印刷して知人に送る、という形式が取られた作品シリーズです。
+          </span>
         </p>
       </div>
 
@@ -226,6 +231,18 @@
         { href: "2022/0212/index.html", label: "2022 0212 - 書簡 - Street" },
         { href: "2021/0411/index.html", label: "2021 0411 - Diary" },
         { href: "2020/0219/n/n.html", label: "2020 0219_1 - n" },
+        {
+          href: "2022/0217/index.html",
+          label: "2022 0217 - 書簡 - Oekaki-ban",
+        },
+        {
+          href: "2022/0216/index.html",
+          label: "2022 0216 - 書簡 - Tottori Sand Dune",
+        },
+        {
+          href: "2022/0210/index.html",
+          label: "2022 0210 - 書簡 - Snow Simulator",
+        },
       ];
 
       const picked = items.sort(() => Math.random() - 0.5).slice(0, 3);
